@@ -46,4 +46,7 @@ header {
 	margin-right:10px;
 }
 
-
+img#profilePic {
+	float: left;
+	padding: 5px 10px 5px 5px;
+}
