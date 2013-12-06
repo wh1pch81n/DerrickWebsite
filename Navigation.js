@@ -26,6 +26,7 @@ function Navigation(){
 	this.initGUI = function() {
 		var arrLinks = [
 										["About Me", "index.html"],
+										["My Courses", "courses.html"],
 										["Teaching", "teaching.html"]
 		];
 		
