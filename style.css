@@ -1,0 +1,44 @@
+#tableContainer {
+	display: table;
+	border-spacing:10px;
+	width:100%;
+}
+
+#tableRow {
+	display: table-row;
+}
+
+nav#navigation {
+	display: table-cell;
+	background-color: #efe5d0;
+	padding: 15px;
+	vertical-align: top;
+	width: 20%;
+	
+	/* optional! very hard to see although does help */
+	text-shadow: 1px 1px 3px #e2c2c2;
+}
+
+
+section#content {
+	display: table-cell;
+	background-color: #efe5d0;
+	padding: 15px;
+	vertical-align: top;
+	width: 80%;
+}
+
+body {
+	font-family: sans-serif;
+	background-color: #b5a789;
+}
+
+header {
+	text-align: center;
+	background-color: lightgrey;
+	padding: 3px;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+

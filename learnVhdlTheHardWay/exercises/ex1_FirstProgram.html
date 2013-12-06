@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+			<title>You always remember your first</title>
+			<script src="ex1_FirstProgram.js"></script>
+			<link type="text/css" rel="stylesheet" href="style.css">
+				</head>
+	<body>
+		<article>
+			<h1>Lesson 1: Lecture Slides</h1>
+			
+			<input type="button" id="prevButton" value="prev"></input>
+			<span id="slide_num"></span>
+			<input type="button" id="nextButton" value="next"></input>
+			<div id="slide">
+				<div id="tableRow">
+					<div id="codeSection">
+						<p id="codeSectionP"></p>
+					</div>
+					<div id="commentSection">
+						<h1 id="commentSectionH"></h1>
+						<p id="commentSectionP"></p>
+					</div>
+				</div>
+			</div>
+		</article>
+		<article id="questions">
+			<h1>There Are no Stupid Questions</h1>
+			<h3>How do I make a single line comment?</h3>
+			<p>
+			Double dashes mean commented out code. eg "--" Don't ask me why
+			they chose double dashes instead of double slashes like most languages
+			eg "//".
+			</p>
+			<h3>How do I make multi-line comments?</h3>
+			<p>
+			In many programming languages the multi-line comment
+			begins with the "/*" and ends with the "*/".  VHDL currently does not
+			have multi-line comments so you will just have to use multiple
+			single line comments.
+			</p>
+			<h3>whats a std_logic_vector?</h3>
+			<p>
+			I am assuming that you are familiar with a bit. An std_logic_vector
+			is an array of them.  the "(0 downto 0)" part is how you specify how
+			many bits there will.  In this case there will be only one
+			</p>
+			<h3>downto?</h3>
+			<p>
+			its the numbering direction.  the number to the right will be the index
+			of the right most bit. the number to the left will be the index to the
+			left most bit.
+			so if I have an std_logic_vector(4 downto 0), it means my bits will be
+			counted like this:
+			</p>
+			<p>
+			4, 3, 2, 1, 0 -- index number <br>
+			1, 0, 0, 1, 1 -- bits
+			</p>
+			<p>
+			there is also something call "to" which counts it the opposite way
+			</p>
+			<p>
+			0, 1, 2, 3, 4 -- index number <br>
+			1, 0, 0, 1, 1 -- bits
+			</p>
+			<p>
+			but I usually save that for vhdl arrays. Also you should notice that
+			the bits didn't change.  Only the number label changed.  Why is this
+			significant?  When you access an element of the std_logic_vector, the
+			index you choose will correspond to the number label.  If my
+			std_logic_vector(4 downto 0) is named foo and a downto is used then if
+			I access the 3rd bit (e.g. foo(3) ) then I get the 2nd bit from the
+			left. But if I used "to" (e.g. std_logic_vector(0 to 4) ) then foo(3)
+			would correspond to the 4th bit from the left.
+			</p>
+			<h3>huh? returnName1 &lt;&#61; parameterName1;</h3>
+			<p>
+			in this context, the &lt;&#61; is used to indicate that the parameter
+			is assigning a value to the return variable. Also, since the line of
+			code was done in the concurrent region, it will happen instantaneously
+			as opposed to sequentially.
+			</p>
+			<h3>what did we just make?</h3>
+			<p>
+			Its a buffer. All it does it carry the input to the output.  Usually
+			this has the effect of enforcing direction or keeping the a high bit
+			high and a low bit low.
+			</p>
+			<h3>can you talk a bit more about concurrency?</h3>
+			<p>
+			Lets say there was an entity with more parameters and return names.
+			our implementation would look like ....<br>
+			<br>
+			returnName1 &lt;&#61; parameterName1;<br>
+			returnName2 &lt;&#61; parameterName2;<br>
+			returnName3 &lt;&#61; parameterName3;<br>
+			<br>
+			all three of those would be set at the same time as opposed to being
+			set one at a time from top to bottom.
+			</p>
+			<h3>in and out?  sounds like a tasty fast food joint</h3>
+			<p>
+			in and out are the directions of the flow of electricity. When you set
+			something as "in" the parameter can be read but not set. When you set
+			it as "out", the opposite happens.  You can set it but you can't read
+			it.  Much like how in software languages, you can't read from the
+			"return" keyword, but you can set it.
+			</p>
+			<h3> Why do parameters need two different types? </h3>
+			<p>
+			we need to specify the direction of the flow of electricity.  That can
+			be either "in" or "out".  The second type specifies the size and type
+			of the wire.  For most intents and purposes you may use an
+			std_logic_vector.
+			<br><br>
+			there are other types out there like std_logic and bit.  But I feel
+			that in an effort to keep things more uniform we will stick with
+			std_logic_vector's for now.  You may run into std_logic from time to
+			time and I don't really want to stranded so I'll make a quick note
+			about std_logic.
+			<br><br>
+			std_logic can hold one bit.  You may set an std_logic with either a '1'
+			or a '0'.  (you can also set it as high-Z which looks like 'Z'.  that
+			is a capital Z and is case sensitive).  An std_logic_vector is, you
+			guessed it, a vector (or an array) of std_logic.  Which means you can
+			access each std_logic in a std_logic_vector.
+			</p>
+			<p class="code">
+			<span class="comment">-- suppose we have 3 wires called foo, bar, and rut</span><br>
+			<span class="comment">-- foo is an std_logic</span><br>
+			<span class="comment">-- bar and rut are two std_logic_vectors</span><br>
+			foo &lt;&#61; '1'; <span class="comment">-- hard code foo with high bit</span><br>
+			foo &lt;&#61; '0'; <span class="comment">-- hard code foo with low bit</span><br>
+			<br>
+			foo &lt;&#61; bar(3); <span class="comment">-- set foo with the 3rd bit of bar.</span><br>
+			bar(2) &lt;&#61; foo; <span class="comment">-- set 2nd bit of bar with foo</span><br>
+			<br>
+			bar &lt;&#61; rut; <span class="comment">-- set bar with rut.  only works if they are the same size</span><br>
+			bar(4) &lt;&#61; rut(7); <span class="comment">-- set the 4th bit of bar with the 7th bit of rut</span><br>
+			</p>
+		</article>
+	</body>
+</html>

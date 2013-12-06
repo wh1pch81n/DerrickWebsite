@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+			<title>teaching</title>
+			<link rel="stylesheet" type="text/css" href="style.css">
+			<script src="Navigation.js"></script>
+			<script>
+				window.onload = function(){
+					var nav = new Navigation();
+					nav.headerID = "header";
+					nav.tableContainerID = "tableContainer";
+					nav.tableRowID = "tableRow";
+					nav.navigationID = "navigation";
+					nav.contentID = "content";
+					nav.footerID = "footer";
+					
+					nav.initHeader();
+					nav.initGUI();
+					nav.initFooter();
+				};
+			</script>
+			</head>
+	<body>
+		<header id="header"></header>
+		<div id="tableContainer">
+			<div id="tableRow">
+				<nav id="navigation"></nav>
+				<section id="content">
+					<p><a href="learnVhdlTheHardWay/index.html">VHDL tutorial</a>
+						</section>
+			</div> <!-- tableRow -->
+		</div> <!-- tableContainer -->
+		<footer id="footer"></footer>
+	</body>
+</html>
