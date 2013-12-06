@@ -11,7 +11,8 @@
 nav#navigation {
 	display: table-cell;
 	background-color: #efe5d0;
-	padding: 15px;
+	padding:  0px;
+	text-align: center;
 	vertical-align: top;
 	width: 20%;
 	
@@ -26,6 +27,10 @@ section#content {
 	padding: 15px;
 	vertical-align: top;
 	width: 80%;
+}
+
+.selected {
+	background-color: #c8b99c;
 }
 
 body {

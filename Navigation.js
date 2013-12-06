@@ -32,6 +32,11 @@ function Navigation(){
 		
 		for(var i = 0; i < arrLinks.length; ++i) {
 			var p = document.createElement("p");
+			//check if current url is the link we are making
+			//if so give it the class "selected"
+			if (document.URL.search(arrLinks[i][1]) >= 0) {
+				p.setAttribute("class", "selected");
+			}
 			var link = document.createElement("a");
 			link.innerHTML = arrLinks[i][0];
 			link.setAttribute("href",arrLinks[i][1]);
