@@ -12,7 +12,8 @@ function Navigation(){
 	this.footerID = "";
 	this.initHeader = function() {
 		var header = document.getElementById(this.headerID);
-		header.innerHTML= "<h1>Derrick Ho</h1>"
+		
+		header.innerHTML = "<h1>Derrick Ho</h1>"
 		+ "<p>"
 		+ "Bourns College of Engineering<br>"
 		+ "University of California, Riverside"

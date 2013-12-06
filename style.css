@@ -16,10 +16,23 @@ nav#navigation {
 	vertical-align: top;
 	width: 20%;
 	
-	/* optional! very hard to see although does help */
-	text-shadow: 1px 1px 3px #e2c2c2;
 }
 
+nav p { /*spaces out the links in the navigation*/
+	padding: 10px;
+	margin: 5px 0px;
+}
+
+nav a:link, nav a:visited {
+	color: #954b4b;
+	border-bottom: none;
+	font-weight: bold;
+	
+	/* optional! very hard to see although does help */
+	text-shadow: 1px 1px 3px #e2c2c2;
+	
+	text-transform: uppercase;
+}
 
 section#content {
 	display: table-cell;
@@ -38,15 +51,51 @@ body {
 	background-color: #b5a789;
 }
 
-header {
+header h1 {
+	color: #efe5d0;
+}
+
+header{
+	background-color: #675c47;
+	background-image: url("images/UCR_logo.png");
+	background-size: auto 90%; /*auto size width 100% of height*/
+	background-position-x: 10px;
+	background-position-y: center;
+	background-repeat: no-repeat;
+	
 	text-align: center;
-	background-color: lightgrey;
 	padding: 3px;
 	margin-left:10px;
 	margin-right:10px;
+	color: #efe5d0;
+	
+}
+
+footer {
+  background-color: #675c47;
+  color:            #efe5d0;
+  text-align:       center;
+  padding:          15px;
+  margin: 0px 10px 10px 10px;
+  font-size:        90%;
 }
 
 img#profilePic {
 	float: left;
 	padding: 5px 10px 5px 5px;
+}
+
+h1, h2, h3 {
+	color: #954b4b;
+}
+
+a:link {
+  color:            #b76666;
+  text-decoration:  none;
+  border-bottom:    thin dotted #b76666;
+}
+a:visited {
+  color:            #675c47;
+  text-decoration:  none;
+  border-bottom:    thin dotted #675c47;
 }
