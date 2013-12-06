@@ -80,6 +80,46 @@ footer {
   font-size:        90%;
 }
 
+table {
+	margin-left: 20px;
+	margin-right: 20px;
+	border: thin solid black;
+	caption-side: top;
+	border-collapse: collapse; /*to prevent borders from overlapping*/
+}
+
+th {
+	background-color: #c8b99c;
+}
+
+td, th {
+	border: thin dotted gray;
+	padding: 5px;
+}
+
+table#UCR_course_table td:nth-child(2) {
+	text-align:center;
+}
+
+table#UCR_course_table td:nth-child(3) {
+	text-align:right;
+}
+
+table#selfTaughtClasses td:nth-child(2),
+table#selfTaughtClasses td:nth-child(3){
+	text-align:center;
+}
+
+table#selfTaughtClasses td:nth-child(4),
+table#selfTaughtClasses td:nth-child(5){
+	text-align:right;
+}
+
+caption {
+	font-style: italic;
+	padding-top: 8px;
+}
+
 img#profilePic {
 	float: left;
 	padding: 5px 10px 5px 5px;
