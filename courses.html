@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+			<title>Courses</title>
+			<link rel="stylesheet" type="text/css" href="style.css">
+				<script src="Navigation.js"></script>
+				<script>
+					window.onload = function(){
+						var nav = new Navigation();
+						nav.headerID = "header";
+						nav.tableContainerID = "tableContainer";
+						nav.tableRowID = "tableRow";
+						nav.navigationID = "navigation";
+						nav.contentID = "content";
+						nav.footerID = "footer";
+						
+						nav.initHeader();
+						nav.initGUI();
+						nav.initFooter();
+					};
+				</script>
+				</head>
+	<body>
+		<header id="header"></header>
+		<div id="tableContainer">
+			<div id="tableRow">
+				<nav id="navigation"></nav>
+				<section id="content">
+					<table>
+						<caption>
+							Courses I took in UC Riverside
+						</caption>
+						<tr> <!-- table row headers -->
+							<th>Course #</th>
+							<th>Course Title</th>
+							<th>Year</th>
+						</tr>
+						<tr>
+							<td>CS 122A, CS120B</td>
+							<td>Embedded Systems &amp; Real-time Systems</td>
+							<td> </td>
+						</tr>
+						<tr>
+							<td>CS 161</td>
+							<td>Design &amp; Architecture of Computer Systems</td>
+							<td> </td>
+						</tr>
+						<tr>
+							<td>CS 130</td>
+							<td>Computer Graphics </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<td>CS 179n</td>
+							<td>Video Game Design</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>CS 066</td>
+							<td>3-D Modeling</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>CS 141, CS 111</td>
+							<td>Data Structures &amp; Algorithms</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>CS 150</td>
+							<td>Theory-Automata &amp; formal languages</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>CS 120A</td>
+							<td>Logic Design</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>CS 061</td>
+							<td>Machine Organization &amp; Assembly Language</td>
+						<td></td>
+						</tr>
+						<tr>
+							<td>Engr 180</td>
+							<td>Technical Communications</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>EE 100B, EE 100A</td>
+							<td>Electronic Circuits</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>CS 153</td>
+							<td>Operating Systems</td>
+							<td></td>
+						</tr>
+					</table>
+				</section>
+			</div> <!-- tableRow -->
+		</div> <!-- tableContainer -->
+		<footer id="footer"></footer>
+	</body>
+</html>
