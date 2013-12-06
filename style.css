@@ -39,11 +39,28 @@ body {
 }
 
 header {
+	background-color: #675c47;
+	background-image: url("images/UCR_logo.png");
+	background-size: auto 90%; /*auto size width 100% of height*/
+	background-position-x: 10px;
+	background-position-y: center;
+	background-repeat: no-repeat;
+	
 	text-align: center;
-	background-color: lightgrey;
 	padding: 3px;
 	margin-left:10px;
 	margin-right:10px;
+	color: #efe5d0;
+	
+}
+
+footer {
+  background-color: #675c47;
+  color:            #efe5d0;
+  text-align:       center;
+  padding:          15px;
+  margin: 0px 10px 10px 10px;
+  font-size:        90%;
 }
 
 img#profilePic {
