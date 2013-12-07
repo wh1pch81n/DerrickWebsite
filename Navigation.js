@@ -27,6 +27,7 @@ function Navigation(){
 		var arrLinks = [
 										["About Me", "index.html"],
 										["My Courses", "courses.html"],
+										["Work History", "work_history.html"],
 										["Teaching", "teaching.html"]
 		];
 		
