@@ -58,6 +58,10 @@ section#content {
 	color: gray;
 }
 
+.additionalNotes {
+	font-size: 75%;
+	color: gray;
+}
 dl dd ul li { /*mainly used for the work history, list of additional duties*/
 	line-height: 2em;
 }
