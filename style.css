@@ -46,6 +46,22 @@ section#content {
 	background-color: #c8b99c;
 }
 
+.jobTitle {
+	font-weight: bold;
+}
+
+.jobCompany {
+	font-style: italic;
+}
+
+.jobDuration {
+	color: gray;
+}
+
+dl dd ul li { /*mainly used for the work history, list of additional duties*/
+	line-height: 2em;
+}
+
 body {
 	font-family: sans-serif;
 	background-color: #b5a789;
