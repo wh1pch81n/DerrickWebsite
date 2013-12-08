@@ -117,21 +117,16 @@ td, th {
 	padding: 5px;
 }
 
-table#UCR_course_table td:nth-child(2) {
-	text-align:center;
-}
-
-table#UCR_course_table td:nth-child(3) {
-	text-align:right;
-}
-
+table#UCR_course_table td:nth-child(2),
 table#selfTaughtClasses td:nth-child(2),
-table#selfTaughtClasses td:nth-child(3){
+table#selfTaughtClasses td:nth-child(3) {
 	text-align:center;
 }
 
+table#UCR_course_table td:nth-child(3),
 table#selfTaughtClasses td:nth-child(4),
-table#selfTaughtClasses td:nth-child(5){
+table#selfTaughtClasses td:nth-child(5),
+{
 	text-align:right;
 }
 
