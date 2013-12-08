@@ -26,9 +26,12 @@ function Navigation(){
 	this.initGUI = function() {
 		var arrLinks = [
 										["About Me", "index.html"],
-										["My Courses", "courses.html"],
+										["Classes", "courses.html"],
+										["Projects", "projects.html"],
 										["Work History", "work_history.html"],
-										["Teaching", "teaching.html"]
+										["Teaching", "teaching.html"],
+										["Project Euler", "https://github.com/wh1pch81n/ProjectEulerNew"],
+										["CodeEval", "https://www.codeeval.com/public/8204d6d519fd06ef4ef36415ec9001466e87fc35/"]
 		];
 		
 		var nav = document.getElementById(this.navigationID);
