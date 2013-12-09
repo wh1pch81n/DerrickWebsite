@@ -25,11 +25,11 @@ function initContent(parent) {
 	table_caption = "Self Taught Classes";
 	tableData = [
 	["Name","Summary","Source Material","Year","Repository"],
-	["Nand2Tetris",	"Built a computer from HDL to tetris and beyond","<a href=\"http://nand2tetris.org/book.php\">book</a>,<br>	<a href=\"http://nand2tetris.org/course.php\">Lecture Slides</a>","2013","<a href=\"https://github.com/wh1pch81n/code_projects_portfolio/tree/master/TECS_condensed\">1</a>,<a href=\"https://github.com/wh1pch81n/code_projects_portfolio/tree/master/TECS_uncondensed\">2</a>"],
-	["Tap, Move, Shake","A step-by-step guide to iPhone game development","<a href=\"http://www.barnesandnoble.com/w/tap-move-shake-todd-moore/1110853935?ean=9781449303457\">book</a>","2013","<a href=\"https://github.com/wh1pch81n/AirHockeyiPhone\">1</a>"],
-	["HTML and CSS","Make beautiful websites with HTML5","<a href=\"http://www.barnesandnoble.com/w/head-first-html-and-css-2nd-edition-elisabeth-robson/1111330915?ean=9780596159900\">book</a>","2013","<a href=\"https://github.com/wh1pch81n/headfirst_html\">1</a>"],
-	["HTML and JavaScript","Make interactive websites with HTML5","<a href=\"http://www.barnesandnoble.com/w/head-first-html5-programming-eric-t-freeman/1110865264?ean=9781449390549\">book</a>","2013","<a href=\"https://github.com/wh1pch81n/head_first_html5js\">1</a>"],
-	["The Algorithm Design Manual","Learn algorithms the Skiena way","<a href=\"http://www.cs.sunysb.edu/~algorith/video-lectures/\">Lecture Slides</a>","2013",""]
+	["Nand2Tetris",	"Built a computer from HDL to tetris and beyond","<a target=\"_blank\" href=\"http://nand2tetris.org/book.php\">book</a>,<br>	<a target=\"_blank\" href=\"http://nand2tetris.org/course.php\">Lecture Slides</a>","2013","<a target=\"_blank\" href=\"https://github.com/wh1pch81n/code_projects_portfolio/tree/master/TECS_condensed\">1</a>,<a target=\"_blank\" href=\"https://github.com/wh1pch81n/code_projects_portfolio/tree/master/TECS_uncondensed\">2</a>"],
+	["Tap, Move, Shake","A step-by-step guide to iPhone game development","<a target=\"_blank\" href=\"http://www.barnesandnoble.com/w/tap-move-shake-todd-moore/1110853935?ean=9781449303457\">book</a>","2013","<a target=\"_blank\" href=\"https://github.com/wh1pch81n/AirHockeyiPhone\">1</a>"],
+	["HTML and CSS","Make beautiful websites with HTML5","<a target=\"_blank\" href=\"http://www.barnesandnoble.com/w/head-first-html-and-css-2nd-edition-elisabeth-robson/1111330915?ean=9780596159900\">book</a>","2013","<a target=\"_blank\" href=\"https://github.com/wh1pch81n/headfirst_html\">1</a>"],
+	["HTML and JavaScript","Make interactive websites with HTML5","<a target=\"_blank\" href=\"http://www.barnesandnoble.com/w/head-first-html5-programming-eric-t-freeman/1110865264?ean=9781449390549\">book</a>","2013","<a target=\"_blank\" href=\"https://github.com/wh1pch81n/head_first_html5js\">1</a>"],
+	["The Algorithm Design Manual","Learn algorithms the Skiena way","<a target=\"_blank\" href=\"http://www.cs.sunysb.edu/~algorith/video-lectures/\">Lecture Slides</a>","2013",""]
 	];
 	parent.appendChild(makeTable(table_id, table_caption, tableData));
 };
