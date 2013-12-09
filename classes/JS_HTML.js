@@ -42,5 +42,5 @@ function mkHTML( elementName, attrObj, parent, appendChild) {
 */
 
 function mk( elementName, attrObj, parent, appendChild) {
-	mkHTML( elementName, attrObj, parent, appendChild);
+	return mkHTML( elementName, attrObj, parent, appendChild);
 };
