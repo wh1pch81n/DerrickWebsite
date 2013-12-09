@@ -36,3 +36,11 @@ function mkHTML( elementName, attrObj, parent, appendChild) {
 	
 	return element;
 }
+
+/**
+ short hand version of mkHTML()
+*/
+
+function mk( elementName, attrObj, parent, appendChild) {
+	mkHTML( elementName, attrObj, parent, appendChild);
+};
