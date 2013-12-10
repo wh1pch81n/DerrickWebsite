@@ -1,40 +1,43 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-			<title>teaching</title>
-			<link rel="stylesheet" type="text/css" href="style.css">
-				<script src="classes/Navigation.js"></script>
-				<script src="classes/JS_HTML.js"></script>
-				<script src="teaching.js"></script>
-				<script>
-					window.onload = function(){
-						var nav = new Navigation();
-						nav.headerID = "header";
-						nav.tableContainerID = "tableContainer";
-						nav.tableRowID = "tableRow";
-						nav.navigationID = "navigation";
-						nav.contentID = "content";
-						nav.footerID = "footer";
+<head>
+	<meta charset="utf-8">
+	<title>teaching</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="classes/Navigation.js"></script>
+	<script src="classes/JS_HTML.js"></script>
+	<script src="teaching.js"></script>
+	<script src="classes/StringWithHighlight.js"></script>
+	<script src="classes/Slide.js"></script>
+	<script src="classes/SlideShow.js"></script>
+	<script>
+	window.onload = function(){
+		var nav = new Navigation();
+		nav.headerID = "header";
+		nav.tableContainerID = "tableContainer";
+		nav.tableRowID = "tableRow";
+		nav.navigationID = "navigation";
+		nav.contentID = "content";
+		nav.footerID = "footer";
 						
-						nav.initHeader();
-						nav.initGUI();
-						nav.initFooter();
+		nav.initHeader();
+		nav.initGUI();
+		nav.initFooter();
 						
-						initContent(document.getElementById(nav.contentID));
-					};
-				</script>
-				</head>
-	<body>
-		<header id="header"></header>
-		<div id="tableContainer">
-			<div id="tableRow">
-				<nav id="navigation"></nav>
-				<section id="content">
+		initContent(document.getElementById(nav.contentID));
+	};
+	</script>
+</head>
+<body>
+	<header id="header"></header>
+	<div id="tableContainer">
+		<div id="tableRow">
+			<nav id="navigation"></nav>
+			<section id="content">
 					
-				</section>
-			</div> <!-- tableRow -->
-		</div> <!-- tableContainer -->
-		<footer id="footer"></footer>
-	</body>
+			</section>
+		</div> <!-- tableRow -->
+	</div> <!-- tableContainer -->
+	<footer id="footer"></footer>
+</body>
 </html>
