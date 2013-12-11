@@ -29,7 +29,11 @@ function DHSlideShow () {
 		
 	};
 	this.appendSlide = function(codeArr,header, comment) {
-		this.arrOfSlides.push(new DHSlide(codeArr, header, comment));
+		var codeArr2 = [];
+		for(var i = 0; i < codeArr.length; ++i) {
+			codeArr2.push(new DHStringWithHighlight(codeArr[i].str, codeArr[i].isLit));
+		}
+		this.arrOfSlides.push(new DHSlide(codeArr2, header, comment));
 	}
 	this.createDisplay = function(elementRef) {
 		var display = document.createElement("div");

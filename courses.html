@@ -1,152 +1,40 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-			<title>Courses</title>
-			<link rel="stylesheet" type="text/css" href="style.css">
-				<script src="Navigation.js"></script>
-				<script>
-					window.onload = function(){
-						var nav = new Navigation();
-						nav.headerID = "header";
-						nav.tableContainerID = "tableContainer";
-						nav.tableRowID = "tableRow";
-						nav.navigationID = "navigation";
-						nav.contentID = "content";
-						nav.footerID = "footer";
+<head>
+	<meta charset="utf-8">
+	<title>Courses</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="classes/Navigation.js"></script>
+	<script src="classes/JS_HTML.js"></script>
+	<script src="courses.js"></script>
+	<script>
+	window.onload = function(){
+		var nav = new Navigation();
+		nav.headerID = "header";
+		nav.tableContainerID = "tableContainer";
+		nav.tableRowID = "tableRow";
+		nav.navigationID = "navigation";
+		nav.contentID = "content";
+		nav.footerID = "footer";
 						
-						nav.initHeader();
-						nav.initGUI();
-						nav.initFooter();
-					};
-				</script>
-				</head>
-	<body>
-		<header id="header"></header>
-		<div id="tableContainer">
-			<div id="tableRow">
-				<nav id="navigation"></nav>
-				<section id="content">
-					<table id="UCR_course_table">
-						<caption>
-							Courses I took in UC Riverside
-						</caption>
-						<tr> <!-- table row headers -->
-							<th>Course #</th>
-							<th>Course Title</th>
-							<th>Year</th>
-						</tr>
-						<tr>
-							<td>CS 122A, CS120B</td>
-							<td>Embedded Systems &amp; Real-time Systems</td>
-							<td>2011</td>
-						</tr>
-						<tr>
-							<td>CS 161</td>
-							<td>Design &amp; Architecture of Computer Systems</td>
-							<td>2011</td>
-						</tr>
-						<tr>
-							<td>CS 130</td>
-							<td>Computer Graphics </td>
-							<td>2011</td>
-						</tr>
-						<tr>
-							<td>CS 179n</td>
-							<td>Video Game Design</td>
-							<td>2011</td>
-						</tr>
-						<tr>
-							<td>CS 066</td>
-							<td>3-D Modeling</td>
-							<td>2011</td>
-						</tr>
-						<tr>
-							<td>CS 141, CS 111</td>
-							<td>Data Structures &amp; Algorithms</td>
-							<td>2011, 2010</td>
-						</tr>
-						<tr>
-							<td>CS 150</td>
-							<td>Theory-Automata &amp; formal languages</td>
-							<td>2011</td>
-						</tr>
-						<tr>
-							<td>CS 120A</td>
-							<td>Logic Design</td>
-							<td>2010</td>
-						</tr>
-						<tr>
-							<td>CS 061</td>
-							<td>Machine Organization &amp; Assembly Language</td>
-						<td>2010</td>
-						</tr>
-						<tr>
-							<td>Engr 180</td>
-							<td>Technical Communications</td>
-							<td>2010</td>
-						</tr>
-						<tr>
-							<td>EE 100B, EE 100A</td>
-							<td>Electronic Circuits</td>
-							<td>2010, 2012</td>
-						</tr>
-						<tr>
-							<td>CS 153</td>
-							<td>Operating Systems</td>
-							<td>2012</td>
-						</tr>
-					</table>
-					<table id="selfTaughtClasses">
-						<caption>
-							Self Taught Classes
-						</caption>
-						<tr>
-							<th>Name</th>
-							<th>Summary</th>
-							<th>Source</th>
-							<th>Year</th>
-							<th>Repository</th>
-						</tr>
-						<tr>
-							<td>Nand2Tetris</td>
-							<td>Built a computer from HDL to tetris and beyond</td>
-							<td><a href="http://nand2tetris.org/book.php">book</a>, <a href="http://nand2tetris.org/course.php">Lecture Slides</a></td>
-							<td>2013</td>
-							<td><a href="https://github.com/wh1pch81n/code_projects_portfolio/tree/master/TECS_condensed">1</a>, <a href="https://github.com/wh1pch81n/code_projects_portfolio/tree/master/TECS_uncondensed">2</a></td>
-						</tr>
-						<tr>
-							<td>Tap, Move, Shake</td>
-							<td>A step-by-step guide to iPhone game development</td>
-							<td><a href="http://www.barnesandnoble.com/w/tap-move-shake-todd-moore/1110853935?ean=9781449303457">book</a></td>
-							<td>2013</td>
-							<td><a href="https://github.com/wh1pch81n/AirHockeyiPhone">1</a></td>
-						</tr>
-						<tr>
-							<td>HTML and CSS</td>
-							<td>Make beautiful websites with HTML5</td>
-							<td><a href="http://www.barnesandnoble.com/w/head-first-html-and-css-2nd-edition-elisabeth-robson/1111330915?ean=9780596159900">book</a></td>
-							<td>2013</td>
-							<td><a href="https://github.com/wh1pch81n/headfirst_html">1</a></td>
-						</tr>
-						<tr>
-							<td>HTML and JavaScript</td>
-							<td>Make interactive websites with HTML5</td>
-							<td><a href="http://www.barnesandnoble.com/w/head-first-html5-programming-eric-t-freeman/1110865264?ean=9781449390549">book</a></td>
-							<td>2013</td>
-							<td><a href="https://github.com/wh1pch81n/head_first_html5js">1</a></td>
-						</tr>
-						<tr>
-							<td>The Algorithm Design Manual</td>
-							<td>Learn algorithms the Skiena way</td>
-							<td><a href="http://www.cs.sunysb.edu/~algorith/video-lectures/">Lecture Slides</a></td>
-							<td>2013</td>
-							<td></td>
-						</tr>
-					</table>
-				</section>
-			</div> <!-- tableRow -->
-		</div> <!-- tableContainer -->
-		<footer id="footer"></footer>
-	</body>
+		nav.initHeader();
+		nav.initGUI();
+		nav.initFooter();
+						
+		initContent(document.getElementById(nav.contentID));
+	};
+	</script>
+</head>
+<body>
+	<header id="header"></header>
+	<div id="tableContainer">
+		<div id="tableRow">
+			<nav id="navigation"></nav>
+			<section id="content">
+
+			</section>
+		</div> <!-- tableRow -->
+	</div> <!-- tableContainer -->
+	<footer id="footer"></footer>
+</body>
 </html>
