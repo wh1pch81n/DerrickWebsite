@@ -33,7 +33,9 @@ function Navigation(){
 										new NavLink("Project Euler", "https://github.com/wh1pch81n/ProjectEulerNew", 1),
 										new NavLink("CodeEval", "https://www.codeeval.com/public/8204d6d519fd06ef4ef36415ec9001466e87fc35/", 1)
 		];
-		
+		if(!document.URL.search(".html")) {
+			arrLinks[0].class = "selected"; //if the url is not appended with an .HTML then assume "About me" link is highlighted
+		}
 		var nav = document.getElementById(this.navigationID);
 		
 		for(var i = 0; i < arrLinks.length; ++i) {

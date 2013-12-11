@@ -6,13 +6,13 @@ var globalTutorialArr =
 	tutorial:"VHDL", 
 	lessons:[
 	{value:vhdlLesson1, text:"VHDL Lesson 1"},
-	{value:vhdlLesson2, text:"VHDL Lesson 2"}
+	//{value:vhdlLesson2, text:"VHDL Lesson 2"}
 	]
-},{
-	tutorial:"JavaScript", 
-	lessons:[
-	{value:javaScriptLesson1, text:"JavaScript Lesson 1"}
-	]
+//},{
+//	tutorial:"JavaScript", 
+//	lessons:[
+//	{value:javaScriptLesson1, text:"JavaScript Lesson 1"}
+//	]
 }];
 
 function initContent(parent) {	
