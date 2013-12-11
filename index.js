@@ -22,7 +22,7 @@ function initContent(parent) {
 		 currElement.innerHTML = "dho006@ucr.edu";
 		 });
 	
-	mk("h3", null, parent, function (currElement) {
-		 currElement.innerHTML = "The Catalyst";
-		 });
+	//mk("h3", null, parent, function (currElement) {
+	//	 currElement.innerHTML = "The Catalyst";
+	//	 });
 };
