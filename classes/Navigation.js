@@ -33,13 +33,22 @@ function Navigation(){
 										new NavLink("Project Euler", "https://github.com/wh1pch81n/ProjectEulerNew", 1),
 										new NavLink("CodeEval", "https://www.codeeval.com/public/8204d6d519fd06ef4ef36415ec9001466e87fc35/", 1)
 		];
-		if(!document.URL.search(".html")) {
-			arrLinks[0].class = "selected"; //if the url is not appended with an .HTML then assume "About me" link is highlighted
-		}
-		var nav = document.getElementById(this.navigationID);
 		
+		var nav = document.getElementById(this.navigationID);
+		var selNum = 0;
 		for(var i = 0; i < arrLinks.length; ++i) {
-			nav.appendChild(arrLinks[i].createLinkElement());
+			var p = arrLinks[i].createLinkElement();
+			
+			//check if current url is the link we are making
+			//if so give it the class "selected"
+			if(document.URL.search(arrLinks[i].url) >= 0) {
+				p.setAttribute("class", "selected");
+				selNum = i;
+			}
+			nav.appendChild(p);
+		}
+		if(selNum == 0) {
+			nav.firstChild.class = "selected";
 		}
 		
 	}
@@ -51,11 +60,6 @@ function NavLink(title, url, willOpenInNewTab) {
 	this.willOpenInNewTab=willOpenInNewTab;
 	this.createLinkElement = function() {
 		var p = document.createElement("p");
-		//check if current url is the link we are making
-		//if so give it the class "selected"
-		if (document.URL.search(this.url) >= 0) {
-			p.setAttribute("class", "selected");
-		}
 		var link = document.createElement("a");
 		link.innerHTML = this.title;
 		link.setAttribute("href",this.url);
