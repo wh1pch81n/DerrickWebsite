@@ -302,18 +302,14 @@ function javaScriptLesson1() {
 	globalLesson.innerHTML = null;
 	var javaScriptLesson1_slideshow = function() {
 		makeSlideShowWithBlock(globalLesson, "Lesson 1: First program", function (codeArr,codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp) {
-														 
-			//codeArr.push(new DHStringWithHighlight("&lt;!doctype html&gt;"));
-			//header = "first things first";
-			//comment = "This is the first tag that should be written in your HTML file.  It tells your browser that this document is written in html as opposed to something else.  The guys that created this prepared themselves in the event that the standard might change, so they made this tag to help future proof things. But HTML is the standard and no one else has tried and succeeded to dethrone it";
-			//slideshow.appendSlide(codeArr, header, comment);
 			
+			//
 			codeArrAppend(tag("!doctype html"));
 			lon([0]);
 			setHeader("first things first");
 			setComment("This is the first tag that should be written in your HTML file.  It tells your browser that this document is written in html as opposed to something else.  The guys that created this prepared themselves in the event that the standard might change, so they made this tag to help future proof things. But HTML is the standard and no one else has tried and succeeded to dethrone it");
 			slideshowAppend();
-			
+			//
 			loff([0]);
 			codeArrAppend(tag("html"));
 			codeArrAppend(tag("/html"));
@@ -321,7 +317,7 @@ function javaScriptLesson1() {
 			setHeader("where does it go");
 			setComment("After we tell the browser that this is indeed an html file, we need to tell it where that html code is located.  It is located between the two html tags");
 			slideshowAppend();
-			
+			//
 			loff([1,2]);
 			codeArrSplice(2, 0, [sp(tag("head")),
 													 sp(tag("/head"))
@@ -330,7 +326,108 @@ function javaScriptLesson1() {
 			setHeader("head first");
 			setComment("every body needs to stay ahead.  The head is the typical place to put scripts, styles, and other things that function under the hood.");
 			slideshowAppend();
+			//
+			loff([2,3]);
+			codeArrSplice(4, 0, [sp(tag("body")),
+													 sp(tag("/body"))]);
+			lon([4,5]);
+			setHeader("mind over body");
+			setComment("The body is usually where a lot of the action happens.  But since we are talking about JavaScript, we won't be using html to add stuff in here.  We will use the power of javaScript to make things and make things happen");
+			slideshowAppend();
+			//
+			loff([4,5]);
+			codeArrSplice(3, 0, [sp(sp(tag("meta charset=\"utf-8\""))),
+													 sp(sp(tag("script") +tag("/script")))]);
+			lon([3,4]);
+			setHeader("meta and script");
+			setComment("The meta tag is used to explicitly say that we should use utf-8 encoding.  The script tags is where we will write javascript");
+			slideshowAppend();
+			//
+			loff([3,4]);
+			codeArrSplice(4, 1, [sp(sp(tag("script"))),
+													 sp(sp("window.onload = function() {")),
+													 sp(sp("};")),
+													 sp(sp(tag("/script")))]);
+			lon([5,6]);
+			setHeader("main function");
+			setComment("The window.onload is a property that excepts a function pointer or a function block.  When the browser is done parsing the html page, it will call window.onload as a function which will then perform the code you see to the right of the assignment operator all the way down to the right curly brace and semi-colon. <br><br> If you are familiar with C or C++ you would call this the main function because it is the first function that gets run");
+			slideshowAppend();
 			
+			/*
+			 //you can write things to the webpage directly
+			 document.write("Hello World");
+			 document.write("This is how I can write on the page");
+			 document.write("I call it the wall");
+			 document.write("walls are fun to write on");
+			 document.write("is that it?");
+			 document.write("ok, bored... lets do something else");
+			 */
+			/*
+			 //open  index.html with a web browser like Google Chrome
+			 //you may notice that its all on one line.  how can we fix that?
+			 // With a line break.  just add a "<br>" to the string like so...
+			 document.write("<br>");
+			 document.write("<br><br>"); //felt like doing another one
+			 
+			 //Now that you know....lets write a few things with line breaks in them
+			 document.write("Hello World<br>");
+			 document.write("This is how I can write on the page<br>");
+			 document.write("I call it the wall<br>");
+			 document.write("walls are fun to write on<br>");
+			 document.write("is that it?<br>");
+			 document.write("ok, bored... lets do something else<br>");
+			 document.write("<br>");
+			 */
+			/*
+			 //what can you print besides strings?
+			 document.write(12345); //integers
+			 document.write("<br>");
+			 
+			 document.write(3.14156789);//floating point
+			 document.write("<br>");
+			 */
+			/*
+			 //thats great... can i do math?
+			 document.write(1 + 2); //adding
+			 document.write("<br>");
+			 document.write(777 -1);
+			 document.write("<br>");
+			 */
+			/*
+			 document.write(10 *5); //multiplication
+			 document.write("<br>");
+			 document.write(50 / 2);
+			 document.write("<br>");
+			 */
+			/*
+			 document.write("<br>");
+			 //can i store these values somewhere?
+			 var variable_name = "Yes, you can store them in variables";
+			 var variable_number = 25;
+			 var str = "the variable can have any name that starts with a Letter";
+			 */
+			/*
+			 // we can even put numbers into a string if we wanted.
+			 var name = "Derrick";
+			 var age = 25;
+			 var profile = "Name: " + name + "<br>" + "Age: " + age + "<br>";
+			 
+			 //when we are ready to put it n the page we can do it like this
+			 document.write(profile);
+			 document.write("<br>");
+			 */
+			/*
+			 //ok, string and numbers are cool.  is there any other basic data type
+			 //i should know about?
+			 var an_array_of_str = ["this", "is", "an", "array", "of", "words"];
+			 document.write("word at index 0:" + an_array_of_str[0] + "<br>");
+			 document.write("word at index 3:" + an_array_of_str[3] + "<br>");
+			 document.write("word at the end:" + an_array_of_str[an_array_of_str.length-1] + "<br>");
+			 document.write("<br>");
+			 var an_array_of_num =[1, 5, 7, 9, 3];
+			 document.write("number at index 0:" + an_array_of_str[0] + "<br>");
+			 document.write("number at index 4:" + an_array_of_str[4] + "<br>");
+			 */
 			
 		});
 	};
@@ -362,7 +459,7 @@ function javaScriptLesson1() {
  @param sp a block that prepends string with a tab eg &emsp;
  
  @code
-
+ 
  @endcode
  */
 function makeSlideShowWithBlock(parent, slideTitle, block) {
