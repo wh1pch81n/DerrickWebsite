@@ -1,21 +1,21 @@
 var globalParent = null;
 var globalLesson = null;
 
-var globalTutorialArr = 
+var globalTutorialArr =
 [{
-	tutorial:"VHDL", 
-	lessons:[
-	{value:vhdlLesson1, text:"VHDL Lesson 1"},
-	//{value:vhdlLesson2, text:"VHDL Lesson 2"}
-	]
-//},{
-//	tutorial:"JavaScript", 
-//	lessons:[
-//	{value:javaScriptLesson1, text:"JavaScript Lesson 1"}
-//	]
+tutorial:"VHDL",
+lessons:[
+				 {value:vhdlLesson1, text:"VHDL Lesson 1"},
+				 //{value:vhdlLesson2, text:"VHDL Lesson 2"}
+				 ]
+},{
+tutorial:"JavaScript",
+lessons:[
+				 {value:javaScriptLesson1, text:"JavaScript Lesson 1"}
+				 ]
 }];
 
-function initContent(parent) {	
+function initContent(parent) {
 	mk("dl", {id:"tutorialNav"}, parent, function(b) {
 		
 		for(var i = 0; i < globalTutorialArr.length; ++i){
@@ -25,10 +25,11 @@ function initContent(parent) {
 			});
 			mk("dd", null, b, function(b) {
 				var lessons = tutorial.lessons;
-				for(var j = 0; j < lessons.length; ++j) {
-					var button = mk("input", {type:"button", value:lessons[j].text}, b, null);
-					button.onclick = lessons[j].value;
-					//mk("br", null, b, null);
+				for(var j = 0; j < lessons.length; ++j)
+				{
+				var button = mk("input", {type:"button", value:lessons[j].text}, b, null);
+				button.onclick = lessons[j].value;
+				//mk("br", null, b, null);
 				}
 			});
 		}
@@ -36,8 +37,8 @@ function initContent(parent) {
 	globalLesson = mk("article", {id:"lessonSpace"}, parent, null);
 };
 
-	
-												
+
+
 function vhdlLesson1() {
 	globalLesson.innerHTML = null;
 	var vhdlLesson1_slideshow = function(){
@@ -48,19 +49,19 @@ function vhdlLesson1() {
 		var codeArr = [];
 		var header = "";
 		var comment = "";
-
+		
 		codeArr.push(new DHStringWithHighlight("library ieee;",0));
 		header = "The much needed library";
 		comment = "This library allows you to write vhdl.  Always include it";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		codeArr.push(new DHStringWithHighlight("entity first_prog is", 0));
 		codeArr.push(new DHStringWithHighlight("end entity first_prog;", 0));
 		codeArr.push(new DHStringWithHighlight("", 0));
 		header = "Entity identity";
 		comment = "Whats an entity?  its kinda like a function declaration or a function prototype.  What it does is let you name it and describe the parameters.  right now, there are no parameters but I've given it the name \"first_prog\"";
 		slideshow.appendSlide(codeArr, header, comment);
-
+		
 		codeArr.push(new DHStringWithHighlight("architecture implementation of first_prog is", 0));
 		codeArr.push(new DHStringWithHighlight("begin", 0));
 		codeArr.push(new DHStringWithHighlight("end architecture implementation;", 0));
@@ -68,26 +69,26 @@ function vhdlLesson1() {
 		comment = "The architecture is where the entity is implemented.  I named the architecture \"implementation\" but you can name it what ever you want.  I chose to give it a name that literally describes what it is.  Which is...the implementation of first_prog <br><br>";
 		comment += "You may also wonder what begin and end are for.  begin is kinda like an open curly brace \"{\" and the end is kinda like a close curly brace \"}\"";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		header = "This looks a bit borning... ";
 		comment = "yeah, I know.  thats because we haven't put anything in it.  This is basically just the foundation that all VHDL modules will be written on";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		header = "see it?";
 		comment = "Notice how the each part has a begining and an ending. We say entity then the name and finish it with the entity then the name.  the same pattern can be found on architecture.  Some of these words are optional, but I highly recommend including them to keep things balanced.  When things are balanced, it looks beautiful";
 		slideshow.appendSlide(codeArr, header, comment);
-								
+		
 		codeArr.splice(2, 0, new DHStringWithHighlight( "&emsp; port&#40;", 1),
-		new DHStringWithHighlight("&emsp; &emsp; parameterName1: in std_logic_vector(0 downto 0);", 1),
-		new DHStringWithHighlight("&emsp; &emsp; returnName1: out std_logic_vector(0 downto 0)", 1),
-		new DHStringWithHighlight("&emsp;&#41;;", 1));
-	
+									 new DHStringWithHighlight("&emsp; &emsp; parameterName1: in std_logic_vector(0 downto 0);", 1),
+									 new DHStringWithHighlight("&emsp; &emsp; returnName1: out std_logic_vector(0 downto 0)", 1),
+									 new DHStringWithHighlight("&emsp;&#41;;", 1));
+		
 		header = "Adding Parameters";
 		comment = "In order for you entity to be useful, it must be able to take in different arguments and give out a result";
 		slideshow.appendSlide(codeArr, header, comment);
-							
+		
 		lightOff(codeArr, [3,4]);
-							
+		
 		comment = "You must declare your parameters in between the parenthesis after the word port";
 		slideshow.appendSlide(codeArr, header, comment);
 		
@@ -98,16 +99,16 @@ function vhdlLesson1() {
 		lightOff(codeArr, [2,5]);
 		lightOn(codeArr, [3,4]);
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		header = "what about inout?";
 		comment = "That is an advanced topic where you can treat it as both an input and an output.  If these ports were streets, the cars would crash into each other head first.  To prevent this mess we need a traffic light to delegate.  In hardware we call it a tri-state device.  This will allow us to set unused inout ports to high Z which will act as a disconnected wire.<br><br>";
 		comment += "inout ports are not used very often, but can be powerful. We shall cover the topic of inout in a future lesson.  So for now just keep it in the back of your mind and pay attention to the in and out ports";
 		slideshow.appendSlide(codeArr, header, comment);
-						
+		
 		header = "where do i set the in or out?";
 		comment = "after the parameter name there is a colon.  add the in or out there";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		header = "Parameter Names?";
 		comment = "You must name your paremeters.  It must start with an alphabetical letter.  It can not start with a number but it CAN end with a number.  in this example I have two parameters named \"parameterName\" and \"returnName\". <br><br>";
 		comment += "You must give your parameters two different types.  As we mentioned earlier, you need to specify the direction: \"in\" or \"out\" and you also need to specify the wire type and size.  We shall almost always use an std_logic_vector.  We gave it the size of one.  Which means it holds one bit";
@@ -117,21 +118,21 @@ function vhdlLesson1() {
 		comment = " in order to specify the size of the std_logic_vector, you need to use downto. In Computer Science, the convention is to label the bits in descending order.  The right most bit starts with zero and we count up as we go left.  That is what we mean when we say \"0 downto 0\".  we are specifying that we want a vector of size 1. and we want to label the left most bit as 0 and the right most bit as 0. <br><br>";
 		comment += "if we wanted a 4 bit std_logic_vector we would need to say \"3 downto 0\".  The left most bit would be labeled as 3 and the right most bit would be labeled as zero.";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		lightOff(codeArr, [3,4]);
-							
+		
 		codeArr.splice(10, 0, new DHStringWithHighlight("&emsp; &emsp; returnName1 &lt;&#61; parameterName1;", 1));
-							
+		
 		header = "Assigning values";
 		comment = "to assign a value we use \"&lt;&#61;\" which is also known as the signal assignment operator.  we are using the value of parameterName1 to set the value of returnName1";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		lightOff(codeArr, [10]);
-							
+		
 		header = "End of Lesson";
 		comment = "read the Q and A below";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		slideshow.goToSlide(0); //go to first slide by default
 	};
 	var vhdlLesson1_questions = function() {
@@ -199,7 +200,7 @@ function vhdlLesson1() {
 				p.innerHTML += "<br><br>";
 				p.innerHTML += "std_logic can hold one bit.  You may set an std_logic with either a '1' or a '0'.  (you can also set it as high-Z which looks like 'Z'.  that is a capital Z and is case sensitive).  An std_logic_vector is, you guessed it, a vector (or an array) of std_logic.  Which means you can access each std_logic in a std_logic_vector.";
 			});
-							
+			
 			mk("p", {class:"code"}, p, function(p) {
 				p.innerHTML = "<span class=\"comment\">-- suppose we have 3 wires called foo, bar, and rut</span><br>";
 				p.innerHTML += "<span class=\"comment\">-- foo is an std_logic</span><br>";
@@ -213,14 +214,14 @@ function vhdlLesson1() {
 				p.innerHTML += "bar &lt;&#61; rut; <span class=\"comment\">-- set bar with rut.  only works if they are the same size</span><br>";
 				p.innerHTML += "bar(4) &lt;&#61; rut(7); <span class=\"comment\">-- set the 4th bit of bar with the 7th bit of rut</span><br>";
 			});
-									
+			
 		});
 	};
 	vhdlLesson1_slideshow();
 	vhdlLesson1_questions();
 };
-													
-function vhdlLesson2() {
+
+function vhdlLesson2() { //needs completing
 	globalLesson.innerHTML = null;
 	var vhdlLesson2_slideshow = function(){
 		//slideShow
@@ -230,20 +231,20 @@ function vhdlLesson2() {
 		var codeArr = [];
 		var header = "";
 		var comment = "";
-	
+		
 		codeArr.push(new DHStringWithHighlight("this is code", 0));
 		codeArr.push(new DHStringWithHighlight("highlighted", 1));
 		header = "splendid header";
 		comment = "wonderful comment";
 		slideshow.appendSlide(codeArr, header, comment);
-	
-	
+		
+		
 		codeArr.push(new DHStringWithHighlight("filo", 0));
 		codeArr.push(new DHStringWithHighlight("piccolo", 0));
 		header = "dragonball";
 		comment = "gohan";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		slideshow.goToSlide(0);
 	};
 	var vhdlLesson2_questions = function() {
@@ -291,14 +292,125 @@ function vhdlLesson2() {
 				b.innerHTML += "<span class=\"comment\">-- english.  But you can name it what ever you want.</span><br>";
 			});
 		});
-	};;
+	};
 	vhdlLesson2_slideshow();
 	vhdlLesson2_questions();
 };
-													
-													
+
+
 function javaScriptLesson1() {
 	globalLesson.innerHTML = null;
+	var javaScriptLesson1_slideshow = function() {
+		makeSlideShowWithBlock(globalLesson, "Lesson 1: First program", function (codeArr,codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp) {
+														 
+			//codeArr.push(new DHStringWithHighlight("&lt;!doctype html&gt;"));
+			//header = "first things first";
+			//comment = "This is the first tag that should be written in your HTML file.  It tells your browser that this document is written in html as opposed to something else.  The guys that created this prepared themselves in the event that the standard might change, so they made this tag to help future proof things. But HTML is the standard and no one else has tried and succeeded to dethrone it";
+			//slideshow.appendSlide(codeArr, header, comment);
+			
+			codeArrAppend(tag("!doctype html"));
+			lon([0]);
+			setHeader("first things first");
+			setComment("This is the first tag that should be written in your HTML file.  It tells your browser that this document is written in html as opposed to something else.  The guys that created this prepared themselves in the event that the standard might change, so they made this tag to help future proof things. But HTML is the standard and no one else has tried and succeeded to dethrone it");
+			slideshowAppend();
+			
+			loff([0]);
+			codeArrAppend(tag("html"));
+			codeArrAppend(tag("/html"));
+			lon([1,2]);
+			setHeader("where does it go");
+			setComment("After we tell the browser that this is indeed an html file, we need to tell it where that html code is located.  It is located between the two html tags");
+			slideshowAppend();
+			
+			loff([1,2]);
+			codeArrSplice(2, 0, [sp(tag("head")),
+													 sp(tag("/head"))
+													 ]);
+			lon([2,3]);
+			setHeader("head first");
+			setComment("every body needs to stay ahead.  The head is the typical place to put scripts, styles, and other things that function under the hood.");
+			slideshowAppend();
+			
+			
+		});
+	};
+	var javaScriptLesson1_questions = function() {
+		
+	};
+	javaScriptLesson1_slideshow();
+	javaScriptLesson1_questions();
 };
 
-													
+/**
+ A convenience function that will produce a slide show object and offers a block
+ which will give you access to common variables and convenience functions
+ 
+ @param parent a reference to the object that the slide show will be made inside of
+ @param slideTitle a string that will set the slide title
+ @param block a multi-parameter block that provides common variables and convenience functions. The following parameters refer to the block's parameters
+ 
+ @param codeArr an array of DHStringWithHighlight objects
+ @param codeArrSplice a block that helps you splice. param(loc, deleteAmount, object_to_add,...);
+ @param setHeader a block that lets you set the header of the comments. param string
+ @param setComment a block that lets you set the comments. param string
+ @param tag a block that returns a string prepended and postpended with angle brackets around a middle string. param string.
+ @param codeArrAppend a block that appends to the array one DHStringWithHighlight object. param str param isLit
+ @param mkdhsh a block that creates a DHStringWithHighlight
+ @param slideshowAppend a block that adds the codeArr, header, and comments to the slide show
+ @param loff a block that lets to turn off certain rows. param
+ @param lon a block that lets you turn on certain rows.
+ @param sp a block that prepends string with a tab eg &emsp;
+ 
+ @code
+
+ @endcode
+ */
+function makeSlideShowWithBlock(parent, slideTitle, block) {
+	var slideshow = new DHSlideShow();
+	slideshow.init(parent.id, slideTitle);
+	var codeArr = [];
+	var header = "";
+	var comment = ""
+	
+	var tag = function(str) {
+		return "&lt;" + str + "&gt;";
+	};
+	var codeArrAppend = function(str, isLit){
+		codeArr.push(new DHStringWithHighlight(str,isLit));
+	};
+	var mkdhsh = function(str, isLit) {
+		return new DHStringWithHighlight(str,isLit)
+	};
+	var slideshowAppend = function () {
+		slideshow.appendSlide(codeArr, header, comment);
+	};
+	var setHeader = function(str){
+		header = str;
+	};
+	var setComment = function(str){
+		comment = str;
+	};
+	var loff = function(arr) {
+		lightOff(codeArr, arr);
+	};
+	var lon = function(arr){
+		lightOn(codeArr, arr);
+	};
+	
+	var codeArrSplice = function(loc, delAmt, arr) {
+		codeArr.splice(loc, delAmt);
+		for (var i = 0; i < arr.length; ++i) {
+			codeArr.splice(loc+i, 0, mkdhsh(arr[i]));
+		}
+	};
+	
+	var sp = function(str){
+		return "&emsp; " + str;
+	}
+	//call block function
+	block(codeArr, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp);
+	
+	//move to default slide
+	slideshow.goToSlide(0);
+};
+
