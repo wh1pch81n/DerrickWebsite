@@ -5,14 +5,14 @@ var globalTutorialArr =
 [{
 tutorial:"VHDL",
 lessons:[
-				 {value:vhdlLesson1, text:"VHDL Lesson 1"},
-				 //{value:vhdlLesson2, text:"VHDL Lesson 2"}
-				 ]
+		 {value:vhdlLesson1, text:"VHDL Lesson 1"},
+		 //{value:vhdlLesson2, text:"VHDL Lesson 2"}
+		 ]
 },{
 tutorial:"JavaScript",
 lessons:[
-				 {value:javaScriptLesson1, text:"JavaScript Lesson 1"}
-				 ]
+		 {value:javaScriptLesson1, text:"JavaScript Lesson 1"}
+		 ]
 }];
 
 function initContent(parent) {
@@ -36,8 +36,6 @@ function initContent(parent) {
 	});
 	globalLesson = mk("article", {id:"lessonSpace"}, parent, null);
 };
-
-
 
 function vhdlLesson1() {
 	globalLesson.innerHTML = null;
@@ -79,9 +77,9 @@ function vhdlLesson1() {
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		codeArr.splice(2, 0, new DHStringWithHighlight( "&emsp; port&#40;", 1),
-									 new DHStringWithHighlight("&emsp; &emsp; parameterName1: in std_logic_vector(0 downto 0);", 1),
-									 new DHStringWithHighlight("&emsp; &emsp; returnName1: out std_logic_vector(0 downto 0)", 1),
-									 new DHStringWithHighlight("&emsp;&#41;;", 1));
+					   new DHStringWithHighlight("&emsp; &emsp; parameterName1: in std_logic_vector(0 downto 0);", 1),
+					   new DHStringWithHighlight("&emsp; &emsp; returnName1: out std_logic_vector(0 downto 0)", 1),
+					   new DHStringWithHighlight("&emsp;&#41;;", 1));
 		
 		header = "Adding Parameters";
 		comment = "In order for you entity to be useful, it must be able to take in different arguments and give out a result";
@@ -301,16 +299,18 @@ function vhdlLesson2() { //needs completing
 function javaScriptLesson1() {
 	globalLesson.innerHTML = null;
 	var javaScriptLesson1_slideshow = function() {
-		makeSlideShowWithBlock(globalLesson, "Lesson 1: First program", function (codeArr,codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp) {
+		makeSlideShowWithBlock(globalLesson, "Lesson 1: First program", function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
 			
 			//
+			flush();
 			codeArrAppend(tag("!doctype html"));
 			lon([0]);
 			setHeader("first things first");
 			setComment("This is the first tag that should be written in your HTML file.  It tells your browser that this document is written in html as opposed to something else.  The guys that created this prepared themselves in the event that the standard might change, so they made this tag to help future proof things. But HTML is the standard and no one else has tried and succeeded to dethrone it");
 			slideshowAppend();
 			//
-			loff([0]);
+			flush();
+			codeArrAppend(tag("!doctype html"));
 			codeArrAppend(tag("html"));
 			codeArrAppend(tag("/html"));
 			lon([1,2]);
@@ -318,117 +318,174 @@ function javaScriptLesson1() {
 			setComment("After we tell the browser that this is indeed an html file, we need to tell it where that html code is located.  It is located between the two html tags");
 			slideshowAppend();
 			//
-			loff([1,2]);
-			codeArrSplice(2, 0, [sp(tag("head")),
-													 sp(tag("/head"))
-													 ]);
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(tag("/html"));
 			lon([2,3]);
 			setHeader("head first");
 			setComment("every body needs to stay ahead.  The head is the typical place to put scripts, styles, and other things that function under the hood.");
 			slideshowAppend();
 			//
-			loff([2,3]);
-			codeArrSplice(4, 0, [sp(tag("body")),
-													 sp(tag("/body"))]);
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(sp(tag("body")));
+			codeArrAppend(sp(tag("/body")));
+			codeArrAppend(tag("/html"));
 			lon([4,5]);
 			setHeader("mind over body");
 			setComment("The body is usually where a lot of the action happens.  But since we are talking about JavaScript, we won't be using html to add stuff in here.  We will use the power of javaScript to make things and make things happen");
 			slideshowAppend();
 			//
-			loff([4,5]);
-			codeArrSplice(3, 0, [sp(sp(tag("meta charset=\"utf-8\""))),
-													 sp(sp(tag("script") +tag("/script")))]);
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(sp(tag("meta charset=\"utf-8\""))));
+			codeArrAppend(sp(sp(tag("script") +tag("/script"))));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(sp(tag("body")));
+			codeArrAppend(sp(tag("/body")));
+			codeArrAppend(tag("/html"));
 			lon([3,4]);
 			setHeader("meta and script");
 			setComment("The meta tag is used to explicitly say that we should use utf-8 encoding.  The script tags is where we will write javascript");
 			slideshowAppend();
 			//
-			loff([3,4]);
-			codeArrSplice(4, 1, [sp(sp(tag("script"))),
-													 sp(sp("window.onload = function() {")),
-													 sp(sp("};")),
-													 sp(sp(tag("/script")))]);
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(sp(tag("meta charset=\"utf-8\""))));
+			codeArrAppend(sp(sp(tag("script"))));
+			codeArrAppend(sp(sp("window.onload = function() {")));
+			codeArrAppend(sp(sp("};")));
+			codeArrAppend(sp(sp(tag("/script"))));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(sp(tag("body")));
+			codeArrAppend(sp(tag("/body")));
+			codeArrAppend(tag("/html"));
 			lon([5,6]);
 			setHeader("main function");
 			setComment("The window.onload is a property that excepts a function pointer or a function block.  When the browser is done parsing the html page, it will call window.onload as a function which will then perform the code you see to the right of the assignment operator all the way down to the right curly brace and semi-colon. <br><br> If you are familiar with C or C++ you would call this the main function because it is the first function that gets run");
 			slideshowAppend();
 			
-			/*
-			 //you can write things to the webpage directly
-			 document.write("Hello World");
-			 document.write("This is how I can write on the page");
-			 document.write("I call it the wall");
-			 document.write("walls are fun to write on");
-			 document.write("is that it?");
-			 document.write("ok, bored... lets do something else");
-			 */
-			/*
-			 //open  index.html with a web browser like Google Chrome
-			 //you may notice that its all on one line.  how can we fix that?
-			 // With a line break.  just add a "<br>" to the string like so...
-			 document.write("<br>");
-			 document.write("<br><br>"); //felt like doing another one
-			 
-			 //Now that you know....lets write a few things with line breaks in them
-			 document.write("Hello World<br>");
-			 document.write("This is how I can write on the page<br>");
-			 document.write("I call it the wall<br>");
-			 document.write("walls are fun to write on<br>");
-			 document.write("is that it?<br>");
-			 document.write("ok, bored... lets do something else<br>");
-			 document.write("<br>");
-			 */
-			/*
-			 //what can you print besides strings?
-			 document.write(12345); //integers
-			 document.write("<br>");
-			 
-			 document.write(3.14156789);//floating point
-			 document.write("<br>");
-			 */
-			/*
-			 //thats great... can i do math?
-			 document.write(1 + 2); //adding
-			 document.write("<br>");
-			 document.write(777 -1);
-			 document.write("<br>");
-			 */
-			/*
-			 document.write(10 *5); //multiplication
-			 document.write("<br>");
-			 document.write(50 / 2);
-			 document.write("<br>");
-			 */
-			/*
-			 document.write("<br>");
-			 //can i store these values somewhere?
-			 var variable_name = "Yes, you can store them in variables";
-			 var variable_number = 25;
-			 var str = "the variable can have any name that starts with a Letter";
-			 */
-			/*
-			 // we can even put numbers into a string if we wanted.
-			 var name = "Derrick";
-			 var age = 25;
-			 var profile = "Name: " + name + "<br>" + "Age: " + age + "<br>";
-			 
-			 //when we are ready to put it n the page we can do it like this
-			 document.write(profile);
-			 document.write("<br>");
-			 */
-			/*
-			 //ok, string and numbers are cool.  is there any other basic data type
-			 //i should know about?
-			 var an_array_of_str = ["this", "is", "an", "array", "of", "words"];
-			 document.write("word at index 0:" + an_array_of_str[0] + "<br>");
-			 document.write("word at index 3:" + an_array_of_str[3] + "<br>");
-			 document.write("word at the end:" + an_array_of_str[an_array_of_str.length-1] + "<br>");
-			 document.write("<br>");
-			 var an_array_of_num =[1, 5, 7, 9, 3];
-			 document.write("number at index 0:" + an_array_of_str[0] + "<br>");
-			 document.write("number at index 4:" + an_array_of_str[4] + "<br>");
-			 */
+			//
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(sp(tag("meta charset=\"utf-8\""))));
+			codeArrAppend(sp(sp(tag("script"))));
+			codeArrAppend(sp(sp("window.onload = function() {")));
+			codeArrAppend(sp(sp(sp(codeComment("//you can write things to the webpage directly")))));
+			codeArrAppend(sp(sp(sp("document.write(\"Hello World\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"This is how I can write on the page\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"I call it the wall\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"walls are fun to write on\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"is that it?\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"ok, bored... lets do something else\");"))));
+			codeArrAppend(sp(sp("};")));
+			codeArrAppend(sp(sp(tag("/script"))));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(sp(tag("body")));
+			codeArrAppend(sp(tag("/body")));
+			codeArrAppend(tag("/html"));
+			lon([7,8,9,10,11,12]);
+			setHeader("write to console");
+			setComment("The document.write() function lets to write words and html to the web brower page.  The things between the two double quotes is called a string constant.  A string constant will be printed on the web browser page");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 7, [
+								 sp(sp(sp(codeComment("//one line break")))),
+								 sp(sp(sp("document.write(\"" + tag("br") + "\");"))),
+								 sp(sp(sp(codeComment("//two line breaks")))),
+								 sp(sp(sp("document.write(\"" + tag("br") + tag("br") + "\");")))
+								 ]);
+			lon([7,9]);
+			setHeader("Claustrophobic");
+			setComment("If you tested the code in the previous slide, you may have noticed that the words all continued on to the right.  You might have had to scroll all the way to the right to see all of it.  Or if your browser is good it would end up wrapping.  This may or may not be what you are aiming for.  But my personal preferene is to make things more readable, so we should add line breaks");
+			slideshowAppend();
 			
+			codeArrSplice(6, 4, [
+								 sp(sp(sp("document.write(\"Hello World"+ tag("br") + "\");" ))),
+								 sp(sp(sp("document.write(\"This is how I can write on the page"+ tag("br") + "\");" ))),
+								 sp(sp(sp("document.write(\"I call it the wall"+ tag("br") + "\");" ))),
+								 sp(sp(sp("document.write(\"walls are fun to write on"+ tag("br") + "\");"))),
+								 sp(sp(sp("document.write(\"is that it?"+ tag("br") + "\");"))),
+								 sp(sp(sp("document.write(\"ok, bored... lets do something else"+ tag("br") + "\");")))
+								 ]);
+			lon([6,7,8,9,10,11]);
+			setHeader("much better");
+			setComment("This is the same as two slides ago.  But we have added line breaks so that it will write words on the line below it");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 6, [
+								 sp(sp(sp("document.write(12345 + \"&lt;br&gt;\");" ))),
+								 sp(sp(sp("document.write(3.14156789 + \"&lt;br&gt;\");" ))),
+								 ]);
+			lon([6,7]);
+			setHeader("What can you do besides strings?");
+			setComment("You can print numbers.  Javascript is a typeless system, so if you give it a string or a number, the compiler will convert it to something more appropriate.  When you use document.write() it is turning that number into the string version so that it can be displayed properly.<BR><BR>The first one prints the string version of an integer and the second one prints a string version of a floating point number");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 2, [
+								 sp(sp(sp("document.write(1+2+ \"&lt;br&gt;\");" + codeComment("//adding.  Will print 3")))),
+								 sp(sp(sp("document.write(777-1+ \"&lt;br&gt;\");" + codeComment("//subtracting.  Will print 776")))),
+								 sp(sp(sp("document.write(10 * 5+ \"&lt;br&gt;\");" + codeComment("//multiplication. Will print 50")))),
+								 sp(sp(sp("document.write(50 / 2+ \"&lt;br&gt;\");" + codeComment("//division. Will print 25")))),
+								 ]);
+			lon([6,7,8,9]);
+			setHeader("Can we do Math?");
+			setComment("Arithmetic operations are built in to the language.  Addition, Subtraction, Multiplication, and Division are some of the built in math functions.");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 4, [
+								 sp(sp(sp("var variable_name = \"This is a String\";"))),
+								 sp(sp(sp("var variable_number123 = 25;"))),
+								 sp(sp(sp("var str = \"Another string\";")))
+								 ]);
+			lon([6,7,8]);
+			setHeader("Can store those values somewhere?");
+			setComment("Introducing, variables.  to make a variable you must enter the \"var\" keyword followed by a variable name.  The variable name can be anything that starts with a letter from the alphabet.  It may not start with a number, however it can end with numbers.  You can name variables beginning with non alphabetic number, but I personally do not like them and prefer to stick with variable names with alphabetic characters.<BR><BR> The equal sign i.e. \"=\" is called an assignment operator.  The assignment operator takes the stuff to the right of it up to by not including the semicolon and saves that into the variable on the left. <BR><BR> Javascript is a very weakly type language so you don't have to tell the variable what kind of information you are putting into it.  It is smart enought to assume");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 3, [
+								 sp(sp(sp(codeComment("// we can add strings together.")))),
+								 sp(sp(sp("var name = \"Bob\";"))),
+								 sp(sp(sp("var age = 37;"))),
+								 sp(sp(sp("var profile = \"Name: \" + name + \"&lt;br&gt;\" + \"Age: \" + age + \"&lt;br&gt;\";"))),
+								 sp(sp(sp(codeComment("//print the string")))),
+								 sp(sp(sp("document.write(profile)")))
+								 ]);
+			lon([7,8,9,11]);
+			setHeader("Adding strings?");
+			setComment("When a string is added to a string, it concatenates it into one big string.  Pretend the plus symbols are tape and we are taping the string together.  When it is all connected a copy of that will be saved into the variable.<BR><BR>But wait, you can add a string to a number! In this particular case, the string has priority so the number will get transformed into a string version of the number and then it will get taped to the string");
+			slideshowAppend();
+			/*
+			 
+			 
+			 */
+			//
+			codeArrSplice(6, 6, [
+								 sp(sp(sp("var an_array_of_str = [\"this\", \"is\", \"an\", \"array\", \"of\", \"words\"];"))),
+								 sp(sp(sp("document.write(\"word at index 0:\" + an_array_of_str[0] + \"&lt;br&gt;\");"))),
+								 sp(sp(sp("document.write(\"word at index 3:\" + an_array_of_str[3] + \"&lt;br&gt;\");"))),
+								 sp(sp(sp("document.write(\"word at the end:\" + an_array_of_str[an_array_of_str.length-1] + \"&lt;br&gt;\");"))),
+								 sp(sp(sp("document.write(\"&lt;br&gt;\");"))),
+								 sp(sp(sp("var an_array_of_num =[1, 5, 7, 9, 3];"))),
+								 sp(sp(sp("document.write(\"number at index 0:\" + an_array_of_str[0] + \"&lt;br&gt;\");"))),
+								 sp(sp(sp("document.write(\"number at index 4:\" + an_array_of_str[4] + \"&lt;br&gt;\");")))
+								 ]);
+			lon([7,8,9,11]);
+			setHeader("Ok, String and Number are Cool.  Anything else?");
+			setComment("There is anther basic data type called an array.  An array is a set of contiguous data that can be access by offering an index.  You can think of an array as a book with sheets of paper as pages.  Each page is numbered.  If send you the array name I am sending you the book.  but if I give you the book and the page number then you will be presented with what is on that page.  We usually call that page number the index of an array.  The first element of the array is always 0.  The second index is 1.  the third index is 2 and so on and so forth");
+			slideshowAppend();
 		});
 	};
 	var javaScriptLesson1_questions = function() {
@@ -447,6 +504,7 @@ function javaScriptLesson1() {
  @param block a multi-parameter block that provides common variables and convenience functions. The following parameters refer to the block's parameters
  
  @param codeArr an array of DHStringWithHighlight objects
+ @param flush a block that will set the codeArr to empty array
  @param codeArrSplice a block that helps you splice. param(loc, deleteAmount, object_to_add,...);
  @param setHeader a block that lets you set the header of the comments. param string
  @param setComment a block that lets you set the comments. param string
@@ -457,7 +515,7 @@ function javaScriptLesson1() {
  @param loff a block that lets to turn off certain rows. param
  @param lon a block that lets you turn on certain rows.
  @param sp a block that prepends string with a tab eg &emsp;
- 
+ @param codeComment a block that takes a string parameter and wraps it in span code with a class called "comment"
  @code
  
  @endcode
@@ -500,12 +558,17 @@ function makeSlideShowWithBlock(parent, slideTitle, block) {
 			codeArr.splice(loc+i, 0, mkdhsh(arr[i]));
 		}
 	};
-	
+	var flush = function() {
+		codeArr = [];
+	}
 	var sp = function(str){
 		return "&emsp; " + str;
 	}
+	var codeComment = function(str) {
+		return "<span class=\"comment\">" + str + "</span>";
+	};
 	//call block function
-	block(codeArr, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp);
+	block(codeArr, flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment);
 	
 	//move to default slide
 	slideshow.goToSlide(0);
