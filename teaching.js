@@ -10,8 +10,10 @@ lessons:[
 		 ]
 },{
 tutorial:"JavaScript",
+tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
-		 {value:javaScriptLesson1, text:"JavaScript Lesson 1"}
+		 {value:javaScriptLesson1, text:"JavaScript Lesson 1"},
+		 {file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
 		 ]
 }];
 
@@ -25,17 +27,167 @@ function initContent(parent) {
 			});
 			mk("dd", null, b, function(b) {
 				var lessons = tutorial.lessons;
-				for(var j = 0; j < lessons.length; ++j)
-				{
-				var button = mk("input", {type:"button", value:lessons[j].text}, b, null);
-				button.onclick = lessons[j].value;
-				//mk("br", null, b, null);
+				for(var j = 0; j < lessons.length; ++j)	{
+					var button = mk("input", {type:"button", value:lessons[j].text}, null, null);
+					var lesson_j = lessons[j];
+					if(lesson_j.hasOwnProperty("value")) {
+						button.onclick = lesson_j.value;
+						b.appendChild(button);
+					} else if(lesson_j.hasOwnProperty("file")){
+						button.onclick = function(){
+							generateSlideShowFromFile(tutorial.tutorialFolder+lesson_j.file,lesson_j.text);
+						}
+						b.appendChild(button);
+					}
 				}
 			});
 		}
 	});
 	globalLesson = mk("article", {id:"lessonSpace"}, parent, null);
 };
+
+function generateSlideShowFromFile(path, slideShowTitle) {
+	globalLesson.innerHTML = null;
+	httpGet(path, function(textFromScript) {
+		makeSlideShowWithBlock(globalLesson, slideShowTitle, function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
+			//parse script line by line
+			var fileArr = textFromScript.split('\n');
+			var action = null;
+			for (var i = 0; i < fileArr.length;) {
+				if(fileArr[i].match("@code")) {
+					action = function(arr) {
+						for (var k = 0; k < arr.length; ++k) {
+							var tabs = countTabs(arr[k]);
+							var str = filterChar(arr[k]);
+							codeArrAppend(tabs+str, isHighlight(arr[k]));
+						}
+					};
+				}else if(fileArr[i].match("@header")) {
+					action = function(arr) {
+						var s = "";
+						for (var k = 0; k < arr.length; ++k) {
+							s += filterChar(arr[k]);
+						}
+						setHeader(s);
+					};
+				}else if(fileArr[i].match("@comment")) {
+					action = function(arr) {
+						var s = "";
+						for (var k = 0; k < arr.length; ++k) {
+							s += filterChar(arr[k]);
+						}
+						setComment(s);
+					};
+				}else if(fileArr[i].match("@addSlide")) {
+					slideshowAppend();
+					flush();
+					i++;
+					continue;
+				}
+				else if(fileArr[i].match("@question")) {
+					action = function(arr) {
+						var s =  "";
+						for(var k = 0; k < arr.length; ++k){
+							if (k) {
+								s+= "<br>";
+							}
+							s += filterChar(arr[k]);
+						}
+						mk("h1", {id:"questions"}, globalLesson, function(b) {
+							b.innerHTML = s;
+						});
+					}
+				}else if(fileArr[i].match("@answer")) {
+					action = function(arr) {
+						var s =  "";
+						for(var k = 0; k < arr.length; ++k){
+							if (k) {
+								s+= "<br>";
+							}
+							s += filterChar(arr[k]);
+						}
+						mk("p", {id:"answer"}, globalLesson, function(b) {
+							b.innerHTML = s;
+						});
+					}
+				}else {
+					break;
+				}
+				
+				var j;
+				for (j = 1; !fileArr[i+j].match("@"); ++j);
+				var arrSlice = fileArr.slice(i+1, i+j);
+				action(arrSlice);
+				
+				i +=j;
+			}
+		});
+	});
+	
+}
+
+function filterChar(line) {
+	var s= "";
+	for (var i = 0; i < line.length; ++i) {
+		switch (line[i]) {
+			case '`':
+			case '~':{
+				continue;
+				break;
+			}
+			case '<':{
+				s+= "&lt;";
+				break;
+			}
+			case '>':{
+				s+= "&gt;";
+				break;
+			}
+			case '"':{
+				s+= "&#34;";
+				break;
+			}
+			case '/':{
+				if (i+1 < line.length && line[i+1] == '/') { //handle comment
+					s += "<span class=\"comment\">" + line.substring(i)+ "</span>";
+					return s;
+				}
+			}
+			default: {
+				s+= line[i];
+			}
+		}
+	}
+	return s;
+}
+
+function countTabs(line) {
+	var s= "";
+	var i;
+	for (i = 0; line[i] == '`' || line[i] == '~'; ++i){
+		s += "&emsp; ";
+	}
+	return s;
+}
+
+function isHighlight(line) {
+	return line[0] == '~';
+}
+
+function httpGet(theUrl, block){
+	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			block(xmlhttp.responseText);
+		}
+	}
+	xmlhttp.open("GET", theUrl, false );
+	xmlhttp.send();
+}
 
 function vhdlLesson1() {
 	globalLesson.innerHTML = null;

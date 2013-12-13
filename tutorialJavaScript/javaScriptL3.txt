@@ -1,0 +1,40 @@
+@code
+<!doctype>
+<html>
+`<head>
+``<meta charset="utf-8">
+``<script>
+~`window.onload = function() {
+~``document.write("hello World" + "<br>");
+~`}
+``</script>
+`<head>
+`<body>
+`</body>
+</html>
+@header
+This is a header
+@comment
+This is the comments section
+@code
+This as a place holder for more code
+
+The above space means that there should be a space appearing too
+//The double slashes mean a comment and a span should be made for this
+@header
+more heading
+@comment
+Add more comments
+@questions
+should there be anymore code here?
+@answer
+no, there should me no more code after the questions macro is written
+Every new line character should be translated into a line break in html.
+
+@question
+how do we know when the file is done?
+@answer
+There are two ways.  I can end it with an "AT" end. or I can keep going until i reach
+the end of the file.  In javaScript I am unceratin how it will handle that so To be
+safe I am going to just end it with the AT end
+@end

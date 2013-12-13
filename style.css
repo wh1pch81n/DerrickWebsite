@@ -177,6 +177,7 @@ a:visited {
 
 #codeSection {
 	display: table-cell;
+	font-family: monospace;
 	background-color: beige;
 	padding: 10px;
 }
