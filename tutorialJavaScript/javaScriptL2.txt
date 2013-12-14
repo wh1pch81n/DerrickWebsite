@@ -34,7 +34,7 @@ window.onload = function () {
 @header
 A note about readability ...
 @comment
-You should always strive to make your code more readable.  The code on the left is totally valid but it is hard to read when all those string are added up in one line.  The reason it is difficult is because it is hard to tell which one is the string (i.e. the stuff between the double quotes) and the variable (i.e. no double quotes).
+You should always strive to make your code more readable.  The code on the left is totally valid but it is hard to read when all those strings are added up in one line.  The reason it is difficult is because it is hard to tell which one is the string (i.e. the stuff between the double quotes) and the variable (i.e. no double quotes).
 @addSlide
 @code
 window.onload = function main() {
@@ -50,7 +50,7 @@ window.onload = function main() {
 @header
 More Clear
 @comment
-Everyone is a little different when it comes to formatting.  But I like to keep one command per line.  But only if it makes sense to do so.  The code to the left makes it much easier to tell which one if the variable and which one is the string.
+Everyone is a little different when it comes to formatting.  But I like to keep one command per line.  But only if it makes sense to do so.  The code to the left makes it much easier to tell variables appart from the string.
 
 If for some reason you need to put a lot of stuff in one line and it seem unavoidable, you should consider making a function.  Functions will be introduced in a future lesson.
 @addSlide
@@ -88,7 +88,7 @@ window.onload = function main() {
 @header
 So what does happen?
 @comment
-See the highlighted code?  That is what happens. The console will out put "your name is Freddy" and that is that.
+See the highlighted code?  That is what happens. The console will output "your name is Freddy" and that is that.
 @addSlide
 @code
 window.onload = function () {
@@ -124,7 +124,7 @@ The "else" branch is optional.  If all the above conditions fail, then it will p
 @addSlide
 @code
 window.onload = function () {
-`for( var i = 0; i < 10; ++i) {
+~for( var i = 0; i < 10; ++i) {
 ``document.write("I am king henry the 8th i am! <br> second verse same as the first!<br>");
 `}
 }
@@ -142,7 +142,7 @@ The number 4 tells us to go back to step 1.
 
 A loop is kind of like a conditional branch.  It is a branch that repeats the stuff between the curly braces until, the condition evaluates to false.
 
-Between the two parenthesis we have 3 section divided by a semi-colon.  The first one declares a variable called i and gives it the value 0.  The second one in the conditional part.  It asks if i is less than 10.  If it is true, then execute the code between the curly braces.  After you execute the code in the curly braces, we perform the third item, ++i.  The ++i means add one to i.  if i is still less than 10, we repeat the code between the curly braces until i is greater or equal to 10.
+Between the two parenthesis we have 3 sections divided by a semi-colon.  The first one declares a variable called i and gives it the value 0.  The second one is the conditional part.  It asks if i is less than 10.  If it is true, then execute the code between the curly braces.  After you execute the code in the curly braces, we perform the third item, ++i.  The ++i means add one to i.  if i is still less than 10, we repeat the code between the curly braces until i is greater or equal to 10.
 @addSlide
 @code
 window.onload = function () {
@@ -191,7 +191,7 @@ You can use a for loop to print out the contents of an array.  Just like any for
 
 By the way, its pronounced array dot length.
 
-The dot allows us to call upon the power of the object.  The array is a built in object and like most object it contains properties that can hold values.  When we call array.length we are asking for the number of elements in the array.
+The dot allows us to call upon the power of the object.  The array is a built-in object and like most objects it contains properties that can hold values.  When we call array.length we are asking for the number of elements in the array.
 
 Since the array has 4 elements, the property should give us 4.
 @addSlide
@@ -231,12 +231,12 @@ window.onload = function() {
 = 
 is an assignment operator.  It gives the variable to the left of it value of the right.
 == 
-is an equality operator.  If the left and right are equal, it will return true.  otherwise its false
+is an equality operator.  If the left and right are equal, it will return true.  Otherwise its false.
 @question
 What else can I use besides ==?
 @answer
 > 
-if the left if greater than the right, then the returns true. Otherwise false.
+if the left is greater than the right, then return true. Otherwise false.
 <
 if the left is less than the right, then return true. Otherwise false.
 <=
