@@ -215,7 +215,8 @@ h1#lessonSpace {
 	
 }
 
-#questions {
-	/*position: absolute;*/
-	/*top: 95%;*/
+.question {
+}
+.answer {
+	margin-left: 30px;
 }
