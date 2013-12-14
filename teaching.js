@@ -13,7 +13,7 @@ tutorial:"JavaScript",
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
 		 {value:javaScriptLesson1, text:"JavaScript Lesson 1"},
-		 {file:"javaScriptL2.txt", text:"JavaScript Lesson 3"},
+		 {file:"javaScriptL2.txt", text:"JavaScript Lesson 2"},
 		 //{file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
 		 ]
 }];
@@ -67,6 +67,9 @@ function generateSlideShowFromFile(path, slideShowTitle) {
 					action = function(arr) {
 						var s = "";
 						for (var k = 0; k < arr.length; ++k) {
+							if (k) {
+								s+= "<br>";
+							}
 							s += filterChar(arr[k]);
 						}
 						setHeader(s);
@@ -75,6 +78,9 @@ function generateSlideShowFromFile(path, slideShowTitle) {
 					action = function(arr) {
 						var s = "";
 						for (var k = 0; k < arr.length; ++k) {
+							if (k) {
+								s+= "<br>";
+							}
 							s += filterChar(arr[k]);
 						}
 						setComment(s);

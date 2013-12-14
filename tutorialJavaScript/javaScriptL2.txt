@@ -1,0 +1,248 @@
+@code
+<!doctype html>
+<html>
+`<head>
+``<meta charset="utf-8">
+~`<script>
+~`</script>
+`</head>
+`<body>
+`</body>
+</html>
+@header
+A refresher
+@comment
+Believe it or not, this html stuff is going going to be pretty much the same for the next few lesson.  Because of that fact I will eliminate it from the lesson.  After all, this is a JavaScript tutorial.  I don't want to clutter up the knowledge by adding extra code.
+
+After this Slide we will focus on just the JavaScript.  Remember that the Javascript should be placed between the <script> and </script>.
+@addSlide
+@code
+window.onload = function () {
+
+}
+@header
+The main Function
+@comment
+This should look familiar.  It is the main function.  Right now it doesn't have anything in it.
+@addSlide
+@code
+window.onload = function () {
+~var animal = "cat";
+~var container = "hat";
+~document.write("The " + animal + " in the " + container + "<br>");
+}
+@header
+A note about readability ...
+@comment
+You should always strive to make your code more readable.  The code on the left is totally valid but it is hard to read when all those string are added up in one line.  The reason it is difficult is because it is hard to tell which one is the string (i.e. the stuff between the double quotes) and the variable (i.e. no double quotes).
+@addSlide
+@code
+window.onload = function main() {
+`var animal = "cat";
+`var container = "hat";
+~document.write(
+~``"The " 
+~``+ animal 
+~``+ " in the " 
+~``+ container 
+~``+ "<br>");
+}
+@header
+More Clear
+@comment
+Everyone is a little different when it comes to formatting.  But I like to keep one command per line.  But only if it makes sense to do so.  The code to the left makes it much easier to tell which one if the variable and which one is the string.
+
+If for some reason you need to put a lot of stuff in one line and it seem unavoidable, you should consider making a function.  Functions will be introduced in a future lesson.
+@addSlide
+@code
+window.onload = function () {
+`var name = "Freddy";
+~if (name == "Freddy") {
+``document.write("your name is Freddy" + "<br>");
+~} else if (name == "freddy") {
+``document.write("your name is Freddy... but remember to capitalize the name m'kay?" + "<br>");
+~} else  {
+``document.write("Who are you?" + "<br>");
+`}
+}
+@header
+decisions decisions...
+@comment
+Things would get boring pretty fast if we couldn't make decisions.  In programming, we can make decisions using a conditional branch.  See the words "if" and "else"?  those are keywords that initiate the conditional branch.
+
+The stuff after the keyword is a left parenthesis and a right parenthesis.  The stuff between those two things is evaluated for truth.  A double equal sign determines if the the object to the left and right are equivalent.  In this case we are asking the conditional branch if the variable called name contains the name "Freddy" or not.
+
+So what happens when we determine if its true or false?
+@addSlide
+@code
+window.onload = function () {
+`var name = "Freddy";
+`if (name == "Freddy") {
+~`document.write("your name is Freddy" + "<br>");
+`} else if (name == "freddy") {
+``document.write("your name is Freddy... but remember to capitalize the name m'kay?" + "<br>");
+`} else  {
+``document.write("Who are you?" + "<br>");
+`}
+window.onload = function main() {
+@header
+So what does happen?
+@comment
+See the highlighted code?  That is what happens. The console will out put "your name is Freddy" and that is that.
+@addSlide
+@code
+window.onload = function () {
+`var name = "Daniel-san";
+`if (name == "Freddy") {
+``document.write("your name is Freddy" + "<br>");
+~} else if (name == "freddy") {
+``document.write("your name is Freddy... but remember to capitalize the name m'kay?" + "<br>");
+`} else  {
+``document.write("Who are you?" + "<br>");
+`}
+}
+@header
+What if I change the name?
+@comment
+If you change the name to something besides "Freddy", then it will move on to the next conditional branch.  But since that evaluates to false, it will go to the next one.  
+@addSlide
+@code
+window.onload = function () {
+`var name = "Daniel-san";
+`if (name == "Freddy") {
+``document.write("your name is Freddy" + "<br>");
+`} else if (name == "freddy") {
+``document.write("your name is Freddy... but remember to capitalize the name m'kay?" + "<br>");
+~} else  {
+~`document.write("Who are you?" + "<br>");
+~}
+}
+@header
+What if I change the name?
+@comment
+The "else" branch is optional.  If all the above conditions fail, then it will perform the code in the else branch.  i.e. prints to the console "Who are you?"
+@addSlide
+@code
+window.onload = function () {
+`for( var i = 0; i < 10; ++i) {
+``document.write("I am king henry the 8th i am! <br> second verse same as the first!<br>");
+`}
+}
+@header
+Loops
+@comments
+Loops are really important.  They are fundamental.  Without loops, programming would be tedious.  A loop is something that executes in a cycle.  Think of the instructions for a shampoo bottle. 
+
+1) wet
+2) lather
+3) rinse
+4) repeat
+
+The number 4 tells us to go back to step 1.
+
+A loop is kind of like a conditional branch.  It is a branch that repeats the stuff between the curly braces until, the condition evaluates to false.
+
+Between the two parenthesis we have 3 section divided by a semi-colon.  The first one declares a variable called i and gives it the value 0.  The second one in the conditional part.  It asks if i is less than 10.  If it is true, then execute the code between the curly braces.  After you execute the code in the curly braces, we perform the third item, ++i.  The ++i means add one to i.  if i is still less than 10, we repeat the code between the curly braces until i is greater or equal to 10.
+@addSlide
+@code
+window.onload = function () {
+`var drink = "Beer";
+`var lyrics = "";
+	
+`for (var cans = 10; cans > 0; i++) {
+``lyrics = lyrics 
+```+ cans 
+```+ " cans of " 
+```+ drink 
+```+ " on the wall <br>"
+```+ cans 
+```+ " cans of " 
+```+ drink 
+```+ "<br>"
+```+ "Take one down, pass it around,<br>";
+``if (cans > 1) {
+```lyrics = lyrics + (cans-1) + " cans of " + drink + " on the wall <br>";
+``} else {
+```lyrics = lyrics + "No more cans of " + drink + " on the wall <br>";
+``}
+``cans = cans -1;
+`}
+	
+`document.write(lyrics);
+}
+@header
+Beer on the wall
+@comment
+This is a more advanced version of the for loop.  It has much more going on.  It has variable creation, string manipulation, and a conditional branch inside of it.
+
+Take out a piece of paper and try to figure out what this code is doing.  How long will it run?  When will it stop?
+@addSlide
+@code
+window.onload = function () {
+`var array =  ["eggs", "mik", "butter", "cereal"];
+~for (var i = 0; i < array.length; i++) {
+``document.write(array[i] + "<br>");
+`}
+}
+@header
+array.length
+@comment
+You can use a for loop to print out the contents of an array.  Just like any for loop, it is important to know when to stop looping.  We are comparing i with array.length.  But what is array.length?
+
+By the way, its pronounced array dot length.
+
+The dot allows us to call upon the power of the object.  The array is a built in object and like most object it contains properties that can hold values.  When we call array.length we are asking for the number of elements in the array.
+
+Since the array has 4 elements, the property should give us 4.
+@addSlide
+@header
+Quiz time!
+@comment
+I want you to use for loops to figure out how to print a triangle of asterisks.
+
+If we have a variable called "numOfRows" then The triangle should be as big as the numberOfRows.
+
+e.g.
+
+if numOfRows is 5 then the output should look something like this:
+
+*
+**
+***
+****
+*****
+
+The solution is in the next slide.  Please do not look at it until you have attempted the quiz
+@addSlide
+@code
+window.onload = function() {
+`var numOfRows = 5;
+`for (var i = 0; i < numOfRows; i++) {
+``for (var r = 0; r <= i; r++) {
+```document.write("*");
+``}
+``document.write("<br>");
+`}
+}
+@addSlide
+@question
+= vs ==
+@answer
+= 
+is an assignment operator.  It gives the variable to the left of it value of the right.
+== 
+is an equality operator.  If the left and right are equal, it will return true.  otherwise its false
+@question
+What else can I use besides ==?
+@answer
+> 
+if the left if greater than the right, then the returns true. Otherwise false.
+<
+if the left is less than the right, then return true. Otherwise false.
+<=
+if the left is less than or equal to the right, then return true. Otherwise false
+>=
+if the left is greater or equal to the right, then return true. Otherwise false
+!=
+if the left is NOT equal to the right, then return true. Otherwise false
+@end
