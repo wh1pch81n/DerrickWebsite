@@ -50,81 +50,58 @@ function generateSlideShowFromFile(path, slideShowTitle) {
 	httpGet(path, function(textFromScript) {
 		makeSlideShowWithBlock(globalLesson, slideShowTitle, function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
 			//parse script line by line
-			var fileArr = textFromScript.split('\n');
+			var fileArr = filterChar(textFromScript).split('\n');
 			var action = null;
-			for (var i = 0; i < fileArr.length;) {
+			for (var i = 0; i < fileArr.length;++i) {
 				if(fileArr[i].match("@code")) {
-					action = function(arr) {
-						for (var k = 0; k < arr.length; ++k) {
-							var tabs = countTabs(arr[k]);
-							var str = filterChar(arr[k]);
-							codeArrAppend(tabs+str, isHighlight(arr[k]));
+					action = function(line) {
+						var isH;
+						if(isH = isHighlight(line)){
+							line = line.replace("~", "&emsp; ");
 						}
+						codeArrAppend(line, isH);
 					};
 				}else if(fileArr[i].match("@header")) {
-					action = function(arr) {
-						var s = "";
-						for (var k = 0; k < arr.length; ++k) {
-							if (k) {
-								s+= "<br>";
-							}
-							s += filterChar(arr[k]);
+					action = function(line) {
+						for (; fileArr[i+1][0] != '@'; ++i) {
+							line += "<br>" + fileArr[i+1];
 						}
-						setHeader(s);
+						setHeader(line);
 					};
 				}else if(fileArr[i].match("@comment")) {
-					action = function(arr) {
-						var s = "";
-						for (var k = 0; k < arr.length; ++k) {
-							if (k) {
-								s+= "<br>";
-							}
-							s += filterChar(arr[k]);
+					action = function(line) {
+						for (; fileArr[i+1][0] != '@'; ++i) {
+							line += "<br>" + fileArr[i+1];
 						}
-						setComment(s);
+						setComment(line);
 					};
 				}else if(fileArr[i].match("@addSlide")) {
 					slideshowAppend();
 					flush();
-					i++;
-					continue;
 				}
 				else if(fileArr[i].match("@question")) {
-					action = function(arr) {
-						var s =  "";
-						for(var k = 0; k < arr.length; ++k){
-							if (k) {
-								s+= "<br>";
-							}
-							s += filterChar(arr[k]);
+					action = function(line) {
+						for (; fileArr[i][0] != '@'; ++i) {
+							mk("h1", {class:"question"}, globalLesson, function(b) {
+								b.innerHTML += fileArr[i] + "<br>";
+							});
 						}
-						mk("h1", {class:"question"}, globalLesson, function(b) {
-							b.innerHTML = s;
-						});
-					}
+						--i;
+					};
 				}else if(fileArr[i].match("@answer")) {
-					action = function(arr) {
-						var s =  "";
-						for(var k = 0; k < arr.length; ++k){
-							if (k) {
-								s+= "<br>";
-							}
-							s += filterChar(arr[k]);
+					action = function(line) {
+						for (; fileArr[i][0] != '@'; ++i) {
+							mk("p", {class:"answer"}, globalLesson, function(b) {
+								b.innerHTML += fileArr[i] + "<br>";
+							});
 						}
-						mk("p", {class:"answer"}, globalLesson, function(b) {
-							b.innerHTML = s;
-						});
-					}
-				}else {
+						--i;
+					};
+				}else if(fileArr[i].match("@end")){
 					break;
+				}else {
+					action(fileArr[i]);
 				}
-				
-				var j;
-				for (j = 1; !fileArr[i+j].match("@"); ++j);
-				var arrSlice = fileArr.slice(i+1, i+j);
-				action(arrSlice);
-				
-				i +=j;
 			}
 		});
 	});
@@ -132,47 +109,22 @@ function generateSlideShowFromFile(path, slideShowTitle) {
 }
 
 function filterChar(line) {
-	var s= "";
-	for (var i = 0; i < line.length; ++i) {
-		switch (line[i]) {
-			case '`':
-			case '~':{
-				continue;
-				break;
-			}
-			case '<':{
-				s+= "&lt;";
-				break;
-			}
-			case '>':{
-				s+= "&gt;";
-				break;
-			}
-			case '"':{
-				s+= "&#34;";
-				break;
-			}
-			case '/':{
-				if (i+1 < line.length && line[i+1] == '/') { //handle comment
-					s += "<span class=\"comment\">" + line.substring(i)+ "</span>";
-					return s;
-				}
-			}
-			default: {
-				s+= line[i];
-			}
-		}
+	var i;
+	for (i = 0; line[i] == '`' || line[i] == '~'; ++i);
+	var tabs = line.substring(0,i).replace(/`/g,"&emsp; ");
+	var code = tabs + line.substring(i).replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&#34;");
+	
+	if( code.indexOf("//") > 0) {
+		return code.replace("//", "<span class=\"comment\">") + "</span>";
 	}
-	return s;
+	
+	return code;
 }
 
 function countTabs(line) {
-	var s= "";
 	var i;
-	for (i = 0; line[i] == '`' || line[i] == '~'; ++i){
-		s += "&emsp; ";
-	}
-	return s;
+	for (i = 0; line[i] == '`' || line[i] == '~'; ++i);
+	return line.substring(0,i).replace('~',"&emsp; ").replace('~',"&emsp; ");
 }
 
 function isHighlight(line) {
