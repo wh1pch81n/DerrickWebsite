@@ -13,7 +13,8 @@ tutorial:"JavaScript",
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
 		 {value:javaScriptLesson1, text:"JavaScript Lesson 1"},
-		 {file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
+		 {file:"javaScriptL2.txt", text:"JavaScript Lesson 3"},
+		 //{file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
 		 ]
 }];
 
