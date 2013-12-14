@@ -1,21 +1,24 @@
 var globalParent = null;
 var globalLesson = null;
 
-var globalTutorialArr = 
+var globalTutorialArr =
 [{
-	tutorial:"VHDL", 
-	lessons:[
-	{value:vhdlLesson1, text:"VHDL Lesson 1"},
-	//{value:vhdlLesson2, text:"VHDL Lesson 2"}
-	]
-//},{
-//	tutorial:"JavaScript", 
-//	lessons:[
-//	{value:javaScriptLesson1, text:"JavaScript Lesson 1"}
-//	]
+tutorial:"VHDL",
+lessons:[
+		 {value:vhdlLesson1, text:"VHDL Lesson 1"},
+		 //{value:vhdlLesson2, text:"VHDL Lesson 2"}
+		 ]
+},{
+tutorial:"JavaScript",
+tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
+lessons:[
+		 {value:javaScriptLesson1, text:"JavaScript Lesson 1"},
+		 {file:"javaScriptL2.txt", text:"JavaScript Lesson 2"},
+		 //{file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
+		 ]
 }];
 
-function initContent(parent) {	
+function initContent(parent) {
 	mk("dl", {id:"tutorialNav"}, parent, function(b) {
 		
 		for(var i = 0; i < globalTutorialArr.length; ++i){
@@ -25,10 +28,16 @@ function initContent(parent) {
 			});
 			mk("dd", null, b, function(b) {
 				var lessons = tutorial.lessons;
-				for(var j = 0; j < lessons.length; ++j) {
+				for(var j = 0; j < lessons.length; ++j)	{
 					var button = mk("input", {type:"button", value:lessons[j].text}, b, null);
-					button.onclick = lessons[j].value;
-					//mk("br", null, b, null);
+					var lesson_j = lessons[j];
+					if(lesson_j.hasOwnProperty("value")) {
+						button.onclick = lesson_j.value;
+					} else if(lesson_j.hasOwnProperty("file")){
+						button.onclick = function(){
+							generateSlideShowFromFile(tutorial.tutorialFolder+lesson_j.file,lesson_j.text);
+						}
+					}
 				}
 			});
 		}
@@ -36,8 +45,155 @@ function initContent(parent) {
 	globalLesson = mk("article", {id:"lessonSpace"}, parent, null);
 };
 
+function generateSlideShowFromFile(path, slideShowTitle) {
+	globalLesson.innerHTML = null;
+	httpGet(path, function(textFromScript) {
+		makeSlideShowWithBlock(globalLesson, slideShowTitle, function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
+			//parse script line by line
+			var fileArr = textFromScript.split('\n');
+			var action = null;
+			for (var i = 0; i < fileArr.length;) {
+				if(fileArr[i].match("@code")) {
+					action = function(arr) {
+						for (var k = 0; k < arr.length; ++k) {
+							var tabs = countTabs(arr[k]);
+							var str = filterChar(arr[k]);
+							codeArrAppend(tabs+str, isHighlight(arr[k]));
+						}
+					};
+				}else if(fileArr[i].match("@header")) {
+					action = function(arr) {
+						var s = "";
+						for (var k = 0; k < arr.length; ++k) {
+							if (k) {
+								s+= "<br>";
+							}
+							s += filterChar(arr[k]);
+						}
+						setHeader(s);
+					};
+				}else if(fileArr[i].match("@comment")) {
+					action = function(arr) {
+						var s = "";
+						for (var k = 0; k < arr.length; ++k) {
+							if (k) {
+								s+= "<br>";
+							}
+							s += filterChar(arr[k]);
+						}
+						setComment(s);
+					};
+				}else if(fileArr[i].match("@addSlide")) {
+					slideshowAppend();
+					flush();
+					i++;
+					continue;
+				}
+				else if(fileArr[i].match("@question")) {
+					action = function(arr) {
+						var s =  "";
+						for(var k = 0; k < arr.length; ++k){
+							if (k) {
+								s+= "<br>";
+							}
+							s += filterChar(arr[k]);
+						}
+						mk("h1", {class:"question"}, globalLesson, function(b) {
+							b.innerHTML = s;
+						});
+					}
+				}else if(fileArr[i].match("@answer")) {
+					action = function(arr) {
+						var s =  "";
+						for(var k = 0; k < arr.length; ++k){
+							if (k) {
+								s+= "<br>";
+							}
+							s += filterChar(arr[k]);
+						}
+						mk("p", {class:"answer"}, globalLesson, function(b) {
+							b.innerHTML = s;
+						});
+					}
+				}else {
+					break;
+				}
+				
+				var j;
+				for (j = 1; !fileArr[i+j].match("@"); ++j);
+				var arrSlice = fileArr.slice(i+1, i+j);
+				action(arrSlice);
+				
+				i +=j;
+			}
+		});
+	});
 	
-												
+}
+
+function filterChar(line) {
+	var s= "";
+	for (var i = 0; i < line.length; ++i) {
+		switch (line[i]) {
+			case '`':
+			case '~':{
+				continue;
+				break;
+			}
+			case '<':{
+				s+= "&lt;";
+				break;
+			}
+			case '>':{
+				s+= "&gt;";
+				break;
+			}
+			case '"':{
+				s+= "&#34;";
+				break;
+			}
+			case '/':{
+				if (i+1 < line.length && line[i+1] == '/') { //handle comment
+					s += "<span class=\"comment\">" + line.substring(i)+ "</span>";
+					return s;
+				}
+			}
+			default: {
+				s+= line[i];
+			}
+		}
+	}
+	return s;
+}
+
+function countTabs(line) {
+	var s= "";
+	var i;
+	for (i = 0; line[i] == '`' || line[i] == '~'; ++i){
+		s += "&emsp; ";
+	}
+	return s;
+}
+
+function isHighlight(line) {
+	return line[0] == '~';
+}
+
+function httpGet(theUrl, block){
+	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			block(xmlhttp.responseText);
+		}
+	}
+	xmlhttp.open("GET", theUrl, false );
+	xmlhttp.send();
+}
+
 function vhdlLesson1() {
 	globalLesson.innerHTML = null;
 	var vhdlLesson1_slideshow = function(){
@@ -48,19 +204,19 @@ function vhdlLesson1() {
 		var codeArr = [];
 		var header = "";
 		var comment = "";
-
+		
 		codeArr.push(new DHStringWithHighlight("library ieee;",0));
 		header = "The much needed library";
 		comment = "This library allows you to write vhdl.  Always include it";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		codeArr.push(new DHStringWithHighlight("entity first_prog is", 0));
 		codeArr.push(new DHStringWithHighlight("end entity first_prog;", 0));
 		codeArr.push(new DHStringWithHighlight("", 0));
 		header = "Entity identity";
 		comment = "Whats an entity?  its kinda like a function declaration or a function prototype.  What it does is let you name it and describe the parameters.  right now, there are no parameters but I've given it the name \"first_prog\"";
 		slideshow.appendSlide(codeArr, header, comment);
-
+		
 		codeArr.push(new DHStringWithHighlight("architecture implementation of first_prog is", 0));
 		codeArr.push(new DHStringWithHighlight("begin", 0));
 		codeArr.push(new DHStringWithHighlight("end architecture implementation;", 0));
@@ -68,26 +224,26 @@ function vhdlLesson1() {
 		comment = "The architecture is where the entity is implemented.  I named the architecture \"implementation\" but you can name it what ever you want.  I chose to give it a name that literally describes what it is.  Which is...the implementation of first_prog <br><br>";
 		comment += "You may also wonder what begin and end are for.  begin is kinda like an open curly brace \"{\" and the end is kinda like a close curly brace \"}\"";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		header = "This looks a bit borning... ";
 		comment = "yeah, I know.  thats because we haven't put anything in it.  This is basically just the foundation that all VHDL modules will be written on";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		header = "see it?";
 		comment = "Notice how the each part has a begining and an ending. We say entity then the name and finish it with the entity then the name.  the same pattern can be found on architecture.  Some of these words are optional, but I highly recommend including them to keep things balanced.  When things are balanced, it looks beautiful";
 		slideshow.appendSlide(codeArr, header, comment);
-								
+		
 		codeArr.splice(2, 0, new DHStringWithHighlight( "&emsp; port&#40;", 1),
-		new DHStringWithHighlight("&emsp; &emsp; parameterName1: in std_logic_vector(0 downto 0);", 1),
-		new DHStringWithHighlight("&emsp; &emsp; returnName1: out std_logic_vector(0 downto 0)", 1),
-		new DHStringWithHighlight("&emsp;&#41;;", 1));
-	
+					   new DHStringWithHighlight("&emsp; &emsp; parameterName1: in std_logic_vector(0 downto 0);", 1),
+					   new DHStringWithHighlight("&emsp; &emsp; returnName1: out std_logic_vector(0 downto 0)", 1),
+					   new DHStringWithHighlight("&emsp;&#41;;", 1));
+		
 		header = "Adding Parameters";
 		comment = "In order for you entity to be useful, it must be able to take in different arguments and give out a result";
 		slideshow.appendSlide(codeArr, header, comment);
-							
+		
 		lightOff(codeArr, [3,4]);
-							
+		
 		comment = "You must declare your parameters in between the parenthesis after the word port";
 		slideshow.appendSlide(codeArr, header, comment);
 		
@@ -98,16 +254,16 @@ function vhdlLesson1() {
 		lightOff(codeArr, [2,5]);
 		lightOn(codeArr, [3,4]);
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		header = "what about inout?";
 		comment = "That is an advanced topic where you can treat it as both an input and an output.  If these ports were streets, the cars would crash into each other head first.  To prevent this mess we need a traffic light to delegate.  In hardware we call it a tri-state device.  This will allow us to set unused inout ports to high Z which will act as a disconnected wire.<br><br>";
 		comment += "inout ports are not used very often, but can be powerful. We shall cover the topic of inout in a future lesson.  So for now just keep it in the back of your mind and pay attention to the in and out ports";
 		slideshow.appendSlide(codeArr, header, comment);
-						
+		
 		header = "where do i set the in or out?";
 		comment = "after the parameter name there is a colon.  add the in or out there";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		header = "Parameter Names?";
 		comment = "You must name your paremeters.  It must start with an alphabetical letter.  It can not start with a number but it CAN end with a number.  in this example I have two parameters named \"parameterName\" and \"returnName\". <br><br>";
 		comment += "You must give your parameters two different types.  As we mentioned earlier, you need to specify the direction: \"in\" or \"out\" and you also need to specify the wire type and size.  We shall almost always use an std_logic_vector.  We gave it the size of one.  Which means it holds one bit";
@@ -117,21 +273,21 @@ function vhdlLesson1() {
 		comment = " in order to specify the size of the std_logic_vector, you need to use downto. In Computer Science, the convention is to label the bits in descending order.  The right most bit starts with zero and we count up as we go left.  That is what we mean when we say \"0 downto 0\".  we are specifying that we want a vector of size 1. and we want to label the left most bit as 0 and the right most bit as 0. <br><br>";
 		comment += "if we wanted a 4 bit std_logic_vector we would need to say \"3 downto 0\".  The left most bit would be labeled as 3 and the right most bit would be labeled as zero.";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		lightOff(codeArr, [3,4]);
-							
+		
 		codeArr.splice(10, 0, new DHStringWithHighlight("&emsp; &emsp; returnName1 &lt;&#61; parameterName1;", 1));
-							
+		
 		header = "Assigning values";
 		comment = "to assign a value we use \"&lt;&#61;\" which is also known as the signal assignment operator.  we are using the value of parameterName1 to set the value of returnName1";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		lightOff(codeArr, [10]);
-							
+		
 		header = "End of Lesson";
 		comment = "read the Q and A below";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		slideshow.goToSlide(0); //go to first slide by default
 	};
 	var vhdlLesson1_questions = function() {
@@ -199,7 +355,7 @@ function vhdlLesson1() {
 				p.innerHTML += "<br><br>";
 				p.innerHTML += "std_logic can hold one bit.  You may set an std_logic with either a '1' or a '0'.  (you can also set it as high-Z which looks like 'Z'.  that is a capital Z and is case sensitive).  An std_logic_vector is, you guessed it, a vector (or an array) of std_logic.  Which means you can access each std_logic in a std_logic_vector.";
 			});
-							
+			
 			mk("p", {class:"code"}, p, function(p) {
 				p.innerHTML = "<span class=\"comment\">-- suppose we have 3 wires called foo, bar, and rut</span><br>";
 				p.innerHTML += "<span class=\"comment\">-- foo is an std_logic</span><br>";
@@ -213,14 +369,14 @@ function vhdlLesson1() {
 				p.innerHTML += "bar &lt;&#61; rut; <span class=\"comment\">-- set bar with rut.  only works if they are the same size</span><br>";
 				p.innerHTML += "bar(4) &lt;&#61; rut(7); <span class=\"comment\">-- set the 4th bit of bar with the 7th bit of rut</span><br>";
 			});
-									
+			
 		});
 	};
 	vhdlLesson1_slideshow();
 	vhdlLesson1_questions();
 };
-													
-function vhdlLesson2() {
+
+function vhdlLesson2() { //needs completing
 	globalLesson.innerHTML = null;
 	var vhdlLesson2_slideshow = function(){
 		//slideShow
@@ -230,20 +386,20 @@ function vhdlLesson2() {
 		var codeArr = [];
 		var header = "";
 		var comment = "";
-	
+		
 		codeArr.push(new DHStringWithHighlight("this is code", 0));
 		codeArr.push(new DHStringWithHighlight("highlighted", 1));
 		header = "splendid header";
 		comment = "wonderful comment";
 		slideshow.appendSlide(codeArr, header, comment);
-	
-	
+		
+		
 		codeArr.push(new DHStringWithHighlight("filo", 0));
 		codeArr.push(new DHStringWithHighlight("piccolo", 0));
 		header = "dragonball";
 		comment = "gohan";
 		slideshow.appendSlide(codeArr, header, comment);
-	
+		
 		slideshow.goToSlide(0);
 	};
 	var vhdlLesson2_questions = function() {
@@ -291,14 +447,318 @@ function vhdlLesson2() {
 				b.innerHTML += "<span class=\"comment\">-- english.  But you can name it what ever you want.</span><br>";
 			});
 		});
-	};;
+	};
 	vhdlLesson2_slideshow();
 	vhdlLesson2_questions();
 };
-													
-													
+
+
 function javaScriptLesson1() {
 	globalLesson.innerHTML = null;
+	var javaScriptLesson1_slideshow = function() {
+		makeSlideShowWithBlock(globalLesson, "Lesson 1: First program", function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
+			
+			//
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			lon([0]);
+			setHeader("first things first");
+			setComment("This is the first tag that should be written in your HTML file.  It tells your browser that this document is written in html as opposed to something else.  The guys that created this prepared themselves in the event that the standard might change, so they made this tag to help future proof things. But HTML is the standard and no one else has tried and succeeded to dethrone it.");
+			slideshowAppend();
+			//
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(tag("/html"));
+			lon([1,2]);
+			setHeader("where does it go");
+			setComment("After we tell the browser that this is indeed an html file, we need to tell it where that html code is located.  It is located between the two html tags.");
+			slideshowAppend();
+			//
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(tag("/html"));
+			lon([2,3]);
+			setHeader("head first");
+			setComment("Every body needs a head.  The head is the typical place to put scripts, styles, and other things that function under the hood.");
+			slideshowAppend();
+			//
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(sp(tag("body")));
+			codeArrAppend(sp(tag("/body")));
+			codeArrAppend(tag("/html"));
+			lon([4,5]);
+			setHeader("mind over body");
+			setComment("The body is usually where a lot of the action happens.  But since we are talking about JavaScript, we won't be using html to add stuff in here.  We will use the power of javaScript to make things and make things happen");
+			slideshowAppend();
+			//
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(sp(tag("meta charset=\"utf-8\""))));
+			codeArrAppend(sp(sp(tag("script") +tag("/script"))));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(sp(tag("body")));
+			codeArrAppend(sp(tag("/body")));
+			codeArrAppend(tag("/html"));
+			lon([3,4]);
+			setHeader("meta and script");
+			setComment("The meta tag is used to explicitly say that we should use utf-8 encoding.  The script tags will be the home of our javascript");
+			slideshowAppend();
+			//
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(sp(tag("meta charset=\"utf-8\""))));
+			codeArrAppend(sp(sp(tag("script"))));
+			codeArrAppend(sp(sp("window.onload = function() {")));
+			codeArrAppend(sp(sp("};")));
+			codeArrAppend(sp(sp(tag("/script"))));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(sp(tag("body")));
+			codeArrAppend(sp(tag("/body")));
+			codeArrAppend(tag("/html"));
+			lon([5,6]);
+			setHeader("main function");
+			setComment("The window.onload is a property that expects a function pointer or a function block.  When the browser is done parsing the html page, it will call window.onload as a function which will then perform the code you see to the right of the assignment operator all the way down to the right curly brace and semi-colon. <br><br> If you are familiar with C or C++ you would call this the main function because it is the first function that gets run");
+			slideshowAppend();
+			
+			//
+			flush();
+			codeArrAppend(tag("!doctype html"));
+			codeArrAppend(tag("html"));
+			codeArrAppend(sp(tag("head")));
+			codeArrAppend(sp(sp(tag("meta charset=\"utf-8\""))));
+			codeArrAppend(sp(sp(tag("script"))));
+			codeArrAppend(sp(sp("window.onload = function() {")));
+			codeArrAppend(sp(sp(sp(codeComment("//you can write things to the webpage directly")))));
+			codeArrAppend(sp(sp(sp("document.write(\"Hello World\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"This is how I can write on the page\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"I call it the wall\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"walls are fun to write on\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"is that it?\");"))));
+			codeArrAppend(sp(sp(sp("document.write(\"ok, bored... lets do something else\");"))));
+			codeArrAppend(sp(sp("};")));
+			codeArrAppend(sp(sp(tag("/script"))));
+			codeArrAppend(sp(tag("/head")));
+			codeArrAppend(sp(tag("body")));
+			codeArrAppend(sp(tag("/body")));
+			codeArrAppend(tag("/html"));
+			lon([7,8,9,10,11,12]);
+			setHeader("write to console");
+			setComment("The document.write() function lets you write words and html to the web brower page.  The things between the two double quotes is called a string constant.  A string constant will be printed on the web browser page.");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 7, [
+								 sp(sp(sp(codeComment("//one line break")))),
+								 sp(sp(sp("document.write(\"" + tag("br") + "\");"))),
+								 sp(sp(sp(codeComment("//two line breaks")))),
+								 sp(sp(sp("document.write(\"" + tag("br") + tag("br") + "\");")))
+								 ]);
+			lon([7,9]);
+			setHeader("Claustrophobic");
+			setComment("If you tested the code in the previous slide, you may have noticed that the words all continued on to the right.  You might have had to scroll all the way to the right to see all of it.  Or if your browser is good it would end up wrapping.  This may or may not be what you are aiming for.  But my personal preference is to make things more readable, so we should add line breaks");
+			slideshowAppend();
+			
+			codeArrSplice(6, 4, [
+								 sp(sp(sp("document.write(\"Hello World"+ tag("br") + "\");" ))),
+								 sp(sp(sp("document.write(\"This is how I can write on the page"+ tag("br") + "\");" ))),
+								 sp(sp(sp("document.write(\"I call it the wall"+ tag("br") + "\");" ))),
+								 sp(sp(sp("document.write(\"walls are fun to write on"+ tag("br") + "\");"))),
+								 sp(sp(sp("document.write(\"is that it?"+ tag("br") + "\");"))),
+								 sp(sp(sp("document.write(\"ok, bored... lets do something else"+ tag("br") + "\");")))
+								 ]);
+			lon([6,7,8,9,10,11]);
+			setHeader("much better");
+			setComment("This is the same as two slides ago.  But we have added line breaks so that it will write words on the line below it.");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 6, [
+								 sp(sp(sp("document.write(12345 + \"&lt;br&gt;\");" ))),
+								 sp(sp(sp("document.write(3.14156789 + \"&lt;br&gt;\");" ))),
+								 ]);
+			lon([6,7]);
+			setHeader("What can you do besides strings?");
+			setComment("You can print numbers.  Javascript is a typeless system, so if you give it a string or a number, the compiler will convert it to something more appropriate.  When you use document.write() it is turning that number into the string version so that it can be displayed properly.<BR><BR>The first one prints the string version of an integer and the second one prints a string version of a floating point number.");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 2, [
+								 sp(sp(sp("document.write(1+2+ \"&lt;br&gt;\");" + codeComment("//adding.  Will print 3")))),
+								 sp(sp(sp("document.write(777-1+ \"&lt;br&gt;\");" + codeComment("//subtracting.  Will print 776")))),
+								 sp(sp(sp("document.write(10 * 5+ \"&lt;br&gt;\");" + codeComment("//multiplication. Will print 50")))),
+								 sp(sp(sp("document.write(50 / 2+ \"&lt;br&gt;\");" + codeComment("//division. Will print 25")))),
+								 ]);
+			lon([6,7,8,9]);
+			setHeader("Can we do Math?");
+			setComment("Arithmetic operations are built in to the language.  Addition, Subtraction, Multiplication, and Division are some of the built-in math functions.");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 4, [
+								 sp(sp(sp("var variable_name = \"This is a String\";"))),
+								 sp(sp(sp("var variable_number123 = 25;"))),
+								 sp(sp(sp("var str = \"Another string\";")))
+								 ]);
+			lon([6,7,8]);
+			setHeader("Can store those values somewhere?");
+			setComment("Introducing, variables.  To make a variable you must enter the \"var\" keyword followed by a variable name.  The variable name can be anything that starts with a letter from the alphabet.  It may not start with a number, however it can end with numbers.  You can name variables beginning with non-alphabetic characters, but I personally do not like them and prefer to stick with variable names with alphabetic characters.<BR><BR> The equal sign i.e. \"=\" is called an assignment operator.  The assignment operator takes the stuff to the right of it (up to by not including the semicolon) and saves that into the variable on the left. <BR><BR> Javascript is a very weakly type language so you don't have to tell it the variable type.  That kind of information assumed.  And most of the time it is correct.");
+			slideshowAppend();
+			//
+			codeArrSplice(6, 3, [
+								 sp(sp(sp(codeComment("// we can add strings together.")))),
+								 sp(sp(sp("var name = \"Bob\";"))),
+								 sp(sp(sp("var age = 37;"))),
+								 sp(sp(sp("var profile = \"Name: \" + name + \"&lt;br&gt;\" + \"Age: \" + age + \"&lt;br&gt;\";"))),
+								 sp(sp(sp(codeComment("//print the string")))),
+								 sp(sp(sp("document.write(profile)")))
+								 ]);
+			lon([7,8,9,11]);
+			setHeader("Adding strings?");
+			setComment("When a string is added to a string, it concatenates it into one big string.  Pretend the plus symbols are pieces of tape and we are taping the string together.  When it is all connected a copy of that will be saved into the variable.<BR><BR>But wait, you can add a string to a number! In this particular case, the string has priority so the number will get transformed into a string version of the number and then it will get taped to the string");
+			slideshowAppend();
+			
+			//
+			codeArrSplice(6, 6, [
+								 sp(sp(sp("var an_array_of_str = [\"this\", \"is\", \"an\", \"array\", \"of\", \"words\"];"))),
+								 sp(sp(sp("document.write(\"word at index 0:\" + an_array_of_str[0] + \"&lt;br&gt;\");"))),
+								 sp(sp(sp("document.write(\"word at index 3:\" + an_array_of_str[3] + \"&lt;br&gt;\");"))),
+								 sp(sp(sp("document.write(\"word at the end:\" + an_array_of_str[an_array_of_str.length-1] + \"&lt;br&gt;\");"))),
+								 sp(sp(sp("document.write(\"&lt;br&gt;\");"))),
+								 sp(sp(sp("var an_array_of_num =[1, 5, 7, 9, 3];"))),
+								 sp(sp(sp("document.write(\"number at index 0:\" + an_array_of_str[0] + \"&lt;br&gt;\");"))),
+								 sp(sp(sp("document.write(\"number at index 4:\" + an_array_of_str[4] + \"&lt;br&gt;\");")))
+								 ]);
+			lon([7,8,9,11]);
+			setHeader("Ok, Strings and Numbers are Cool.  Anything else?");
+			setComment("There is anther basic data type called an array.  An array is a set of contiguous data that can be access by offering an index.  You can think of an array as a book with sheets of paper as pages.  Each page is numbered.  If you send the array name then you're sending you the book.  But if I give you the book and the page number then you will be able to see what is on that page.  We usually call that page number the index of an array.  The first element of the array is always 0.  The second index is 1.  the third index is 2 and so on and so forth.");
+			slideshowAppend();
+		});
+	};
+	var javaScriptLesson1_questions = function() {
+		mk("h1", {class:"question"}, globalLesson, function(b){
+			b.innerHTML = "What do you mean, when you say \"that information is assumed?\"";
+		});
+		mk("p", {class:"answer"}, globalLesson, function(b){
+			b.innerHTML = "If the object on the right is  a string, then the variable is a string."
+			b.innerHTML += "<br><br>";
+			b.innerHTML += "If the object is a number, then the variable is a number.";
+			b.innerHTML += "<br><br>";
+			b.innerHTML += "But what happens when you combine different object together?  If you were to add a string to a number, the number would get converted into a string.  If you were to add two numbers, it would stay as numbers.";
+		});
+		mk("h1", {class:"question"}, globalLesson, function(b){
+			b.innerHTML = "What if I want the string converted to a number?";
+		});
+		mk("p", {class:"answer"}, globalLesson, function(b){
+			b.innerHTML = "You can use parseFloat() or parseInt().";
+			b.innerHTML += "<br><br>";
+			b.innerHTML += "parseFloat(\"1.23\") will give us number 1.23";
+			b.innerHTML += "";
+			b.innerHTML += "parseInt(\"1729\") will give us number 1729";
+			b.innerHTML += "<br><br>";
+			b.innerHTML += "therefore...";
+			b.innerHTML += "<br><br>";
+			b.innerHTML += "var foo = \"9\" + 9; //gives us \"99\"";
+			b.innerHTML += "var bar = parseFloat(\"9\") + 9; //gives us 18";
+		});
+		mk("h1", {class:"question"}, globalLesson, function(b){
+			b.innerHTML = "Why do arrays start at 0?";
+		});
+		mk("p", {class:"answer"}, globalLesson, function(b){
+			b.innerHTML = "When you want to view the first element in the array, you do something like this:";
+			b.innerHTML = "<br><br>";
+			b.innerHTML = "array[0];";
+			b.innerHTML = "<br><br>";
+			b.innerHTML = "But why?  That number is the offset from the beginning of the array.  If the offset is 0 then we are looking at the very beginning.  If the offset is 5 then we are looking 5 elements below the initial element.";
+		});
+	};
+	javaScriptLesson1_slideshow();
+	javaScriptLesson1_questions();
 };
 
-													
+/**
+ A convenience function that will produce a slide show object and offers a block
+ which will give you access to common variables and convenience functions
+ 
+ @param parent a reference to the object that the slide show will be made inside of
+ @param slideTitle a string that will set the slide title
+ @param block a multi-parameter block that provides common variables and convenience functions. The following parameters refer to the block's parameters
+		 
+		 @param codeArr an array of DHStringWithHighlight objects
+		 @param flush a block that will set the codeArr to empty array
+		 @param codeArrSplice a block that helps you splice. param(loc, deleteAmount, object_to_add,...);
+		 @param setHeader a block that lets you set the header of the comments. param string
+		 @param setComment a block that lets you set the comments. param string
+		 @param tag a block that returns a string prepended and postpended with angle brackets around a middle string. param string.
+		 @param codeArrAppend a block that appends to the array one DHStringWithHighlight object. param str param isLit
+		 @param mkdhsh a block that creates a DHStringWithHighlight
+		 @param slideshowAppend a block that adds the codeArr, header, and comments to the slide show
+		 @param loff a block that lets to turn off certain rows. param
+		 @param lon a block that lets you turn on certain rows.
+		 @param sp a block that prepends string with a tab eg &emsp;
+		 @param codeComment a block that takes a string parameter and wraps it in span code with a class called "comment"
+		 @code
+		 
+		 @endcode
+		 */
+		   function makeSlideShowWithBlock(parent, slideTitle, block) {
+			   var slideshow = new DHSlideShow();
+			   slideshow.init(parent.id, slideTitle);
+			   var codeArr = [];
+			   var header = "";
+			   var comment = ""
+			   
+			   var tag = function(str) {
+				   return "&lt;" + str + "&gt;";
+			   };
+			   var codeArrAppend = function(str, isLit){
+				   codeArr.push(new DHStringWithHighlight(str,isLit));
+			   };
+			   var mkdhsh = function(str, isLit) {
+				   return new DHStringWithHighlight(str,isLit)
+			   };
+			   var slideshowAppend = function () {
+				   slideshow.appendSlide(codeArr, header, comment);
+			   };
+			   var setHeader = function(str){
+				   header = str;
+			   };
+			   var setComment = function(str){
+				   comment = str;
+			   };
+			   var loff = function(arr) {
+				   lightOff(codeArr, arr);
+			   };
+			   var lon = function(arr){
+				   lightOn(codeArr, arr);
+			   };
+			   
+			   var codeArrSplice = function(loc, delAmt, arr) {
+				   codeArr.splice(loc, delAmt);
+				   for (var i = 0; i < arr.length; ++i) {
+					   codeArr.splice(loc+i, 0, mkdhsh(arr[i]));
+				   }
+			   };
+			   var flush = function() {
+				   codeArr = [];
+			   }
+			   var sp = function(str){
+				   return "&emsp; " + str;
+			   }
+			   var codeComment = function(str) {
+				   return "<span class=\"comment\">" + str + "</span>";
+			   };
+			   //call block function
+			   block(codeArr, flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment);
+			   
+			   //move to default slide
+			   slideshow.goToSlide(0);
+		   };
+		   

@@ -177,6 +177,7 @@ a:visited {
 
 #codeSection {
 	display: table-cell;
+	font-family: monospace;
 	background-color: beige;
 	padding: 10px;
 }
@@ -214,7 +215,8 @@ h1#lessonSpace {
 	
 }
 
-#questions {
-	/*position: absolute;*/
-	/*top: 95%;*/
+.question {
+}
+.answer {
+	margin-left: 30px;
 }

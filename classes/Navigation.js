@@ -1,7 +1,7 @@
 /**
  Navigation Class
  @description Responsible for generating the navigation GUI while also allowing the webpage's individual content to be realized
-*/
+ */
 
 function Navigation(){
 	this.headerID = "";
@@ -31,8 +31,9 @@ function Navigation(){
 										new NavLink("Work History", "work_history.html", 0),
 										new NavLink("Teaching", "teaching.html", 0),
 										new NavLink("Project Euler", "https://github.com/wh1pch81n/ProjectEulerNew", 1),
-										new NavLink("CodeEval", "https://www.codeeval.com/public/8204d6d519fd06ef4ef36415ec9001466e87fc35/", 1)
-		];
+										new NavLink("CodeEval", "https://www.codeeval.com/public/8204d6d519fd06ef4ef36415ec9001466e87fc35/", 1),
+										new NavLink("<img src=\"http://s.c.lnkd.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png\" width=\"20\" height=\"15\" alt=\"View Derrick Ho's LinkedIn profile\">", "http://www.linkedin.com/in/derrickho88", 1)
+										];
 		
 		var nav = document.getElementById(this.navigationID);
 		var selNum = 0;
