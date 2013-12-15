@@ -435,7 +435,7 @@ function vhdlLesson2() { //needs completing
 function javaScriptLesson1() {
 	globalLesson.innerHTML = null;
 	var javaScriptLesson1_slideshow = function() {
-		makeSlideShowWithBlock(globalLesson, "Lesson 1: First program", function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
+		makeSlideShowWithBlock(globalLesson, "Lesson 1: Strings, Arrays & Math", function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
 			
 			//
 			flush();
