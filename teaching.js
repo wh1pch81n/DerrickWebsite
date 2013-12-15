@@ -50,81 +50,50 @@ function generateSlideShowFromFile(path, slideShowTitle) {
 	httpGet(path, function(textFromScript) {
 		makeSlideShowWithBlock(globalLesson, slideShowTitle, function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
 			//parse script line by line
-			var fileArr = textFromScript.split('\n');
+			var fileArr = filterChar(textFromScript).split('\n');
 			var action = null;
-			for (var i = 0; i < fileArr.length;) {
-				if(fileArr[i].match("@code")) {
-					action = function(arr) {
-						for (var k = 0; k < arr.length; ++k) {
-							var tabs = countTabs(arr[k]);
-							var str = filterChar(arr[k]);
-							codeArrAppend(tabs+str, isHighlight(arr[k]));
+			for (var i = 0; i < fileArr.length;++i) {
+				if(fileArr[i].indexOf("@code") >= 0) {
+					action = function(line) {
+						var isH;
+						if(isH = isHighlight(line)){
+							line = line.replace("~", "&emsp; ");
 						}
+						codeArrAppend(line, isH);
 					};
-				}else if(fileArr[i].match("@header")) {
-					action = function(arr) {
-						var s = "";
-						for (var k = 0; k < arr.length; ++k) {
-							if (k) {
-								s+= "<br>";
-							}
-							s += filterChar(arr[k]);
+				}else if(fileArr[i].indexOf("@header") >= 0 || fileArr[i].indexOf("@comment") >= 0) {
+					var theAction = setHeader;
+					if (fileArr[i].indexOf("comment") >= 0) {
+						theAction = setComment;
+					}
+					action = function(line) {
+						for (; fileArr[i+1][0] != '@'; ++i) {
+							line += "<br>" + fileArr[i+1];
 						}
-						setHeader(s);
+						theAction(line);
 					};
-				}else if(fileArr[i].match("@comment")) {
-					action = function(arr) {
-						var s = "";
-						for (var k = 0; k < arr.length; ++k) {
-							if (k) {
-								s+= "<br>";
-							}
-							s += filterChar(arr[k]);
-						}
-						setComment(s);
-					};
-				}else if(fileArr[i].match("@addSlide")) {
+				}else if(fileArr[i].indexOf("@addSlide") >= 0) {
 					slideshowAppend();
 					flush();
-					i++;
-					continue;
-				}
-				else if(fileArr[i].match("@question")) {
-					action = function(arr) {
-						var s =  "";
-						for(var k = 0; k < arr.length; ++k){
-							if (k) {
-								s+= "<br>";
-							}
-							s += filterChar(arr[k]);
-						}
-						mk("h1", {class:"question"}, globalLesson, function(b) {
-							b.innerHTML = s;
-						});
+				}else if(fileArr[i].indexOf("@question") >= 0 || fileArr[i].indexOf("@answer") >= 0) {
+					var style = fileArr[i].substring(1);
+					var element = "p";
+					if(style.indexOf("question")>=0){
+						element = "h1";
 					}
-				}else if(fileArr[i].match("@answer")) {
-					action = function(arr) {
-						var s =  "";
-						for(var k = 0; k < arr.length; ++k){
-							if (k) {
-								s+= "<br>";
+					action = function(line) {
+						mk(element, {class:style}, globalLesson, function(b) {
+							for (; fileArr[i][0] != '@'; ++i) {
+								b.innerHTML += fileArr[i] + "<br>";
 							}
-							s += filterChar(arr[k]);
-						}
-						mk("p", {class:"answer"}, globalLesson, function(b) {
-							b.innerHTML = s;
 						});
-					}
-				}else {
+						--i;
+					};
+				}else if(fileArr[i].indexOf("@end") >= 0){
 					break;
+				}else {
+					action(fileArr[i]);
 				}
-				
-				var j;
-				for (j = 1; !fileArr[i+j].match("@"); ++j);
-				var arrSlice = fileArr.slice(i+1, i+j);
-				action(arrSlice);
-				
-				i +=j;
 			}
 		});
 	});
@@ -132,47 +101,14 @@ function generateSlideShowFromFile(path, slideShowTitle) {
 }
 
 function filterChar(line) {
-	var s= "";
-	for (var i = 0; i < line.length; ++i) {
-		switch (line[i]) {
-			case '`':
-			case '~':{
-				continue;
-				break;
-			}
-			case '<':{
-				s+= "&lt;";
-				break;
-			}
-			case '>':{
-				s+= "&gt;";
-				break;
-			}
-			case '"':{
-				s+= "&#34;";
-				break;
-			}
-			case '/':{
-				if (i+1 < line.length && line[i+1] == '/') { //handle comment
-					s += "<span class=\"comment\">" + line.substring(i)+ "</span>";
-					return s;
-				}
-			}
-			default: {
-				s+= line[i];
-			}
-		}
+	line = line.replace(/`/g,"&emsp; ").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	//.replace(/"/g, "&#34;");
+	
+	if( line.indexOf("//") >= 0) {
+		return line.replace("//", "<span class=\"comment\">") + "</span>";
 	}
-	return s;
-}
-
-function countTabs(line) {
-	var s= "";
-	var i;
-	for (i = 0; line[i] == '`' || line[i] == '~'; ++i){
-		s += "&emsp; ";
-	}
-	return s;
+	
+	return line;
 }
 
 function isHighlight(line) {
@@ -690,75 +626,75 @@ function javaScriptLesson1() {
  @param parent a reference to the object that the slide show will be made inside of
  @param slideTitle a string that will set the slide title
  @param block a multi-parameter block that provides common variables and convenience functions. The following parameters refer to the block's parameters
-		 
-		 @param codeArr an array of DHStringWithHighlight objects
-		 @param flush a block that will set the codeArr to empty array
-		 @param codeArrSplice a block that helps you splice. param(loc, deleteAmount, object_to_add,...);
-		 @param setHeader a block that lets you set the header of the comments. param string
-		 @param setComment a block that lets you set the comments. param string
-		 @param tag a block that returns a string prepended and postpended with angle brackets around a middle string. param string.
-		 @param codeArrAppend a block that appends to the array one DHStringWithHighlight object. param str param isLit
-		 @param mkdhsh a block that creates a DHStringWithHighlight
-		 @param slideshowAppend a block that adds the codeArr, header, and comments to the slide show
-		 @param loff a block that lets to turn off certain rows. param
-		 @param lon a block that lets you turn on certain rows.
-		 @param sp a block that prepends string with a tab eg &emsp;
-		 @param codeComment a block that takes a string parameter and wraps it in span code with a class called "comment"
-		 @code
-		 
-		 @endcode
-		 */
-		   function makeSlideShowWithBlock(parent, slideTitle, block) {
-			   var slideshow = new DHSlideShow();
-			   slideshow.init(parent.id, slideTitle);
-			   var codeArr = [];
-			   var header = "";
-			   var comment = ""
-			   
-			   var tag = function(str) {
-				   return "&lt;" + str + "&gt;";
-			   };
-			   var codeArrAppend = function(str, isLit){
-				   codeArr.push(new DHStringWithHighlight(str,isLit));
-			   };
-			   var mkdhsh = function(str, isLit) {
-				   return new DHStringWithHighlight(str,isLit)
-			   };
-			   var slideshowAppend = function () {
-				   slideshow.appendSlide(codeArr, header, comment);
-			   };
-			   var setHeader = function(str){
-				   header = str;
-			   };
-			   var setComment = function(str){
-				   comment = str;
-			   };
-			   var loff = function(arr) {
-				   lightOff(codeArr, arr);
-			   };
-			   var lon = function(arr){
-				   lightOn(codeArr, arr);
-			   };
-			   
-			   var codeArrSplice = function(loc, delAmt, arr) {
-				   codeArr.splice(loc, delAmt);
-				   for (var i = 0; i < arr.length; ++i) {
-					   codeArr.splice(loc+i, 0, mkdhsh(arr[i]));
-				   }
-			   };
-			   var flush = function() {
-				   codeArr = [];
-			   }
-			   var sp = function(str){
-				   return "&emsp; " + str;
-			   }
-			   var codeComment = function(str) {
-				   return "<span class=\"comment\">" + str + "</span>";
-			   };
-			   //call block function
-			   block(codeArr, flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment);
-			   
-			   //move to default slide
-			   slideshow.goToSlide(0);
-		   };
-		   
+ 
+ @param codeArr an array of DHStringWithHighlight objects
+ @param flush a block that will set the codeArr to empty array
+ @param codeArrSplice a block that helps you splice. param(loc, deleteAmount, object_to_add,...);
+ @param setHeader a block that lets you set the header of the comments. param string
+ @param setComment a block that lets you set the comments. param string
+ @param tag a block that returns a string prepended and postpended with angle brackets around a middle string. param string.
+ @param codeArrAppend a block that appends to the array one DHStringWithHighlight object. param str param isLit
+ @param mkdhsh a block that creates a DHStringWithHighlight
+ @param slideshowAppend a block that adds the codeArr, header, and comments to the slide show
+ @param loff a block that lets to turn off certain rows. param
+ @param lon a block that lets you turn on certain rows.
+ @param sp a block that prepends string with a tab eg &emsp;
+ @param codeComment a block that takes a string parameter and wraps it in span code with a class called "comment"
+ @code
+ 
+ @endcode
+ */
+function makeSlideShowWithBlock(parent, slideTitle, block) {
+	var slideshow = new DHSlideShow();
+	slideshow.init(parent.id, slideTitle);
+	var codeArr = [];
+	var header = "";
+	var comment = ""
+	
+	var tag = function(str) {
+		return "&lt;" + str + "&gt;";
+	};
+	var codeArrAppend = function(str, isLit){
+		codeArr.push(new DHStringWithHighlight(str,isLit));
+	};
+	var mkdhsh = function(str, isLit) {
+		return new DHStringWithHighlight(str,isLit)
+	};
+	var slideshowAppend = function () {
+		slideshow.appendSlide(codeArr, header, comment);
+	};
+	var setHeader = function(str){
+		header = str;
+	};
+	var setComment = function(str){
+		comment = str;
+	};
+	var loff = function(arr) {
+		lightOff(codeArr, arr);
+	};
+	var lon = function(arr){
+		lightOn(codeArr, arr);
+	};
+	
+	var codeArrSplice = function(loc, delAmt, arr) {
+		codeArr.splice(loc, delAmt);
+		for (var i = 0; i < arr.length; ++i) {
+			codeArr.splice(loc+i, 0, mkdhsh(arr[i]));
+		}
+	};
+	var flush = function() {
+		codeArr = [];
+	}
+	var sp = function(str){
+		return "&emsp; " + str;
+	}
+	var codeComment = function(str) {
+		return "<span class=\"comment\">" + str + "</span>";
+	};
+	//call block function
+	block(codeArr, flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment);
+	
+	//move to default slide
+	slideshow.goToSlide(0);
+};
+
