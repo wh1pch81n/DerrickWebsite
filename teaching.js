@@ -44,7 +44,7 @@ function initContent(parent) {
 						button.onclick = lesson_j.value;
 					} else if(lesson_j.hasOwnProperty("file")){
 						button.onclick = function(){
-							generateSlideShowFromFile(tutorial.tutorialFolder+lesson_j.file,lesson_j.text);
+							generateSlideShowFromFile(tutorial.tutorialFolder+lesson_j.file, "Lesson " + lesson_j.text);
 						}
 					}
 				}
