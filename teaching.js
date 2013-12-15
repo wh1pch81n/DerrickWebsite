@@ -172,7 +172,7 @@ function vhdlLesson1() {
 	var vhdlLesson1_slideshow = function(){
 		//slideShow
 		var slideshow = new DHSlideShow();
-		slideshow.init(globalLesson.id, "Lesson 1: First Program");
+		slideshow.init(globalLesson.id, "Lesson 1 - First Program");
 		
 		var codeArr = [];
 		var header = "";
@@ -435,7 +435,7 @@ function vhdlLesson2() { //needs completing
 function javaScriptLesson1() {
 	globalLesson.innerHTML = null;
 	var javaScriptLesson1_slideshow = function() {
-		makeSlideShowWithBlock(globalLesson, "Lesson 1: Strings, Arrays & Math", function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
+		makeSlideShowWithBlock(globalLesson, "Lesson 1 - Strings, Arrays & Math", function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
 			
 			//
 			flush();
