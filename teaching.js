@@ -1,23 +1,32 @@
 var globalParent = null;
 var globalLesson = null;
 
+/*
+ And array of tutorial objects that hold references to
+ the lessons
+ */
 var globalTutorialArr =
 [{
 tutorial:"VHDL",
 lessons:[
-		 {value:vhdlLesson1, text:"VHDL Lesson 1"},
+		 {value:vhdlLesson1, text:"1 - First Program"},
 		 //{value:vhdlLesson2, text:"VHDL Lesson 2"}
 		 ]
 },{
 tutorial:"JavaScript",
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
-		 {value:javaScriptLesson1, text:"JavaScript Lesson 1"},
-		 {file:"javaScriptL2.txt", text:"JavaScript Lesson 2"},
+		 {value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
+		 {file:"javaScriptL2.txt", text:"2 - ifs & loops"},
 		 //{file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
 		 ]
 }];
 
+/**
+ initializes the content of the page.
+ 
+ @param parent A reference to a DOM object. Objects generated in this function will be appended as child to parent.
+ */
 function initContent(parent) {
 	mk("dl", {id:"tutorialNav"}, parent, function(b) {
 		
@@ -45,6 +54,12 @@ function initContent(parent) {
 	globalLesson = mk("article", {id:"lessonSpace"}, parent, null);
 };
 
+/**
+ Generates Slide show Object From the text recieved from the path.
+ 
+ @param path "the text at this URL will be used to generate the slideShowObject
+ @param slideShowTitle "Title of the slide show"
+ */
 function generateSlideShowFromFile(path, slideShowTitle) {
 	globalLesson.innerHTML = null;
 	httpGet(path, function(textFromScript) {
@@ -100,21 +115,40 @@ function generateSlideShowFromFile(path, slideShowTitle) {
 	
 }
 
+/**
+ replaces certain characters with ones more appropriate for slideShow
+ 
+ @param line "the string that will get flitered of certain chars"
+ */
 function filterChar(line) {
-	line = line.replace(/`/g,"&emsp; ").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-	//.replace(/"/g, "&#34;");
+	var replace_map = {
+		'`':"&emsp; ",
+		'<':"&lt;",
+		'>':"&gt;",
+		'/*':"<span class=\"comment\">", //not handled
+		'*/':"</span>"//not handled
+	};
 	
-	if( line.indexOf("//") >= 0) {
-		return line.replace("//", "<span class=\"comment\">") + "</span>";
-	}
-	
-	return line;
+	return line.replace(/[`<>]/g, function(match) {
+						return replace_map[match];
+						});
 }
 
+/*
+ Checks if the first character of the line is a ~
+ @param line a string
+ */
 function isHighlight(line) {
 	return line[0] == '~';
 }
 
+/**
+ Reads the content at the URL and saves it into a string. Then offers
+ block to let user decide what to do with it
+ 
+ @param theUrl The url of a website.  Only works online
+ @block(text) block pointer.  "text" is the content of the URL as a string
+ */
 function httpGet(theUrl, block){
 	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -125,11 +159,14 @@ function httpGet(theUrl, block){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			block(xmlhttp.responseText);
 		}
-	}
+	};
 	xmlhttp.open("GET", theUrl, false );
 	xmlhttp.send();
 }
 
+/*
+ Created the first lesson of VHDL
+ */
 function vhdlLesson1() {
 	globalLesson.innerHTML = null;
 	var vhdlLesson1_slideshow = function(){
@@ -312,6 +349,10 @@ function vhdlLesson1() {
 	vhdlLesson1_questions();
 };
 
+/*
+ A snub
+ May be removed in the near future
+ */
 function vhdlLesson2() { //needs completing
 	globalLesson.innerHTML = null;
 	var vhdlLesson2_slideshow = function(){
@@ -388,7 +429,9 @@ function vhdlLesson2() { //needs completing
 	vhdlLesson2_questions();
 };
 
-
+/*
+ Created the first lesson of javaScript
+ */
 function javaScriptLesson1() {
 	globalLesson.innerHTML = null;
 	var javaScriptLesson1_slideshow = function() {
