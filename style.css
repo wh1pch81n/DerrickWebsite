@@ -166,6 +166,22 @@ a:visited {
   border-bottom:    thin dotted #675c47;
 }
 
+a.image {
+	border: none;
+}
+
+a:link.image img{
+	color:            #b76666;
+	text-decoration:  none;
+	border:    medium solid #b76666;
+}
+
+a:visited.image img{
+	color:            #b76666;
+	text-decoration:  none;
+	border:    medium solid #b76666;
+}
+
 #slide {
 	display: table;
 	border-spacing: 30px;

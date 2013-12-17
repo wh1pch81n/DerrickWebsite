@@ -435,68 +435,102 @@ function vhdlLesson2() { //needs completing
  Created the 0th lesson of JavaScript.
  It focuses on the tools you can use to start writting and applying javaScript
  */
-//function javaScriptLesson0() {
-//	globalLesson.innerHTML = null;
-//	mk("h1",null, globalLesson, function(b) {
-//		b.innerHTML = "What do I need to get started?";
-//	});
-//	mk("p", null, globalLesson, function(b) {
-//		b.innerHTML = "JavaScript is perhaps the easiest language to get started on.  The reason is simple, everyone has the tool to do it.  Since you are reading this, you are undoubtedly using a web browser of some sort.  the web browser is the tool that will compile your code and run it.  What is it running?  It is running a little file with an HTML extension.  So to wrap this up you need 3 things to start programming JavaScript:";
-//	});
-//	mk("ol",null, globalLesson, function(b) {
-//		mk("li",null, globalLesson, function(b) {
-//			b.innerHTML = "A web browser e.g. Chrome, Safari, or Internet Explorer";
-//		});
-//		mk("li",null, globalLesson, function(b) {
-//			b.innerHTML = "Text Editor e.g. Notepad or TextEdit";
-//		});
-//		mk("li",null, globalLesson, function(b) {
-//			b.innerHTML = "You and your trusty, computer";
-//		});
-//	});
-//	
-//	mk("h1",null, globalLesson, function(b) {
-//		b.innerHTML = "Wait.  The third one was two things!";
-//	});
-//	mk("p", null, globalLesson, function(b) {
-//		b.innerHTML = "Ok, you caught me.  The third one is basically a given.  So you essentially have two things you need.  But three is a magic number and I felt like stating the obvious.";
-//	});
-//	
-//	mk("h1",null, globalLesson, function(b) {
-//		b.innerHTML = "Ok, I have a Web browser.  After all, I wouldn't be able to be here if I didn't have one.  But what about that text editor thingy?  Are you talking about that black and white text thing that people don't use unless they don't have Word?";
-//	});
-//	mk("p", null, globalLesson, function(b) {
-//		b.innerHTML = "Good question.  There are several text editors out there in existence.  A text editor is basically a tool that helps you write text in a file.  Duh, right?  Below are two text editors that I prefer to use and a third one that isn't really a text editor but does a great job at being one; Plus, its a fast way to make a website.";
-//	});
-//	
-//	mk("h1",null, globalLesson, function(b) {
-//		b.innerHTML = "Hold on! Website? I thought this was a JavaScript tutorial!  What does a website have to do with anything?";
-//	});
-//	mk("p", null, globalLesson, function(b) {
-//		b.innerHTML = "A lot actually.  Any website you see on the web is html.  HTML5 to be more precise. It is the foundation that lets a whole lot of web tools do their fancy dance.  JavaScript is one of them.  JavaScript in particular is a very powerful device that can help you create simple stuff like writing text to the webpage to making an HTML5 video game.";
-//	});
-//	
-//	mk("h1",null, globalLesson, function(b) {
-//		b.innerHTML = "What Text Editor is good for Windows?";
-//	});
-//	mk("p", null, globalLesson, function(b) {
-//		b.innerHTML = "I prefer <a href=\"http://notepad-plus-plus.org\">NotePad++</a>. It offers syntax highlighting to help you see what you are writing and some auto-completion.  Once you have it downloaded, open NotePad++ and create a new file and save it as an HTML file.  Then open the file in your web browser.  Keep the text editor on the left half of screen and the web browser on the right side of the screen.  This is the set up that you should have before starting each tutorial";
-//	});
-//
-//	mk("h1",null, globalLesson, function(b) {
-//		b.innerHTML = "What Text Editor is good for OSX?";
-//	});
-//	mk("p", null, globalLesson, function(b) {
-//		b.innerHTML = "There are many editors out there like <a href=\"http://www.barebones.com/products/textwrangler/\">TextWrangler</a>, <a href=\"http://macromates.com\">TextMate</a>, TextEdit, or even Xcode.  I like to do my editing in Xcode, but that is just me.  You may have an easier time working with TextMate.  Regardless of which one you pick, open it up and create a file and save it as an HTML file.  Open that file with a web browser.  Keep the text editor on the left half of the screen and the web browser on the right side of the screen.  This is the set up that you should have before starting each tutorial.";
-//	});
-//	
-//	mk("h1",null, globalLesson, function(b) {
-//		b.innerHTML = "And what about that Text editor that isn't really a text editor?";
-//	});
-//	mk("p", null, globalLesson, function(b) {
-//		b.innerHTML = "It's called <a href=\"http://stypi.com\">Stypi</a> and it is a Real-Time Online Collab website.  It lets multiple people across the web see the same document and edit it at the same time.  Its just like Google Docs except it has more of a web focus.  If you click the link I offered it will generate a brand new page with a random unique name.  I recommend that you make an account so that you have more control over file management.  Make sure that you set the editor to be using HTML.  Anyways, the page that you get should be called \"code.stypy.com\" followed by the rest of the URL.  Open a new page and give it the same URL except you change \"code\" to \"render\".";
-//	});
-//};
+function javaScriptLesson0() {
+	globalLesson.innerHTML = null;
+	mk("h1",null, globalLesson, function(b) {
+		b.innerHTML = "What do I need to get started?";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+		b.innerHTML = "JavaScript is perhaps the easiest language to get started on.  The reason is simple, everyone has the tool to do it.  Since you are reading this, you are undoubtedly using a web browser of some sort.  The web browser is the tool that will compile your code and run it.  What is it running?  It is running a little file with an HTML extension.  So to wrap this up you need 3 things to start programming JavaScript:";
+	});
+	
+	mk("ol",{class:"answer"}, globalLesson, function(b) {
+		mk("li",{class:"answer"}, globalLesson, function(b) {
+			b.innerHTML = "A web browser e.g. Chrome, Safari, or Internet Explorer";
+		});
+		mk("li",{class:"answer"}, globalLesson, function(b) {
+			b.innerHTML = "Text Editor e.g. Notepad or TextEdit";
+		});
+		mk("li",{class:"answer"}, globalLesson, function(b) {
+			b.innerHTML = "You and your trusty, computer";
+		});
+	});
+	
+	mk("h1",null, globalLesson, function(b) {
+		b.innerHTML = "Wait.  The third one was two things!";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+		b.innerHTML = "Ok, you caught me.  The third one is basically a given.  So you essentially have two things you need.  But three is a magic number and I felt like stating the obvious.";
+	});
+	
+	mk("h1",null, globalLesson, function(b) {
+		b.innerHTML = "Ok, I have a Web browser.  After all, I wouldn't be able to be here if I didn't have one.  But what about that text editor thingy?  Are you talking about that black and white text thing that people don't use unless they don't have Word?";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+		b.innerHTML = "Good question.  There are several text editors out there in existence.  A text editor is basically a tool that helps you write text in a file.  Duh, right?  Below are two text editors that I prefer to use and a third one that isn't really a text editor but does a great job at being one; Plus, its a fast way to make a website.";
+	});
+	
+	mk("h1",null, globalLesson, function(b) {
+		b.innerHTML = "Hold on! Website? I thought this was a JavaScript tutorial!  What does a web site have to do with anything?";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+		b.innerHTML = "A lot actually.  Any web site you see on the web is HTML.  HTML5 to be more precise. It is the foundation that lets a whole lot of web tools do their fancy dance.  JavaScript is one of them.  JavaScript in particular is a very powerful device that can help you create simple stuff from writing text to the web page to making an HTML5 video game.";
+	});
+	
+	mk("h1",null, globalLesson, function(b) {
+		b.innerHTML = "What Text Editor is good for Windows?";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+		b.innerHTML = "I prefer <a href=\"http://notepad-plus-plus.org\">NotePad++</a>. It offers syntax highlighting to help you see what you are writing and some auto-completion.  Once you have it downloaded, open NotePad++ and create a new file and save it as an HTML file.  Then open the file in your web browser.  Keep the text editor on the left half of screen and the web browser on the right side of the screen.  This is the set up that you should have before starting each tutorial";
+	});
+
+	mk("h1",null, globalLesson, function(b) {
+		b.innerHTML = "What Text Editor is good for OSX?";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+		b.innerHTML = "There are many editors out there like <a href=\"http://www.barebones.com/products/textwrangler/\">TextWrangler</a>, <a href=\"http://macromates.com\">TextMate</a>, TextEdit, or even Xcode.  I like to do my editing in Xcode, but that is just me.  You may have an easier time working with TextMate.  Regardless of which one you pick, open it up and create a file and save it as an HTML file.  Open that file with a web browser.  Keep the text editor on the left half of the screen and the web browser on the right side of the screen.  This is the set up that you should have before starting each tutorial.";
+	});
+	
+	mk("h1",null, globalLesson, function(b) {
+		b.innerHTML = "And what about that Text editor that isn't really a text editor?";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+		b.innerHTML = "It's called <a href=\"http://stypi.com\">Stypi</a> and it is a Real-Time Online Collab website.  It lets multiple people across the web see the same document and edit it at the same time.  Its just like Google Docs except it has more of a web focus.  If you click the link I offered it will generate a brand new page with a random unique name.  I recommend that you make an account so that you have more control over file management.  Make sure that you set the editor to be using HTML.  Anyways, the page that you get should be called \"code.stypy.com\" followed by the rest of the URL.  Open a new page and give it the same URL except you change \"code\" to \"render\".  The picture below illustrates how you should set up your windows at the start of each tutorial.";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+		mk("a", {class:"image", href:"images/JSL0_exampleSetUp_big.png"}, b, function (b) {
+			mk("img", {src:"images/JSL0_exampleSetUp.png"}, b, null);
+		});
+	});
+	
+	mk("h1", {class:"question"}, globalLesson, function(b) {
+	   b.innerHTML = "What was that hings you said about \"quickest way to make a web site?\"";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+	   b.innerHTML = "Every HTML file you create on Stypi has a rendered version.  If you create a file called \"http://code.stypi.com/l337ju1ce\", you can share the rendered version by changing the code to render. i.e. \"http://render.stypi.com/l337ju1ce\"";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+	   b.innerHTML = "The good news is that you get a website on the web without using an a webhosting website.  The bad news is that anyone on the net may edit that page.  For the purposes of these tutorials, that should be fine.";
+	});
+	
+	mk("h1", {class:"question"}, globalLesson, function(b) {
+	   b.innerHTML = "Path vs URL";
+	});
+	
+	mk("p", {class:"answer"}, globalLesson, function(b) {
+	   b.innerHTML = "Path implies that the file is on your computer.  URL implies that it is a file on someone elses computer.  When you go to a URL you are essentially looking a file. That file exists in a directory, just like how the files in your computer exist in a directory.  The difference is whether it is local or remote.  When you access a website you will notice that they start with http:// while a file you open in your web browser will start with file://";
+	});
+};
 
 /*
  Created the first lesson of javaScript
@@ -694,7 +728,7 @@ function javaScriptLesson1() {
 		mk("h1",{class:"question"}, globalLesson, function(b) {
 			b.innerHTML = "Whats a document?";
 		});
-		mk("p", {class:"answer", globalLesson, function(b) {
+		mk("p", {class:"answer"}, globalLesson, function(b) {
 			b.innerHTML = "You might have noticed that we use a lot of document.write in this tutorial.  A document is a data structure that holds on to every html element and allows you to manipulate it.  The stuff in the document is what you end up seeing when you open up the web page.  Right now we are just sending plain text into the document and as a result we get...plain text in our web page.  So the words you are seeing in here is a paragraph object and somewhere in the document there is a &lt;p&gt; with this lump of text followed by a &lt;/p&gt;";
 		});
 		mk("h1", {class:"question"}, globalLesson, function(b){
