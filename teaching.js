@@ -40,13 +40,15 @@ function initContent(parent) {
 			mk("dd", null, b, function(b) {
 				var lessons = tutorial.lessons;
 				for(var j = 0; j < lessons.length; ++j)	{
-					var button = mk("input", {type:"button", value:lessons[j].text, href:"#"+globalLesson.id}, b, null);
+					var button = mk("input", {type:"button", value:lessons[j].text}, b, null);
 					var lesson_j = lessons[j];
 					if(lesson_j.hasOwnProperty("value")) {
 						button.onclick = lesson_j.value;
 					} else if(lesson_j.hasOwnProperty("file")){
 						button.onclick = function(){
+							location.hash = "#header";
 							generateSlideShowFromFile(tutorial.tutorialFolder+lesson_j.file, "Lesson " + lesson_j.text);
+							location.hash = "#"+globalLesson.id;
 						}
 					}
 				}
@@ -171,6 +173,7 @@ function httpGet(theUrl, block){
  */
 function vhdlLesson1() {
 	globalLesson.innerHTML = null;
+	location.hash = "#header";
 	var vhdlLesson1_slideshow = function(){
 		//slideShow
 		var slideshow = new DHSlideShow();
@@ -349,6 +352,7 @@ function vhdlLesson1() {
 	};
 	vhdlLesson1_slideshow();
 	vhdlLesson1_questions();
+	location.hash = "#"+globalLesson.id;
 };
 
 /*
@@ -357,6 +361,7 @@ function vhdlLesson1() {
  */
 function vhdlLesson2() { //needs completing
 	globalLesson.innerHTML = null;
+	location.hash = "#header";
 	var vhdlLesson2_slideshow = function(){
 		//slideShow
 		var slideshow = new DHSlideShow();
@@ -429,6 +434,7 @@ function vhdlLesson2() { //needs completing
 	};
 	vhdlLesson2_slideshow();
 	vhdlLesson2_questions();
+	location.hash = "#"+globalLesson.id;
 };
 
 /*
@@ -437,6 +443,7 @@ function vhdlLesson2() { //needs completing
  */
 function javaScriptLesson0() {
 	globalLesson.innerHTML = null;
+	location.hash = "#header";
 	mk("h1",null, globalLesson, function(b) {
 		b.innerHTML = "What do I need to get started?";
 	});
@@ -488,7 +495,7 @@ function javaScriptLesson0() {
 	mk("p", {class:"answer"}, globalLesson, function(b) {
 		b.innerHTML = "I prefer <a href=\"http://notepad-plus-plus.org\">NotePad++</a>. It offers syntax highlighting to help you see what you are writing and some auto-completion.  Once you have it downloaded, open NotePad++ and create a new file and save it as an HTML file.  Then open the file in your web browser.  Keep the text editor on the left half of screen and the web browser on the right side of the screen.  This is the set up that you should have before starting each tutorial";
 	});
-
+	
 	mk("h1",null, globalLesson, function(b) {
 		b.innerHTML = "What Text Editor is good for OSX?";
 	});
@@ -512,31 +519,33 @@ function javaScriptLesson0() {
 	});
 	
 	mk("h1", {class:"question"}, globalLesson, function(b) {
-	   b.innerHTML = "What was that hings you said about \"quickest way to make a web site?\"";
+		b.innerHTML = "What was that hings you said about \"quickest way to make a web site?\"";
 	});
 	
 	mk("p", {class:"answer"}, globalLesson, function(b) {
-	   b.innerHTML = "Every HTML file you create on Stypi has a rendered version.  If you create a file called \"http://code.stypi.com/l337ju1ce\", you can share the rendered version by changing the code to render. i.e. \"http://render.stypi.com/l337ju1ce\"";
+		b.innerHTML = "Every HTML file you create on Stypi has a rendered version.  If you create a file called \"http://code.stypi.com/l337ju1ce\", you can share the rendered version by changing the code to render. i.e. \"http://render.stypi.com/l337ju1ce\".";
 	});
 	
 	mk("p", {class:"answer"}, globalLesson, function(b) {
-	   b.innerHTML = "The good news is that you get a website on the web without using an a webhosting website.  The bad news is that anyone on the net may edit that page.  For the purposes of these tutorials, that should be fine.";
+		b.innerHTML = "The good news is that you get a website on the web without using an a webhosting website.  The bad news is that anyone on the net may edit that page.  For the purposes of these tutorials, that should be fine.";
 	});
 	
 	mk("h1", {class:"question"}, globalLesson, function(b) {
-	   b.innerHTML = "Path vs URL";
+		b.innerHTML = "Path vs URL";
 	});
 	
 	mk("p", {class:"answer"}, globalLesson, function(b) {
-	   b.innerHTML = "Path implies that the file is on your computer.  URL implies that it is a file on someone elses computer.  When you go to a URL you are essentially looking a file. That file exists in a directory, just like how the files in your computer exist in a directory.  The difference is whether it is local or remote.  When you access a website you will notice that they start with http:// while a file you open in your web browser will start with file://";
+		b.innerHTML = "Path implies that the file is on your computer.  URL implies that it is a file on someone elses computer.  When you go to a URL you are essentially looking at a file. That file exists in a directory, just like how the files in your computer exist in a directory.  The difference is whether it is local or remote.  When you access a website you will notice that they start with \"http://\" while a file you open in your web browser will start with \"file://\".";
 	});
+	location.hash = "#"+globalLesson.id;
 };
 
 /*
- Created the first lesson of javaScript
+ Created the first lesson of javaScript
  */
 function javaScriptLesson1() {
 	globalLesson.innerHTML = null;
+	location.hash = "#header";
 	var javaScriptLesson1_slideshow = function() {
 		makeSlideShowWithBlock(globalLesson, "Lesson 1 - Strings, Arrays & Math", function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
 			
@@ -769,6 +778,7 @@ function javaScriptLesson1() {
 	};
 	javaScriptLesson1_slideshow();
 	javaScriptLesson1_questions();
+	location.hash = "#"+globalLesson.id;
 };
 
 /**
