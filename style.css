@@ -1,6 +1,6 @@
 #tutorialNav {
-border: thin solid black;
-padding: 10px;
+	border: thin solid black;
+	padding: 10px;
 }
 
 #tableContainer {
@@ -97,12 +97,12 @@ header{
 }
 
 footer {
-  background-color: #675c47;
-  color:            #efe5d0;
-  text-align:       center;
-  padding:          15px;
-  margin: 0px 10px 10px 10px;
-  font-size:        90%;
+	background-color: #675c47;
+	color:            #efe5d0;
+	text-align:       center;
+	padding:          15px;
+	margin: 0px 10px 10px 10px;
+	font-size:        90%;
 }
 
 table {
@@ -123,6 +123,9 @@ td, th {
 }
 
 table#UCR_course_table td:nth-child(2),
+table#skillsLanguageTable td:nth-child(1),
+table#skillsLanguageTable td:nth-child(2) p,
+table#skillsLanguageTable td:nth-child(3),
 table#selfTaughtClasses td:nth-child(2),
 table#selfTaughtClasses td:nth-child(3) {
 	text-align:center;
@@ -130,7 +133,7 @@ table#selfTaughtClasses td:nth-child(3) {
 
 table#UCR_course_table td:nth-child(3),
 table#selfTaughtClasses td:nth-child(4),
-table#selfTaughtClasses td:nth-child(5),
+table#selfTaughtClasses td:nth-child(5)
 {
 	text-align:right;
 }
@@ -156,14 +159,14 @@ h1, h2, h3 {
 }
 
 a:link {
-  color:            #b76666;
-  text-decoration:  none;
-  border-bottom:    thin dotted #b76666;
+	color:            #b76666;
+	text-decoration:  none;
+	border-bottom:    thin dotted #b76666;
 }
 a:visited {
-  color:            #675c47;
-  text-decoration:  none;
-  border-bottom:    thin dotted #675c47;
+	color:            #675c47;
+	text-decoration:  none;
+	border-bottom:    thin dotted #675c47;
 }
 
 a.image {
