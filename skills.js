@@ -10,7 +10,7 @@ function initContent(parent) {
 					  <li>CodeEval</li>\
 					  <li>Project Euler</li>\
 					  </ul>", "5/5"],
-					 ["HTML5, CSS, JavaScript", "<p>This site; Especially the tutorial section.</p>", "4/5"],
+					 ["HTML5<br>CSS<br>JavaScript", "<p>This site</p>", "4/5"],
 					 ["C", "<ul>\
 					  <li>nand2tetris</li>\
 					  <li>DDR Game</li>\
