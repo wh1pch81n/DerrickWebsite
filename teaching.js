@@ -183,84 +183,86 @@ function vhdlLesson1() {
 		var header = "";
 		var comment = "";
 		
-		codeArr.push(new DHStringWithHighlight("library ieee;",0));
+		codeArr.push(new DHStringWithHighlight("LIBRARY IEEE;",0));
+		codeArr.push(new DHStringWithHighlight("USE IEEE.STD_LOGIC_1164.ALL;",0));
+		codeArr.push(new DHStringWithHighlight("",0));
 		header = "The much needed library";
-		comment = "This library allows you to write vhdl.  Always include it";
+		comment = "This library allows you to write vhdl.  Always include it.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		codeArr.push(new DHStringWithHighlight("entity first_prog is", 0));
-		codeArr.push(new DHStringWithHighlight("end entity first_prog;", 0));
+		codeArr.push(new DHStringWithHighlight("ENTITY first_prog IS", 0));
+		codeArr.push(new DHStringWithHighlight("END ENTITY first_prog;", 0));
 		codeArr.push(new DHStringWithHighlight("", 0));
 		header = "Entity identity";
-		comment = "Whats an entity?  its kinda like a function declaration or a function prototype.  What it does is let you name it and describe the parameters.  right now, there are no parameters but I've given it the name \"first_prog\"";
+		comment = "Whats an entity?  It's kinda like a function declaration or a function prototype.  What it does is let you name it and describe the parameters.  Right now, there are no parameters but I've given it the name \"first_prog.\"";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		codeArr.push(new DHStringWithHighlight("architecture implementation of first_prog is", 0));
-		codeArr.push(new DHStringWithHighlight("begin", 0));
-		codeArr.push(new DHStringWithHighlight("end architecture implementation;", 0));
-		header = "architects needed"
-		comment = "The architecture is where the entity is implemented.  I named the architecture \"implementation\" but you can name it what ever you want.  I chose to give it a name that literally describes what it is.  Which is...the implementation of first_prog <br><br>";
-		comment += "You may also wonder what begin and end are for.  begin is kinda like an open curly brace \"{\" and the end is kinda like a close curly brace \"}\"";
+		codeArr.push(new DHStringWithHighlight("ARCHITECTURE implementation OF first_prog IS", 0));
+		codeArr.push(new DHStringWithHighlight("BEGIN", 0));
+		codeArr.push(new DHStringWithHighlight("END ARCHITECTURE implementation;", 0));
+		header = "Architects needed"
+		comment = "The architecture is where the entity is implemented.  I named the architecture \"implementation\" but you can name it what ever you want.  I chose to give it a name that literally describes what it is.  Which is...the implementation of first_prog. <br><br>";
+		comment += "You may also wonder what BEGIN and END are for.  The BEGIN is kinda like an open curly brace \"{\" and the END is kinda like a close curly brace \"}\".  It encapsulates your code.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		header = "This looks a bit borning... ";
-		comment = "yeah, I know.  thats because we haven't put anything in it.  This is basically just the foundation that all VHDL modules will be written on";
+		comment = "Yeah, I know.  that's because we haven't put anything in it.  This is basically just the foundation that all VHDL modules will be written on.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		header = "see it?";
-		comment = "Notice how the each part has a begining and an ending. We say entity then the name and finish it with the entity then the name.  the same pattern can be found on architecture.  Some of these words are optional, but I highly recommend including them to keep things balanced.  When things are balanced, it looks beautiful";
+		header = "See it?";
+		comment = "Notice how the each part has a begining and an ending. We say ENTITY then the name and finish it with the ENTITY then the name.  The same pattern can be found on ARCHITECTURE.  Some of these words are optional, but I highly recommend including them to keep things balanced.  When things are balanced, it looks beautiful.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		codeArr.splice(2, 0, new DHStringWithHighlight( "&emsp; port&#40;", 1),
-					   new DHStringWithHighlight("&emsp; &emsp; parameterName1: in std_logic_vector(0 downto 0);", 1),
-					   new DHStringWithHighlight("&emsp; &emsp; returnName1: out std_logic_vector(0 downto 0)", 1),
+		codeArr.splice(4, 0, new DHStringWithHighlight( "&emsp; PORT&#40;", 1),
+					   new DHStringWithHighlight("&emsp; &emsp; parameterName1: IN STD_LOGIC_VECTOR(0 DOWNTO 0);", 1),
+					   new DHStringWithHighlight("&emsp; &emsp; returnName1: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)", 1),
 					   new DHStringWithHighlight("&emsp;&#41;;", 1));
 		
 		header = "Adding Parameters";
-		comment = "In order for you entity to be useful, it must be able to take in different arguments and give out a result";
+		comment = "In order for your entity to be useful, it must be able to take in different arguments and give out a result.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		lightOff(codeArr, [3,4]);
+		lightOff(codeArr, [5,6]);
 		
-		comment = "You must declare your parameters in between the parenthesis after the word port";
+		comment = "You must declare your parameters in between the parenthesis after the word PORT.  A parameter begins with the variable name ie \"parameterName1\" followed by a colon ie \":\" followed by the direction, followed by the data type.  If want to add another one, we must separate them with semi-colons.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		header = "parameter types";
-		comment = "Every parameter can have 3 directions: in, out, and inout<br><br>";
-		comment += "what does \"in\" mean? It means we expect it to be an input.  Outsiders are expected to insert a value into the entity's \"in\" port.  However, inside the entity, we may read the port but not change it<br><br>";
-		comment += "what does \"out\" mean? It means we expect it to be an output.   Outsiders are expected to read the value of an entity's \"out\" port.  It is like a return value.  However, inside the entity, we may set the port but not read from it";
-		lightOff(codeArr, [2,5]);
-		lightOn(codeArr, [3,4]);
+		header = "Parameter types";
+		comment = "Every parameter can have 3 directions: IN, OUT, and INOUT.<br><br>";
+		comment += "what does \"IN\" mean? It means we expect it to be an input.  Outsiders are expected to insert a value into the entity's \"IN\" argument.  However, inside the entity, we may read the parameter but not change it.<br><br>";
+		comment += "What does \"OUT\" mean? It means we expect it to be an output.   Outsiders are expected to read the value of an entity's \"OUT\" argument.  It is like a return value or getting a variable by reference (if you are familiar with C).  However, inside the entity, we may set the parameter but not read from it";
+		lightOff(codeArr, [4,7]);
+		lightOn(codeArr, [5,6]);
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		header = "what about inout?";
-		comment = "That is an advanced topic where you can treat it as both an input and an output.  If these ports were streets, the cars would crash into each other head first.  To prevent this mess we need a traffic light to delegate.  In hardware we call it a tri-state device.  This will allow us to set unused inout ports to high Z which will act as a disconnected wire.<br><br>";
-		comment += "inout ports are not used very often, but can be powerful. We shall cover the topic of inout in a future lesson.  So for now just keep it in the back of your mind and pay attention to the in and out ports";
+		header = "What about INOUT?";
+		comment = "That is an advanced topic where you can treat it as both an INPUT and an OUTPUT.  If these ports were streets, the cars would crash into each other head first.  To prevent this mess we need a traffic light to delegate.  In hardware we call it a tri-state device.  This will allow us to set unused inout ports to high Z which will act as a disconnected wire.<br><br>";
+		comment += "INOUT ports are not used very often, but can be powerful. We shall cover the topic of INOUT in a future lesson.  So for now just keep it in the back of your mind and pay attention to the IN and OUT ports";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		header = "where do i set the in or out?";
-		comment = "after the parameter name there is a colon.  add the in or out there";
+		header = "Where do I set the IN or OUT?";
+		comment = "After the parameter name there is a colon.  Add the IN or OUT there";
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		header = "Parameter Names?";
-		comment = "You must name your paremeters.  It must start with an alphabetical letter.  It can not start with a number but it CAN end with a number.  in this example I have two parameters named \"parameterName\" and \"returnName\". <br><br>";
-		comment += "You must give your parameters two different types.  As we mentioned earlier, you need to specify the direction: \"in\" or \"out\" and you also need to specify the wire type and size.  We shall almost always use an std_logic_vector.  We gave it the size of one.  Which means it holds one bit";
+		comment = "You must name your paremeters.  It must start with an alphabetical letter.  It can not start with a number but it CAN end with a number.  In this example I have two parameters named \"parameterName\" and \"returnName\". <br><br>";
+		comment += "You must give your parameters two different types.  As we mentioned earlier, you need to specify the direction: \"IN\" or \"OUT\" and you also need to specify the wire type (i.e. data type) and size.  We shall almost always use an STD_LOGIC_VECTOR.  We gave it the size of one, which means it holds one bit.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		header = "Are you down?";
-		comment = " in order to specify the size of the std_logic_vector, you need to use downto. In Computer Science, the convention is to label the bits in descending order.  The right most bit starts with zero and we count up as we go left.  That is what we mean when we say \"0 downto 0\".  we are specifying that we want a vector of size 1. and we want to label the left most bit as 0 and the right most bit as 0. <br><br>";
-		comment += "if we wanted a 4 bit std_logic_vector we would need to say \"3 downto 0\".  The left most bit would be labeled as 3 and the right most bit would be labeled as zero.";
+		comment = "In order to specify the size of the STD_LOGIC_VECTOR, you need to use DOWNTO. In Computer Science, the convention is to label the bits in descending order.  The right most bit starts with zero and we count up as we go left.  That is what we mean when we say \"0 DOWNTO 0\".  We are specifying that we want a vector of size 1 and we want to label the left most bit as 0 and the right most bit as 0. <br><br>";
+		comment += "If we wanted a 4 bit STD_LOGIC_VECTOR we would need to say \"3 DOWNTO 0\".  The left most bit would be labeled as 3 and the right most bit would be labeled as zero.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		lightOff(codeArr, [3,4]);
 		
-		codeArr.splice(10, 0, new DHStringWithHighlight("&emsp; &emsp; returnName1 &lt;&#61; parameterName1;", 1));
+		codeArr.splice(12, 0, new DHStringWithHighlight("&emsp; &emsp; returnName1 &lt;&#61; parameterName1;", 1));
 		
 		header = "Assigning values";
-		comment = "to assign a value we use \"&lt;&#61;\" which is also known as the signal assignment operator.  we are using the value of parameterName1 to set the value of returnName1";
+		comment = "To assign a value we use \"&lt;&#61;\" which is also known as the signal assignment operator.  We are using the value of parameterName1 to set the value of returnName1";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		lightOff(codeArr, [10]);
+		lightOff(codeArr, [12]);
 		
 		header = "End of Lesson";
 		comment = "read the Q and A below";
@@ -273,43 +275,43 @@ function vhdlLesson1() {
 			mk("h1", null, p, function(p) { p.innerHTML = "There Are no Stupid Questions";});
 			mk("h3", null, p, function(p) {	p.innerHTML = "How do I make a single line comment?";});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "Double dashes mean commented out code. eg \"--\" Don't ask me why they chose double dashes instead of double slashes like most languages eg \"//\".";
+				p.innerHTML = "Double dashes mean commented out code( ie \"--\"). Don't ask me why they chose double dashes instead of double slashes like most languages (ie \"//\".)";
 			});
 			mk("h3", null, p, function(p) { p.innerHTML = "How do I make multi-line comments?";});
 			mk("p", null, p, function(p) {
 				p.innerHTML = "In many programming languages the multi-line comment begins with the \"/*\" and ends with the \"*/\".  VHDL currently does not	have multi-line comments so you will just have to use multiple single line comments.";
 			});
-			mk("h3", null, p, function(p) { p.innerHTML = "whats a std_logic_vector?";});
+			mk("h3", null, p, function(p) { p.innerHTML = "What's a STD_LOGIC_VECTOR?";});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "I am assuming that you are familiar with a bit. An std_logic_vector is an array of them.  the \"(0 downto 0)\" part is how you specify how many bits there will.  In this case there will be only one";
+				p.innerHTML = "I am assuming that you are familiar with the concept of a bit. An STD_LOGIC_VECTOR is an array of them.  The \"(0 DOWNTO 0)\" part is how you specify how many bits there will.  In this case there will be only one.";
 			});
-			mk("h3", null, p, function(p) { p.innerHTML = "downto?"; });
+			mk("h3", null, p, function(p) { p.innerHTML = "DOWNTO?"; });
 			mk("p", null, p, function(p) {
-				p.innerHTML = "its the numbering direction.  the number to the right will be the index of the right most bit. the number to the left will be the index to the left most bit. so if I have an std_logic_vector(4 downto 0), it means my bits will be counted like this:";
-			});
-			mk("p", null, p, function(p) {
-				p.innerHTML = "4, 3, 2, 1, 0 -- index number <br>";
-				p.innerHTML += "1, 0, 0, 1, 1 -- bits";
+				p.innerHTML = "It's the numbering direction.  The number to the right will be the index of the right most bit. The number to the left will be the index to the left most bit. So if I have an STD_LOGIC_VECTOR(4 downto 0), it means my bits will be counted like this:";
 			});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "there is also something call \"to\" which counts it the opposite way";
+				p.innerHTML = "&emsp; 4, 3, 2, 1, 0 -- index number <br>";
+				p.innerHTML += "&emsp; 1, 0, 0, 1, 1 -- bits";
 			});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "0, 1, 2, 3, 4 -- index number <br>";
-				p.innerHTML += "1, 0, 0, 1, 1 -- bits";
+				p.innerHTML = "There is also something called \"TO\" which counts it the opposite way like this:";
 			});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "but I usually save that for vhdl arrays. Also you should notice that the bits didn't change.  Only the number label changed.  Why is this significant?  When you access an element of the std_logic_vector, the index you choose will correspond to the number label.  If my std_logic_vector(4 downto 0) is named foo and a downto is used then if I access the 3rd bit (e.g. foo(3) ) then I get the 2nd bit from the left. But if I used \"to\" (e.g. std_logic_vector(0 to 4) ) then foo(3) would correspond to the 4th bit from the left."
+				p.innerHTML = "&emsp; 0, 1, 2, 3, 4 -- index number <br>";
+				p.innerHTML += "&emsp; 1, 0, 0, 1, 1 -- bits";
 			});
-			mk("h3", null, p, function(p) { p.innerHTML = "huh? returnName1 &lt;&#61; parameterName1;"});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "in this context, the &lt;&#61; is used to indicate that the parameter is assigning a value to the return variable. Also, since the line of code was done in the concurrent region, it will happen instantaneously as opposed to sequentially."
+				p.innerHTML = "I usually save that for vhdl arrays. Also you should notice that the bits didn't move anywhere.  Only the ordering of the index numbers changed.  Why is this significant?  When you access an element of the STD_LOGIC_VECTOR, the index you choose will correspond to the bit that is at that index.  If my STD_LOGIC_VECTOR(4 DOWNTO 0) is named foo and a DOWNTO is used then if I access the 3rd bit (e.g. foo(3) ) then I get the 2nd bit from the left. But if I used \"TO\" (e.g. STD_LOGIC_VECTOR(0 to 4) ) then foo(3) would correspond to the 4th bit from the left."
 			});
-			mk("h3", null, p, function(p) { p.innerHTML = "what did we just make?";});
+			mk("h3", null, p, function(p) { p.innerHTML = "Huh? returnName1 &lt;&#61; parameterName1;"});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "Its a buffer. All it does it carry the input to the output.  Usually this has the effect of enforcing direction or keeping the a high bit high and a low bit low.";
+				p.innerHTML = "In this context, the &lt;&#61; is used to indicate that the parameter is assigning a value to the return variable. Also, since the line of code was done in the concurrent region, it will happen instantaneously as opposed to sequentially."
 			});
-			mk("h3", null, p, function(p) { p.innerHTML = "can you talk a bit more about concurrency?";});
+			mk("h3", null, p, function(p) { p.innerHTML = "What did we just make?";});
+			mk("p", null, p, function(p) {
+				p.innerHTML = "It's a buffer. All it does it carry the input to the output.  In application this has the effect of enforcing direction or keeping the high bit high and the low bit low.";
+			});
+			mk("h3", null, p, function(p) { p.innerHTML = "Can you talk a bit more about concurrency?";});
 			mk("p", null, p, function(p) {
 				p.innerHTML = "Lets say there was an entity with more parameters and return names.";
 				p.innerHTML += "our implementation would look like ....<br>";
@@ -321,31 +323,31 @@ function vhdlLesson1() {
 				p.innerHTML += "all three of those would be set at the same time as opposed to being";
 				p.innerHTML += "set one at a time from top to bottom.";
 			});
-			mk("h3", null, p, function(p) { p.innerHTML = "in and out?  sounds like a tasty fast food joint";});
+			mk("h3", null, p, function(p) { p.innerHTML = "IN and OUT?  Sounds like a tasty fast food joint";});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "in and out are the directions of the flow of electricity. When you set something as \"in\" the parameter can be read but not set. When you set it as \"out\", the opposite happens.  You can set it but you can't read it.  Much like how in software languages, you can't read from the \"return\" keyword, but you can set it.";
+				p.innerHTML = "IN and OUT are the directions of the flow of electricity. When you set something as \"IN\" the parameter can be read but not set. When you set it as \"OUT\", the opposite happens (ie You can set it but you can't read it).  Much like how in software languages, you can't read from the \"return\" keyword, but you can set it.";
 			});
 			mk("h3", null, p, function(p) { p.innerHTML = "Why do parameters need two different types?";});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "We need to specify the direction of the flow of electricity.  That can be either \"in\" or \"out\".  The second type specifies the size and type of the wire.  For most intents and purposes you may use an std_logic_vector.";
+				p.innerHTML = "We need to specify the direction of the flow of electricity.  That can be either \"IN\" or \"OUT\".  The second type specifies the size and type of the wire.  For most intents and purposes STD_LOGIC_VECTOR will suffice.";
 				p.innerHTML += "<br><br>";
-				p.innerHTML += "there are other types out there like std_logic and bit.  But I feel that in an effort to keep things more uniform we will stick with std_logic_vector's for now.  You may run into std_logic from time to time and I don't really want to stranded so I'll make a quick note about std_logic.";
+				p.innerHTML += "There are other types out there like STD_LOGIC and BIT.  But I feel that in an effort to keep things more uniform we will stick with STD_LOGIC_VECTORs for now.  You may run into STD_LOGIC from time to time and I don't really want to leave you stranded so I'll make a quick note about STD_LOGIC.";
 				p.innerHTML += "<br><br>";
-				p.innerHTML += "std_logic can hold one bit.  You may set an std_logic with either a '1' or a '0'.  (you can also set it as high-Z which looks like 'Z'.  that is a capital Z and is case sensitive).  An std_logic_vector is, you guessed it, a vector (or an array) of std_logic.  Which means you can access each std_logic in a std_logic_vector.";
+				p.innerHTML += "STD_LOGIC can hold one bit.  You may set an STD_LOGIC with either a '1' or a '0'.  (You can also set it as high-Z which looks like 'Z'.  That is a capital Z and is case sensitive).  An STD_LOGIC_VECTOR is, you guessed it, a vector (or an array) of STD_LOGIC.  Which means you can access each STD_LOGIC in a STD_LOGIC_VECTOR.";
 			});
 			
 			mk("p", {class:"code"}, p, function(p) {
-				p.innerHTML = "<span class=\"comment\">-- suppose we have 3 wires called foo, bar, and rut</span><br>";
-				p.innerHTML += "<span class=\"comment\">-- foo is an std_logic</span><br>";
-				p.innerHTML += "<span class=\"comment\">-- bar and rut are two std_logic_vectors</span><br>";
-				p.innerHTML += "foo &lt;&#61; '1'; <span class=\"comment\">-- hard code foo with high bit</span><br>";
-				p.innerHTML += "foo &lt;&#61; '0'; <span class=\"comment\">-- hard code foo with low bit</span><br>";
+				p.innerHTML = "<span class=\"comment\">-- Suppose we have 3 wires called foo, bar, and rut.</span><br>";
+				p.innerHTML += "<span class=\"comment\">-- foo is an STD_LOGIC while</span><br>";
+				p.innerHTML += "<span class=\"comment\">-- bar and rut are two STD_LOGIC_VECTORs.</span><br>";
+				p.innerHTML += "foo &lt;&#61; '1'; <span class=\"comment\">-- Hard code foo with high bit.</span><br>";
+				p.innerHTML += "foo &lt;&#61; '0'; <span class=\"comment\">-- Hard code foo with low bit.</span><br>";
 				p.innerHTML += "<br>";
-				p.innerHTML += "foo &lt;&#61; bar(3); <span class=\"comment\">-- set foo with the 3rd bit of bar.</span><br>";
-				p.innerHTML += "bar(2) &lt;&#61; foo; <span class=\"comment\">-- set 2nd bit of bar with foo</span><br>";
+				p.innerHTML += "foo &lt;&#61; bar(3); <span class=\"comment\">-- Set foo with the 3rd bit of bar.</span><br>";
+				p.innerHTML += "bar(2) &lt;&#61; foo; <span class=\"comment\">-- Set 2nd bit of bar with foo.</span><br>";
 				p.innerHTML += "<br>";
-				p.innerHTML += "bar &lt;&#61; rut; <span class=\"comment\">-- set bar with rut.  only works if they are the same size</span><br>";
-				p.innerHTML += "bar(4) &lt;&#61; rut(7); <span class=\"comment\">-- set the 4th bit of bar with the 7th bit of rut</span><br>";
+				p.innerHTML += "bar &lt;&#61; rut; <span class=\"comment\">-- Set bar with rut.  Only works if they are the same size</span><br>";
+				p.innerHTML += "bar(4) &lt;&#61; rut(7); <span class=\"comment\">-- Set the 4th bit of bar with the 7th bit of rut.</span><br>";
 			});
 			
 		});
