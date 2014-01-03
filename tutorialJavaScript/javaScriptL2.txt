@@ -104,7 +104,7 @@ window.onload = function () {
 @header
 What if I change the name?
 @comment
-If you change the name to something besides "Freddy", then it will move on to the next conditional branch.  But since that evaluates to false, it will go to the next one.  
+If you change the name to something besides "Freddy", then it will move on to the next conditional branch.  But since that evaluates to false, it will go to the next one.
 @addSlide
 @code
 window.onload = function () {
@@ -130,7 +130,7 @@ window.onload = function () {
 }
 @header
 Loops
-@comments
+@comment
 Loops are really important.  They are fundamental.  Without loops, programming would be tedious.  A loop is something that executes in a cycle.  Think of the instructions for a shampoo bottle. 
 
 1) wet
@@ -195,6 +195,8 @@ The dot allows us to call upon the power of the object.  The array is a built-in
 
 Since the array has 4 elements, the property should give us 4.
 @addSlide
+@code
+//
 @header
 Quiz time!
 @comment
@@ -224,6 +226,12 @@ window.onload = function() {
 ``document.write("<br>");
 `}
 }
+@header
+Quiz Answer
+@comment
+This is what is known as a nested for loop.  The deepest one is responsible for printing the asterisk and printing it a finite amount of times.  This for loop deals with an indivitual row.
+
+The outer for loop is responsible for printing each row and telling it how many it should print for each row.  It also adds the line break after the row has completed.
 @addSlide
 @question
 = vs ==
