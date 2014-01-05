@@ -101,7 +101,7 @@ function ProgrammingAssignmentModel() {
 	 set the problem Definition
 	 @param element the element that will the problemDefinition
 	 */
-	this.setProblemDefinition = function(element){this.divProblemDefinition = x;};
+	this.setProblemDefinition = function(element){this.divProblemDefinition = element;};
 	/**
 	 overide defult divTurnInPolicy
 	 NEEDs implementing
