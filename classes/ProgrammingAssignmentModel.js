@@ -22,20 +22,20 @@ function ProgrammingAssignmentModel() {
 	this.header;
 	this.divHeader;
 	this.divDeadline;
-	this.divCollabPolicy = mk("div", {id:this.kID_collabPolicy}, NULL, function(b) {
-		mk("h2", NULL, b, function(b) { b.innerHTML = "Collaboration Policy";});
-		mk("p", NULL, b, function(b) {
+	this.divCollabPolicy = mk("div", {id:this.kID_collabPolicy}, null, function(b) {
+		mk("h2", null, b, function(b) { b.innerHTML = "Collaboration Policy";});
+		mk("p", null, b, function(b) {
 			b.innerHTML = "You may use anything from the built-in JavaScript API. You may ask clarification question if there are ambiguous descriptions in the assignment. If the answer is already clearly stated in the specs, your answer will not be answered, but instead you will be reminded to re-read the specs.";
 		});
 	});
-	this.divTurnInPolicy = mk("div", {id:this.kID_turnInPolicy}, NULL, function(b) {
-		mk("p", NULL, b, function(b) {
+	this.divTurnInPolicy = mk("div", {id:this.kID_turnInPolicy}, null, function(b) {
+		mk("p", null, b, function(b) {
 			b.innerHTML = "Code that is turned in, must be contained in a .html file named main.html. Files of ANY other format will not be graded (e.g. main.doc, main.txt, main.js etc).";
 		});
-		mk("p", NULL, b, function(b) {
+		mk("p", null, b, function(b) {
 			b.innerHTML = "You must turn in your work via email to dho006@ucr.edu with an appropriate subject line.";
 		});
-		mk("p", NULL, b, function(b) {
+		mk("p", null, b, function(b) {
 			b.innerHTML = "Remember to include the following header information at the top of the HTML file";
 		});
 		mk("p", {id:this.kID_progHeader}, b, function(b) {
@@ -59,17 +59,17 @@ function ProgrammingAssignmentModel() {
 	/**
 	 append this object to the given element
 	 */
-	this.appendPAMTo(element){
+	this.appendPAMTo = function(element){
 		if(element){
-			element.appendChild(this.header);
-			element.appendChild(this.divHeader);
-			element.appendChild(this.divDeadline);
-			element.appendChild(this.divCollabPolicy);
-			element.appendChild(this.divTurnInPolicy);
-			element.appendChild(this.divProblemDefinition);
-			element.appendChild(this.divRubric);
+			if(this.header) {element.appendChild(this.header);}
+			if(this.divHeader) {element.appendChild(this.divHeader);}
+			if(this.divDeadline){element.appendChild(this.divDeadline);}
+			if(this.divCollabPolicy){element.appendChild(this.divCollabPolicy);}
+			if(this.divTurnInPolicy){element.appendChild(this.divTurnInPolicy);}
+			if(this.divProblemDefinition){element.appendChild(this.divProblemDefinition);}
+			if(this.divRubric){element.appendChild(this.divRubric);}
 		}
-	}
+	};
 	/**
 	 set the divRubric
 	 @param(string) rHeader the rubric header
@@ -77,20 +77,20 @@ function ProgrammingAssignmentModel() {
 	 @param(array) bPoints a list of bonus points
 	 */
 	this.setRubric = function(rHeader, points, bPoints){
-		this.divRubric = mk("div", {id:this.kID_rubric}, NULL, function(b) {
-			mk("h2", NULL, b, function(b) {
+		this.divRubric = mk("div", {id:this.kID_rubric}, null, function(b) {
+			mk("h2", null, b, function(b) {
 				b.innerHTML = rHeader;
 			});
-			mk("ul", NULL, b, function(b) {
+			mk("ul", null, b, function(b) {
 				for(var i = 0; i < points.length; ++i){
-					mk("li", NULL, b, function(b) {
+					mk("li", null, b, function(b) {
 						b.innerHTML = points[i];
 					});
 				}
 			});
-			mk("ul", NULL, b, function(b) {
+			mk("ul", null, b, function(b) {
 				for(var i = 0; i < bPoints.length; ++i){
-					mk("li", NULL, b, function(b) {
+					mk("li", null, b, function(b) {
 						b.innerHTML = bPoints[i];
 					});
 				}
@@ -113,9 +113,9 @@ function ProgrammingAssignmentModel() {
 	 @param(string) p
 	 */
 	this.overrideDivCollaborationPolicy = function(title, p) {
-		this.divCollabPolicy = mk("div", {id:this.kID_collabPolicy}, NULL, function(b) {
-			mk("h2", NULL, b, function(b) { b.innerHTML = title;});
-			mk("p", NULL, b, function(b) {
+		this.divCollabPolicy = mk("div", {id:this.kID_collabPolicy}, null, function(b) {
+			mk("h2", null, b, function(b) { b.innerHTML = title;});
+			mk("p", null, b, function(b) {
 				b.innerHTML = p;
 			});
 		});
@@ -125,8 +125,8 @@ function ProgrammingAssignmentModel() {
 	 @param(string) s innerHTML of p
 	 */
 	this.setDivDeadline = function(s) {
-		this.divDeadline = mk("div",{id:this.kID_divDeadline}, NULL, function(b){
-			mk("p",NULL, b, function(b) {
+		this.divDeadline = mk("div",{id:this.kID_divDeadline}, null, function(b){
+			mk("p",null, b, function(b) {
 				b.innerHTML = s;
 			});
 		});
@@ -134,9 +134,9 @@ function ProgrammingAssignmentModel() {
 	/** sets the divHeader
 	 @param(string) s the innerHTML of the H1 element
 	 */
-	this.setDivheader = function(s){
-		this.divHeader = mk("div",{id:this.kID_divHeader}, NULL, function(b) {
-			mk("h1",NULL, b, function(b){
+	this.setDivHeader = function(s){
+		this.divHeader = mk("div",{id:this.kID_divHeader}, null, function(b) {
+			mk("h1",null, b, function(b){
 				b.innerHTML = s;
 			});
 		});
@@ -146,14 +146,14 @@ function ProgrammingAssignmentModel() {
 	 @param(string) title the name of the new title
 	 */
 	this.setTitle = function(title) {
-		document.getElementsByTagName("title").innerHTML = title;
+		document.getElementsByTagName("title")[0].innerHTML = title;
 	};
 	/**
 	 Will set the small top header
 	 @param(string) s the innerHTML that will be in header element
 	 */
 	this.setHeader = function(s){
-		this.header = mk("header",NULL,NULL,function(b){
+		this.header = mk("header",null,null,function(b){
 			b.innerHTML = s;
 		});
 	};
