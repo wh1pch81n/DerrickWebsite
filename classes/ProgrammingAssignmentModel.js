@@ -146,7 +146,7 @@ function ProgrammingAssignmentModel() {
 	 @param(string) title the name of the new title
 	 */
 	this.setTitle = function(title) {
-		document.getElementsByTagname("title").innerHTML = title;
+		document.getElementsByTagName("title").innerHTML = title;
 	};
 	/**
 	 Will set the small top header
