@@ -22,12 +22,7 @@ function ProgrammingAssignmentModel() {
 	this.header;
 	this.divHeader;
 	this.divDeadline;
-	this.divCollabPolicy = mk("div", {id:this.kID_collabPolicy()}, null, function(b) {
-		mk("h2", null, b, function(b) { b.innerHTML = "Collaboration Policy";});
-		mk("p", null, b, function(b) {
-			b.innerHTML = "You may use anything from the built-in JavaScript API. You may ask clarification question if there are ambiguous descriptions in the assignment. If the answer is already clearly stated in the specs, your answer will not be answered, but instead you will be reminded to re-read the specs.";
-		});
-	});
+	this.divCollabPolicy = _divCollabPolicy(this);
 	this.divTurnInPolicy = _divTurnInPolicy(this);
 	this.divProblemDefinition;
 	this.divRubric;
@@ -74,6 +69,7 @@ function ProgrammingAssignmentModel() {
 			});
 		});
 	};
+	
 	/**
 	 set the problem Definition
 	 @param element the element that will the problemDefinition
@@ -136,6 +132,9 @@ function ProgrammingAssignmentModel() {
 	};
 };
 
+/**
+ The default turn in policy
+ */
 function _divTurnInPolicy(obj){
 	return mk("div", {id:obj.kID_turnInPolicy()}, null, function(b) {
 		mk("p", null, b, function(b) {
@@ -163,5 +162,16 @@ function _divTurnInPolicy(obj){
 	});
 }
 
+/**
+ The default Collaboration Policy
+ */
+function _divCollabPolicy(obj){
+	return mk("div", {id:obj.kID_collabPolicy()}, null, function(b) {
+		mk("h2", null, b, function(b) { b.innerHTML = "Collaboration Policy";});
+		mk("p", null, b, function(b) {
+			b.innerHTML = "You may use anything from the built-in JavaScript API. You may ask clarification question if there are ambiguous descriptions in the assignment. If the answer is already clearly stated in the specs, your answer will not be answered, but instead you will be reminded to re-read the specs.";
+		});
+	});
+}
 
 
