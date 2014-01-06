@@ -1,0 +1,73 @@
+/**Elements*/
+body {
+	font-family: serif;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 30px;
+	background-color: beige;
+}
+
+header {
+	font-size: 10px;
+	margin: 0;
+	padding:0;
+	color: gray;
+}
+
+canvas {
+	border: thin black solid;
+}
+
+/**Id's*/
+#PAheader{
+	color: purple;
+}
+
+#PAdeadline {
+	border:thick dotted red;
+	margin: 20px;
+	text-align: center;
+}
+
+#PAcollaborationPolicy {
+	border-top: thin black solid;
+	border-bottom: thin black solid;
+}
+
+#PAturnInPolicy {
+	
+}
+
+
+#PAprogramHeader {
+	font-family: monospace;
+	padding: 20px;
+	font-size: 12px;
+	line-height: 100%;
+}
+
+#PAproblemDefinition {
+	
+}
+
+#PAprogExample {
+	
+}
+
+#PArubric {
+	background-color: #CCCFBA;
+}
+
+/**Classes*/
+.PAcode {
+	font-family: monospace;
+	background-color: #C5CF81;
+	margin-left: 20px;
+	padding: 10px;
+	font-size: 12px;
+	line-height: 100%;
+}
+
+.PAhtmlCode {
+	color: grey;
+}
