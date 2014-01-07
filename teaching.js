@@ -11,16 +11,17 @@ var globalTutorialArr =
 tutorial:"VHDL",
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
-				 {value:vhdlLesson1, text:"1 - First Program"},
-				 {file:"vhdlL2.txt", text:"2 - Muliple Ports"}
+	{value:vhdlLesson1, text:"1 - First Program"},
+	{file:"vhdlL2.txt", text:"2 - Muliple Ports"}
 				 ]
 },{
 tutorial:"JavaScript",
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
-				 {value:javaScriptLesson0, text:"0 - Get Set Up"},
-				 {value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
-				 {file:"javaScriptL2.txt", text:"2 - ifs & loops"},
+	{value:javaScriptLesson0, text:"0 - Get Set Up"},
+	{value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
+	{file:"javaScriptL2.txt", text:"2 - ifs & loops"},
+	{href:"javaScriptPA1.html", text:"Programming Assignment 1"}
 				 //{file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
 				 ]
 }];
@@ -46,13 +47,18 @@ function initContent(parent) {
 					var lesson_j = lessons[j];
 					if(lesson_j.hasOwnProperty("value")) {
 						button.onclick = lesson_j.value;
-					} else if(lesson_j.hasOwnProperty("file")){
+					} else if(lesson_j.hasOwnProperty("file")) {
+						button.file = tutorialFolder+lesson_j.file;
 						button.onclick = function(){
 							location.hash = "#header";
-							var file = tutorialFolder+lesson_j.file;
-							generateSlideShowFromFile(file, "Lesson " + lesson_j.text);
+							generateSlideShowFromFile(this.file, "Lesson " + this.value);
 							location.hash = "#"+globalLesson.id;
-						}
+						};
+					} else if(lesson_j.hasOwnProperty("href")) {
+						button.file = tutorialFolder+lesson_j.href;
+						button.onclick = function() {
+							window.open(this.file);
+						};
 					}
 				}
 			});
