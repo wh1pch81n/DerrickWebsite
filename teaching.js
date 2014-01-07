@@ -12,7 +12,7 @@ tutorial:"VHDL",
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
 	{value:vhdlLesson1, text:"1 - First Program"},
-	{file:"vhdlL2.txt", text:"2 - Muliple Ports"}
+	{file:"vhdlL2.txt", text:"2 - Multiple Ports"}
 				 ]
 },{
 tutorial:"JavaScript",
