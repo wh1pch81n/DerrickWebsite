@@ -24,8 +24,6 @@ window.onload = function(){
 			b.innerHTML = "A Working Example";
 		});
 		
-		
-		
 		//Click this button To start the program
 		var button = mk("input", {type:"button", value:"Click to run sample"}, b, null);
 		button.onclick = function(){

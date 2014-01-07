@@ -54,11 +54,12 @@ canvas {
 }
 
 #PAproblemDefinition {
-
+	
 }
 
 #PAprogExample {
-	
+	border: thin solid black;
+	padding: 10px;
 }
 
 #PArubric {
