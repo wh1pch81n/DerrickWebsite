@@ -1,0 +1,312 @@
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+
+END ARCHITECTURE implementation;
+@header
+The Bare-Bones
+@comment
+Let's start Lesson 2 by reviewing the bare-bones VHDL program.
+
+We have the ENTITY and the ARCHITECTURE with nothing useful in it.
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+~`a0_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+~`s0_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+`s0_o <= a0_i;
+END ARCHITECTURE implementation;
+@header
+Add something useful
+@comment
+You have seen this before in the previous lesson.  This is a buffer that takes the input "a0_i" and sends the value to "s0_o".
+
+But can we do more?
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+~`a0_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+~`a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+~`a2_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+~`a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+``s0_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+`s0_o <= a0_i;
+END ARCHITECTURE implementation;
+@header
+Let's add more inputs!
+@comment
+I added a few more inputs.
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+``a0_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a2_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+~`s0_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+~`s1_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+~`s2_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+~`s3_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+`s0_o <= a0_i;
+END ARCHITECTURE implementation;
+@header
+Let's add more outputs!
+@comment
+I added more outputs.
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+``a0_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a2_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+``s0_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s1_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s2_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s3_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+~s0_o <= a0_i;
+~s1_o <= a1_i;
+~s2_o <= a2_i;
+~s3_o <= a3_i;
+END ARCHITECTURE implementation;
+@header
+Connect four
+@comment
+When we connect these guys we get an even larger buffer than before.  It can handle 4 bits.
+
+Because the RHS and the LHS have the same type (ie STD_LOGIC_VECTOR), we can assign the RHS to the LHS (ie <=) without any additional bells  or whistles.
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+``a0_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a2_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+``s0_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s1_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s2_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s3_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+~s0_o(0 downto 0) <= a0_i(0 downto 0);
+~s1_o(0 downto 0) <= a1_i(0 downto 0);
+~s2_o(0 downto 0) <= a2_i(0 downto 0);
+~s3_o(0 downto 0) <= a3_i(0 downto 0);
+END ARCHITECTURE implementation;
+@header
+Explicit setting
+@comment
+We can specify the exact bits we want to send over.  This is unneccessary in this context, but I thing it is good to know.
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+``a0_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a2_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+``s0_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s1_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s2_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s3_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+~s0_o <= a0_i;
+~s1_o <= a1_i;
+~s2_o <= a2_i;
+~s3_o <= a3_i;
+END ARCHITECTURE implementation;
+@header
+Remove
+@comment
+No more Bells and Whistles.
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+``a0_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a2_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+``a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+``s0_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s1_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s2_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s3_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+`s0_o <= a0_i;
+`s1_o <= a1_i;
+`s2_o <= a2_i;
+`s3_o <= a3_i;
+END ARCHITECTURE implementation;
+@header
+Eliminate redundancy
+@comment
+All of those STD_LOGIC_VECTOR's are repeated again and again.  Isn't there an easier way?
+
+Yes.
+
+How? Commas ... please see the next slide
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+~`a0_i,
+~`a1_i,
+~`a2_i,
+~`a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+``s0_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s1_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s2_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+``s3_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+`s0_o <= a0_i;
+`s1_o <= a1_i;
+`s2_o <= a2_i;
+`s3_o <= a3_i;
+END ARCHITECTURE implementation;
+@header
+Eureka!
+@comment
+The inputs a0_i, a1_i, a2_i and a3_i are all STD_LOGIC_VECTOR.
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+``a0_i,
+``a1_i,
+``a2_i,
+``a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+~`s0_o, s1_o, s2_o, s3_o
+````: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+`s0_o <= a0_i;
+`s1_o <= a1_i;
+`s2_o <= a2_i;
+`s3_o <= a3_i;
+END ARCHITECTURE implementation;
+@header
+What white space?
+@comment
+I shortened the all the outputs.  White space doesn't matter, therefore I can put the names in one line.
+@addSlide
+@code
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY buffer4v IS
+`PORT(
+``a0_i,
+``a1_i,
+``a2_i,
+``a3_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+``s0_o, s1_o, s2_o, s3_o
+````: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+`);
+END ENTITY buffer4v;
+
+ARCHITECTURE implementation  OF buffer4v is
+BEGIN
+`s0_o <= a0_i;
+`s1_o <= a1_i;
+`s2_o <= a2_i;
+`s3_o <= a3_i;
+END ARCHITECTURE implementation;
+@header
+End
+@comment
+End.
+@addSlide
+@question
+How come in the Port thingie the last parameter doesn't end with a semicolon (ie ";")?
+@answer
+In most languages such as C++ the parameters are separated by commas (ie ",").  In VHDL the parameters in the PORT are separated by semicolons (ie ";").
+@end
