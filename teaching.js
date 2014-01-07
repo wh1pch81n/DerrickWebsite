@@ -40,6 +40,7 @@ function initContent(parent) {
 			});
 			mk("dd", null, b, function(b) {
 				var lessons = tutorial.lessons;
+				var tutorialFolder = tutorial.tutorialFolder;
 				for(var j = 0; j < lessons.length; ++j)	{
 					var button = mk("input", {type:"button", value:lessons[j].text}, b, null);
 					var lesson_j = lessons[j];
@@ -48,7 +49,8 @@ function initContent(parent) {
 					} else if(lesson_j.hasOwnProperty("file")){
 						button.onclick = function(){
 							location.hash = "#header";
-							generateSlideShowFromFile(tutorial.tutorialFolder+lesson_j.file, "Lesson " + lesson_j.text);
+							var file = tutorialFolder+lesson_j.file;
+							generateSlideShowFromFile(file, "Lesson " + lesson_j.text);
 							location.hash = "#"+globalLesson.id;
 						}
 					}
