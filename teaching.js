@@ -9,19 +9,20 @@ var globalLesson = null;
 var globalTutorialArr =
 [{
 tutorial:"VHDL",
+tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
-		 {value:vhdlLesson1, text:"1 - First Program"},
-		 //{value:vhdlLesson2, text:"VHDL Lesson 2"}
-		 ]
+				 {value:vhdlLesson1, text:"1 - First Program"},
+				 {file:"vhdlL2.txt", text:"2 - Muliple Ports"}
+				 ]
 },{
 tutorial:"JavaScript",
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
-		 {value:javaScriptLesson0, text:"0 - Get Set Up"},
-		 {value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
-		 {file:"javaScriptL2.txt", text:"2 - ifs & loops"},
-		 //{file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
-		 ]
+				 {value:javaScriptLesson0, text:"0 - Get Set Up"},
+				 {value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
+				 {file:"javaScriptL2.txt", text:"2 - ifs & loops"},
+				 //{file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
+				 ]
 }];
 /**
  initializes the content of the page.
@@ -214,9 +215,9 @@ function vhdlLesson1() {
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		codeArr.splice(4, 0, new DHStringWithHighlight( "&emsp; PORT&#40;", 1),
-					   new DHStringWithHighlight("&emsp; &emsp; parameterName1: IN STD_LOGIC_VECTOR(0 DOWNTO 0);", 1),
-					   new DHStringWithHighlight("&emsp; &emsp; returnName1: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)", 1),
-					   new DHStringWithHighlight("&emsp;&#41;;", 1));
+									 new DHStringWithHighlight("&emsp; &emsp; parameterName1: IN STD_LOGIC_VECTOR(0 DOWNTO 0);", 1),
+									 new DHStringWithHighlight("&emsp; &emsp; returnName1: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)", 1),
+									 new DHStringWithHighlight("&emsp;&#41;;", 1));
 		
 		header = "Adding Parameters";
 		comment = "In order for your entity to be useful, it must be able to take in different arguments and give out a result.";
@@ -652,67 +653,67 @@ function javaScriptLesson1() {
 			slideshowAppend();
 			//
 			codeArrSplice(6, 7, [
-								 sp(sp(sp(codeComment("//one line break")))),
-								 sp(sp(sp("document.write(\"" + tag("br") + "\");"))),
-								 sp(sp(sp(codeComment("//two line breaks")))),
-								 sp(sp(sp("document.write(\"" + tag("br") + tag("br") + "\");")))
-								 ]);
+													 sp(sp(sp(codeComment("//one line break")))),
+													 sp(sp(sp("document.write(\"" + tag("br") + "\");"))),
+													 sp(sp(sp(codeComment("//two line breaks")))),
+													 sp(sp(sp("document.write(\"" + tag("br") + tag("br") + "\");")))
+													 ]);
 			lon([7,9]);
 			setHeader("Claustrophobic");
 			setComment("If you tested the code in the previous slide, you may have noticed that the words all continued on to the right.  You might have had to scroll all the way to the right to see all of it.  Or if your browser is good it would end up wrapping.  This may or may not be what you are aiming for.  But my personal preference is to make things more readable, so we should add line breaks");
 			slideshowAppend();
 			
 			codeArrSplice(6, 4, [
-								 sp(sp(sp("document.write(\"Hello World"+ tag("br") + "\");" ))),
-								 sp(sp(sp("document.write(\"This is how I can write on the page"+ tag("br") + "\");" ))),
-								 sp(sp(sp("document.write(\"I call it the wall"+ tag("br") + "\");" ))),
-								 sp(sp(sp("document.write(\"walls are fun to write on"+ tag("br") + "\");"))),
-								 sp(sp(sp("document.write(\"is that it?"+ tag("br") + "\");"))),
-								 sp(sp(sp("document.write(\"ok, bored... lets do something else"+ tag("br") + "\");")))
-								 ]);
+													 sp(sp(sp("document.write(\"Hello World"+ tag("br") + "\");" ))),
+													 sp(sp(sp("document.write(\"This is how I can write on the page"+ tag("br") + "\");" ))),
+													 sp(sp(sp("document.write(\"I call it the wall"+ tag("br") + "\");" ))),
+													 sp(sp(sp("document.write(\"walls are fun to write on"+ tag("br") + "\");"))),
+													 sp(sp(sp("document.write(\"is that it?"+ tag("br") + "\");"))),
+													 sp(sp(sp("document.write(\"ok, bored... lets do something else"+ tag("br") + "\");")))
+													 ]);
 			lon([6,7,8,9,10,11]);
 			setHeader("much better");
 			setComment("This is the same as two slides ago.  But we have added line breaks so that it will write words on the line below it.");
 			slideshowAppend();
 			//
 			codeArrSplice(6, 6, [
-								 sp(sp(sp("document.write(12345 + \"&lt;br&gt;\");" ))),
-								 sp(sp(sp("document.write(3.14156789 + \"&lt;br&gt;\");" ))),
-								 ]);
+													 sp(sp(sp("document.write(12345 + \"&lt;br&gt;\");" ))),
+													 sp(sp(sp("document.write(3.14156789 + \"&lt;br&gt;\");" ))),
+													 ]);
 			lon([6,7]);
 			setHeader("What can you do besides strings?");
 			setComment("You can print numbers.  Javascript is a typeless system, so if you give it a string or a number, the compiler will convert it to something more appropriate.  When you use document.write() it is turning that number into the string version so that it can be displayed properly.<BR><BR>The first one prints the string version of an integer and the second one prints a string version of a floating point number.");
 			slideshowAppend();
 			//
 			codeArrSplice(6, 2, [
-								 sp(sp(sp("document.write(1+2+ \"&lt;br&gt;\");" + codeComment("//adding.  Will print 3")))),
-								 sp(sp(sp("document.write(777-1+ \"&lt;br&gt;\");" + codeComment("//subtracting.  Will print 776")))),
-								 sp(sp(sp("document.write(10 * 5+ \"&lt;br&gt;\");" + codeComment("//multiplication. Will print 50")))),
-								 sp(sp(sp("document.write(50 / 2+ \"&lt;br&gt;\");" + codeComment("//division. Will print 25")))),
-								 ]);
+													 sp(sp(sp("document.write(1+2+ \"&lt;br&gt;\");" + codeComment("//adding.  Will print 3")))),
+													 sp(sp(sp("document.write(777-1+ \"&lt;br&gt;\");" + codeComment("//subtracting.  Will print 776")))),
+													 sp(sp(sp("document.write(10 * 5+ \"&lt;br&gt;\");" + codeComment("//multiplication. Will print 50")))),
+													 sp(sp(sp("document.write(50 / 2+ \"&lt;br&gt;\");" + codeComment("//division. Will print 25")))),
+													 ]);
 			lon([6,7,8,9]);
 			setHeader("Can we do Math?");
 			setComment("Arithmetic operations are built in to the language.  Addition, Subtraction, Multiplication, and Division are some of the built-in math functions.");
 			slideshowAppend();
 			//
 			codeArrSplice(6, 4, [
-								 sp(sp(sp("var variable_name = \"This is a String\";"))),
-								 sp(sp(sp("var variable_number123 = 25;"))),
-								 sp(sp(sp("var str = \"Another string\";")))
-								 ]);
+													 sp(sp(sp("var variable_name = \"This is a String\";"))),
+													 sp(sp(sp("var variable_number123 = 25;"))),
+													 sp(sp(sp("var str = \"Another string\";")))
+													 ]);
 			lon([6,7,8]);
 			setHeader("Can store those values somewhere?");
 			setComment("Introducing, variables.  To make a variable you must enter the \"var\" keyword followed by a variable name.  The variable name can be anything that starts with a letter from the alphabet.  It may not start with a number, however it can end with numbers.  You can name variables beginning with non-alphabetic characters, but I personally do not like them and prefer to stick with variable names with alphabetic characters.<BR><BR> The equal sign i.e. \"=\" is called an assignment operator.  The assignment operator takes the stuff to the right of it (up to by not including the semicolon) and saves that into the variable on the left. <BR><BR> Javascript is a very weakly type language so you don't have to tell it the variable type.  That kind of information assumed.  And most of the time it is correct.");
 			slideshowAppend();
 			//
 			codeArrSplice(6, 3, [
-								 sp(sp(sp(codeComment("// we can add strings together.")))),
-								 sp(sp(sp("var name = \"Bob\";"))),
-								 sp(sp(sp("var age = 37;"))),
-								 sp(sp(sp("var profile = \"Name: \" + name + \"&lt;br&gt;\" + \"Age: \" + age + \"&lt;br&gt;\";"))),
-								 sp(sp(sp(codeComment("//print the string")))),
-								 sp(sp(sp("document.write(profile)")))
-								 ]);
+													 sp(sp(sp(codeComment("// we can add strings together.")))),
+													 sp(sp(sp("var name = \"Bob\";"))),
+													 sp(sp(sp("var age = 37;"))),
+													 sp(sp(sp("var profile = \"Name: \" + name + \"&lt;br&gt;\" + \"Age: \" + age + \"&lt;br&gt;\";"))),
+													 sp(sp(sp(codeComment("//print the string")))),
+													 sp(sp(sp("document.write(profile)")))
+													 ]);
 			lon([7,8,9,11]);
 			setHeader("Adding strings?");
 			setComment("When a string is added to a string, it concatenates it into one big string.  Pretend the plus symbols are pieces of tape and we are taping the string together.  When it is all connected a copy of that will be saved into the variable.<BR><BR>But wait, you can add a string to a number! In this particular case, the string has priority so the number will get transformed into a string version of the number and then it will get taped to the string");
@@ -720,15 +721,15 @@ function javaScriptLesson1() {
 			
 			//
 			codeArrSplice(6, 6, [
-								 sp(sp(sp("var an_array_of_str = [\"this\", \"is\", \"an\", \"array\", \"of\", \"words\"];"))),
-								 sp(sp(sp("document.write(\"word at index 0:\" + an_array_of_str[0] + \"&lt;br&gt;\");"))),
-								 sp(sp(sp("document.write(\"word at index 3:\" + an_array_of_str[3] + \"&lt;br&gt;\");"))),
-								 sp(sp(sp("document.write(\"word at the end:\" + an_array_of_str[an_array_of_str.length-1] + \"&lt;br&gt;\");"))),
-								 sp(sp(sp("document.write(\"&lt;br&gt;\");"))),
-								 sp(sp(sp("var an_array_of_num =[1, 5, 7, 9, 3];"))),
-								 sp(sp(sp("document.write(\"number at index 0:\" + an_array_of_str[0] + \"&lt;br&gt;\");"))),
-								 sp(sp(sp("document.write(\"number at index 4:\" + an_array_of_str[4] + \"&lt;br&gt;\");")))
-								 ]);
+													 sp(sp(sp("var an_array_of_str = [\"this\", \"is\", \"an\", \"array\", \"of\", \"words\"];"))),
+													 sp(sp(sp("document.write(\"word at index 0:\" + an_array_of_str[0] + \"&lt;br&gt;\");"))),
+													 sp(sp(sp("document.write(\"word at index 3:\" + an_array_of_str[3] + \"&lt;br&gt;\");"))),
+													 sp(sp(sp("document.write(\"word at the end:\" + an_array_of_str[an_array_of_str.length-1] + \"&lt;br&gt;\");"))),
+													 sp(sp(sp("document.write(\"&lt;br&gt;\");"))),
+													 sp(sp(sp("var an_array_of_num =[1, 5, 7, 9, 3];"))),
+													 sp(sp(sp("document.write(\"number at index 0:\" + an_array_of_str[0] + \"&lt;br&gt;\");"))),
+													 sp(sp(sp("document.write(\"number at index 4:\" + an_array_of_str[4] + \"&lt;br&gt;\");")))
+													 ]);
 			lon([7,8,9,11]);
 			setHeader("Ok, Strings and Numbers are Cool.  Anything else?");
 			setComment("There is anther basic data type called an array.  An array is a set of contiguous data that can be access by offering an index.  You can think of an array as a book with sheets of paper as pages.  Each page is numbered.  If you send the array name then you're sending you the book.  But if I give you the book and the page number then you will be able to see what is on that page.  We usually call that page number the index of an array.  The first element of the array is always 0.  The second index is 1.  the third index is 2 and so on and so forth.");
