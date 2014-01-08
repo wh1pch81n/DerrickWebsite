@@ -275,7 +275,7 @@ END ARCHITECTURE implementation;
 @header
 What white space?
 @comment
-I shortened the all the outputs.  White space doesn't matter, therefore I can put the names in one line.
+I shortened all the outputs.  White space doesn't matter, therefore I can put the names in one line.
 @addSlide
 @code
 LIBRARY IEEE;
