@@ -12,7 +12,7 @@ window.onload = function(){
 		mk("p", null, b, function(b){
 			b.innerHTML = "For this assignment you will write a program that asks the user for information about the initial (x,y) position, and (x,y) velocity of an object.  Given this information, the program will then print out the (x,y) position of the object at 0, 1, 2, 3, and 4 seconds.  You will use the following equation to compute the position over time:";
 		});
-		mk("p", null, b, function(b){
+		mk("blockquote", null, b, function(b){
 			b.innerHTML = "x_pos = x_init + (x_vel * t) + 0.5 * (x_acc * t * t)";
 		});
 		mk("p", null, b, function(b){
@@ -69,16 +69,16 @@ window.onload = function(){
 		
 	}));
 	PAM.setRubric("Rubric: (10 pts total",
-								["2 pts: Correctly declares constants and variables",
-								 "2 pts: Gets input",
-								 "2 pts: Calculations use variables for time, position and velocity, but constants for acceleration",
-								 "2 pts: Correct output",
-								 "1 pt:  Header info (provide correct info specified above)",
-								 "0.5 pt: Compiles without errors",
-								 "0.125 pts: - Good variable names",
-								 "0.125 pts: - Proper indentation",
-								 "0.125 pts: - Good comments",
-								 "0.125 pts: - No line wraps"],
+								["2 pts: Correctly declares constants and variables.",
+								 "2 pts: Gets input.",
+								 "2 pts: Calculations use variables for time, position and velocity, but constants for acceleration.",
+								 "2 pts: Correct output.",
+								 "1 pt:  Header info (provide correct info specified above).",
+								 "0.5 pt: Compiles without errors.",
+								 "0.125 pts: - Good variable names.",
+								 "0.125 pts: - Proper indentation.",
+								 "0.125 pts: - Good comments.",
+								 "0.125 pts: - No line wraps."],
 								["Bonus +1 Point: Figure out how to use a \"for loop\" to increment the time variable."]);
 	PAM.appendPAMTo(body);
 }

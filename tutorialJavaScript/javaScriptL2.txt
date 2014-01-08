@@ -12,9 +12,9 @@
 @header
 A refresher
 @comment
-Believe it or not, this html stuff is going going to be pretty much the same for the next few lesson.  Because of that fact I will eliminate it from the lesson.  After all, this is a JavaScript tutorial.  I don't want to clutter up the knowledge by adding extra code.
+Believe it or not, this html stuff is going to be pretty much the same for the next few lessons.  Because of that fact I will eliminate it from the lesson.  After all, this is a JavaScript tutorial.  I don't want to clutter up the knowledge by adding extra code.
 
-After this Slide we will focus on just the JavaScript.  Remember that the Javascript should be placed between the <script> and </script>.
+After this slide we will focus on just the JavaScript.  Remember that the JavaScript should be placed between the <script> and </script>.
 @addSlide
 @code
 window.onload = function () {
@@ -50,9 +50,9 @@ window.onload = function main() {
 @header
 More Clear
 @comment
-Everyone is a little different when it comes to formatting.  But I like to keep one command per line.  But only if it makes sense to do so.  The code to the left makes it much easier to tell variables appart from the string.
+Everyone is a little different when it comes to formatting.  I like to keep one command per line, but only if it makes sense to do so.  The code to the left makes it much easier to tell variables apart from the string.
 
-If for some reason you need to put a lot of stuff in one line and it seem unavoidable, you should consider making a function.  Functions will be introduced in a future lesson.
+If for some reason you need to put a lot of stuff in one line and it seems unavoidable, you should consider making a function.  Functions will be introduced in a future lesson.
 @addSlide
 @code
 window.onload = function () {
@@ -66,11 +66,11 @@ window.onload = function () {
 `}
 }
 @header
-decisions decisions...
+Decisions decisions...
 @comment
 Things would get boring pretty fast if we couldn't make decisions.  In programming, we can make decisions using a conditional branch.  See the words "if" and "else"?  those are keywords that initiate the conditional branch.
 
-The stuff after the keyword is a left parenthesis and a right parenthesis.  The stuff between those two things is evaluated for truth.  A double equal sign determines if the the object to the left and right are equivalent.  In this case we are asking the conditional branch if the variable called name contains the name "Freddy" or not.
+The stuff after the keyword is a left parenthesis and a right parenthesis.  The stuff between those two things are evaluated for truth.  A double equal sign determines if the object to the left and right are equivalent.  In this case we are asking the conditional branch if the variable called "name" contains the name "Freddy" or not.
 
 So what happens when we determine if its true or false?
 @addSlide
@@ -84,7 +84,7 @@ window.onload = function () {
 `} else  {
 ``document.write("Who are you?" + "<br>");
 `}
-window.onload = function main() {
+}
 @header
 So what does happen?
 @comment
@@ -104,7 +104,7 @@ window.onload = function () {
 @header
 What if I change the name?
 @comment
-If you change the name to something besides "Freddy", then it will move on to the next conditional branch.  But since that evaluates to false, it will go to the next one.
+If you change the name to something besides "Freddy", then it will move on to the next conditional branch.  But since that is false as well, it will go to the next one.
 @addSlide
 @code
 window.onload = function () {
@@ -125,7 +125,7 @@ The "else" branch is optional.  If all the above conditions fail, then it will p
 @code
 window.onload = function () {
 ~for( var i = 0; i < 10; ++i) {
-``document.write("I am king henry the 8th i am! <br> second verse same as the first!<br>");
+``document.write("I am king henry the 8th I am! <br> Second verse same as the first!<br>");
 `}
 }
 @header
@@ -142,7 +142,7 @@ The number 4 tells us to go back to step 1.
 
 A loop is kind of like a conditional branch.  It is a branch that repeats the stuff between the curly braces until, the condition evaluates to false.
 
-Between the two parenthesis we have 3 sections divided by a semi-colon.  The first one declares a variable called i and gives it the value 0.  The second one is the conditional part.  It asks if i is less than 10.  If it is true, then execute the code between the curly braces.  After you execute the code in the curly braces, we perform the third item, ++i.  The ++i means add one to i.  if i is still less than 10, we repeat the code between the curly braces until i is greater or equal to 10.
+Between the two parenthesis we have 3 sections divided by a semi-colon.  The first one declares a variable called "i" and gives it the value 0.  The second one is the conditional part.  It asks if "i" is less than 10.  If it is true, then execute the code between the curly braces.  After you execute the code in the curly braces, we perform the third item, "++i".  The "++i" means add one to "i".  If i is still less than 10, we repeat the code between the curly braces until "i" is greater or equal to 10.
 @addSlide
 @code
 window.onload = function () {
@@ -187,11 +187,11 @@ window.onload = function () {
 @header
 array.length
 @comment
-You can use a for loop to print out the contents of an array.  Just like any for loop, it is important to know when to stop looping.  We are comparing i with array.length.  But what is array.length?
+You can use a for loop to print out the contents of an array.  Just like any for loop, it is important to know when to stop looping.  We are comparing "i" with "array.length", but what is array.length?
 
-By the way, its pronounced array dot length.
+By the way, it's pronounced array dot length.
 
-The dot allows us to call upon the power of the object.  The array is a built-in object and like most objects it contains properties that can hold values.  When we call array.length we are asking for the number of elements in the array.
+The dot allows us to call upon the power of the object.  The array is a built-in object and like most objects it contains properties that can hold values.  When we call "array.length" we are asking for the number of elements in the array.
 
 Since the array has 4 elements, the property should give us 4.
 @addSlide
@@ -206,7 +206,7 @@ If we have a variable called "numOfRows" then The triangle should be as big as t
 
 e.g.
 
-if numOfRows is 5 then the output should look something like this:
+If numOfRows is 5 then the output should look something like this:
 
 *
 **
@@ -236,21 +236,24 @@ The outer for loop is responsible for printing each row and telling it how many 
 @question
 = vs ==
 @answer
-= 
-is an assignment operator.  It gives the variable to the left of it value of the right.
-== 
-is an equality operator.  If the left and right are equal, it will return true.  Otherwise its false.
+The "=" is an assignment operator.  It gives the variable to the left of it value of the right.
+
+The "==" is an equality operator.  If the left and right are equal, it will return true.  Otherwise it's false.
 @question
 What else can I use besides ==?
 @answer
-> 
-if the left is greater than the right, then return true. Otherwise false.
-<
-if the left is less than the right, then return true. Otherwise false.
-<=
-if the left is less than or equal to the right, then return true. Otherwise false
->=
-if the left is greater or equal to the right, then return true. Otherwise false
-!=
-if the left is NOT equal to the right, then return true. Otherwise false
+The ">" means: 
+If the left is greater than the right, then return true. Otherwise false.
+
+The "<" means:
+If the left is less than the right, then return true. Otherwise false.
+
+The "<=" means:
+If the left is less than or equal to the right, then return true. Otherwise false.
+
+The ">=" means:
+If the left is greater or equal to the right, then return true. Otherwise false.
+
+The "!=" means:
+If the left is NOT equal to the right, then return true. Otherwise false.
 @end

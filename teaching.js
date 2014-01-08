@@ -233,24 +233,24 @@ function vhdlLesson1() {
 		
 		lightOff(codeArr, [5,6]);
 		
-		comment = "You must declare your parameters in between the parenthesis after the word PORT.  A parameter begins with the variable name ie \"parameterName1\" followed by a colon ie \":\" followed by the direction, followed by the data type.  If want to add another one, we must separate them with semi-colons.";
+		comment = "You must declare your parameters in between the parenthesis after the word PORT.  A parameter begins with the variable name ie \"parameterName1\" followed by a colon ie \":\" followed by the direction, followed by the data type.  If you want to add another one, we must separate them with semi-colons.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		header = "Parameter types";
 		comment = "Every parameter can have 3 directions: IN, OUT, and INOUT.<br><br>";
-		comment += "what does \"IN\" mean? It means we expect it to be an input.  Outsiders are expected to insert a value into the entity's \"IN\" argument.  However, inside the entity, we may read the parameter but not change it.<br><br>";
-		comment += "What does \"OUT\" mean? It means we expect it to be an output.   Outsiders are expected to read the value of an entity's \"OUT\" argument.  It is like a return value or getting a variable by reference (if you are familiar with C).  However, inside the entity, we may set the parameter but not read from it";
+		comment += "What does \"IN\" mean? It means we expect it to be an input.  Outsiders are expected to insert a value into the entity's \"IN\" argument.  However, inside the entity, we may read the parameter but not change it.<br><br>";
+		comment += "What does \"OUT\" mean? It means we expect it to be an output.   Outsiders are expected to read the value of an entity's \"OUT\" argument.  It is like a return value or getting a variable by reference (if you are familiar with C).  However, inside the entity, we may set the parameter but not read from it.";
 		lightOff(codeArr, [4,7]);
 		lightOn(codeArr, [5,6]);
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		header = "What about INOUT?";
 		comment = "That is an advanced topic where you can treat it as both an INPUT and an OUTPUT.  If these ports were streets, the cars would crash into each other head first.  To prevent this mess we need a traffic light to delegate.  In hardware we call it a tri-state device.  This will allow us to set unused inout ports to high Z which will act as a disconnected wire.<br><br>";
-		comment += "INOUT ports are not used very often, but can be powerful. We shall cover the topic of INOUT in a future lesson.  So for now just keep it in the back of your mind and pay attention to the IN and OUT ports";
+		comment += "INOUT ports are not used very often, but can be powerful. We shall cover the topic of INOUT in a future lesson.  So for now just keep it in the back of your mind and pay attention to the IN and OUT ports.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		header = "Where do I set the IN or OUT?";
-		comment = "After the parameter name there is a colon.  Add the IN or OUT there";
+		comment = "After the parameter name there is a colon.  Add the IN or OUT there.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		header = "Parameter Names?";
@@ -263,12 +263,12 @@ function vhdlLesson1() {
 		comment += "If we wanted a 4 bit STD_LOGIC_VECTOR we would need to say \"3 DOWNTO 0\".  The left most bit would be labeled as 3 and the right most bit would be labeled as zero.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
-		lightOff(codeArr, [3,4]);
+		lightOff(codeArr, [5,6]);
 		
 		codeArr.splice(12, 0, new DHStringWithHighlight("&emsp; &emsp; returnName1 &lt;&#61; parameterName1;", 1));
 		
 		header = "Assigning values";
-		comment = "To assign a value we use \"&lt;&#61;\" which is also known as the signal assignment operator.  We are using the value of parameterName1 to set the value of returnName1";
+		comment = "To assign a value we use \"&lt;&#61;\" which is also known as the signal assignment operator.  We are using the value of parameterName1 to set the value of returnName1.";
 		slideshow.appendSlide(codeArr, header, comment);
 		
 		lightOff(codeArr, [12]);
@@ -284,7 +284,7 @@ function vhdlLesson1() {
 			mk("h1", null, p, function(p) { p.innerHTML = "There Are no Stupid Questions";});
 			mk("h3", null, p, function(p) {	p.innerHTML = "How do I make a single line comment?";});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "Double dashes mean commented out code( ie \"--\"). Don't ask me why they chose double dashes instead of double slashes like most languages (ie \"//\".)";
+				p.innerHTML = "Double dashes mean commented out code( ie \"--\"). Don't ask me why they chose double dashes instead of double slashes like most languages (ie \"//\").";
 			});
 			mk("h3", null, p, function(p) { p.innerHTML = "How do I make multi-line comments?";});
 			mk("p", null, p, function(p) {
@@ -292,7 +292,7 @@ function vhdlLesson1() {
 			});
 			mk("h3", null, p, function(p) { p.innerHTML = "What's a STD_LOGIC_VECTOR?";});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "I am assuming that you are familiar with the concept of a bit. An STD_LOGIC_VECTOR is an array of them.  The \"(0 DOWNTO 0)\" part is how you specify how many bits there will.  In this case there will be only one.";
+				p.innerHTML = "I am assuming that you are familiar with the concept of a bit. An STD_LOGIC_VECTOR is an array of them.  The \"(0 DOWNTO 0)\" part is how you specify how many bits there will be.  In this case there will be only one.";
 			});
 			mk("h3", null, p, function(p) { p.innerHTML = "DOWNTO?"; });
 			mk("p", null, p, function(p) {
@@ -322,14 +322,14 @@ function vhdlLesson1() {
 			});
 			mk("h3", null, p, function(p) { p.innerHTML = "Can you talk a bit more about concurrency?";});
 			mk("p", null, p, function(p) {
-				p.innerHTML = "Lets say there was an entity with more parameters and return names.";
-				p.innerHTML += "our implementation would look like ....<br>";
+				p.innerHTML = "Lets say there was an entity with more parameters and return names. ";
+				p.innerHTML += "Our implementation would look like ....<br>";
 				p.innerHTML += "<br>";
 				p.innerHTML += "returnName1 &lt;&#61; parameterName1;<br>";
 				p.innerHTML += "returnName2 &lt;&#61; parameterName2;<br>";
 				p.innerHTML += "returnName3 &lt;&#61; parameterName3;<br>";
 				p.innerHTML += "<br>";
-				p.innerHTML += "all three of those would be set at the same time as opposed to being";
+				p.innerHTML += "All three would be set at the same time as opposed to being ";
 				p.innerHTML += "set one at a time from top to bottom.";
 			});
 			mk("h3", null, p, function(p) { p.innerHTML = "IN and OUT?  Sounds like a tasty fast food joint";});
@@ -363,88 +363,6 @@ function vhdlLesson1() {
 	};
 	vhdlLesson1_slideshow();
 	vhdlLesson1_questions();
-	location.hash = "#"+globalLesson.id;
-};
-
-/*
- A snub
- May be removed in the near future
- */
-function vhdlLesson2() { //needs completing
-	globalLesson.innerHTML = null;
-	location.hash = "#header";
-	var vhdlLesson2_slideshow = function(){
-		//slideShow
-		var slideshow = new DHSlideShow();
-		slideshow.init(globalLesson.id, "Lesson 2: Lecture Slides");
-		
-		var codeArr = [];
-		var header = "";
-		var comment = "";
-		
-		codeArr.push(new DHStringWithHighlight("this is code", 0));
-		codeArr.push(new DHStringWithHighlight("highlighted", 1));
-		header = "splendid header";
-		comment = "wonderful comment";
-		slideshow.appendSlide(codeArr, header, comment);
-		
-		
-		codeArr.push(new DHStringWithHighlight("filo", 0));
-		codeArr.push(new DHStringWithHighlight("piccolo", 0));
-		header = "dragonball";
-		comment = "gohan";
-		slideshow.appendSlide(codeArr, header, comment);
-		
-		slideshow.goToSlide(0);
-	};
-	var vhdlLesson2_questions = function() {
-		mk("h1", null, globalLesson, function(b) {
-			b.innerHTML = "recap";
-		});
-		mk("p", null, globalLesson, function(b) {
-			b.innerHTML = "Last time we went into making a simple one bit buffer.  This was to show you the basic codes that you will need in order to write with vhdl.  You learned about how entities are just like function declarations which just show what parameters.  You learned that we use architectures to implement the entity.";
-		});
-		mk("h1", null, globalLesson, function(b) {
-			b.innerHTML = "more parameters";
-		});
-		mk("p", null, globalLesson, function(b) {
-			b.innerHTML = "Just like in Software programs, you can have a function with infinite number of parameters.  In this lession you will learn how to add more parameters to your buffer.  The end result is a 4 bit buffer.";
-		});
-		mk("div", {class:"code"}, globalLesson, function(b) {
-			mk("blockquote", null,b, function(b) {
-				b.innerHTML = "library IEEE;<br>";
-				b.innerHTML += "use IEEE.STD_LOGIC_1164.ALL;<br>";
-				b.innerHTML += "<br>";
-				b.innerHTML += "entity buffer_4 is<br>";
-				b.innerHTML += "&emsp;port(<br>";
-				b.innerHTML += "&emsp;<span class=\"comment\">-- four inputs added</span><br>";
-				b.innerHTML += "&emsp;&emsp;a1: in std_logic_vector(0 downto 0);<br>";
-				b.innerHTML += "&emsp;&emsp;a2: in std_logic_vector(0 downto 0);<br>";
-				b.innerHTML += "&emsp;&emsp;a3: in std_logic_vector(0 downto 0);<br>";
-				b.innerHTML += "&emsp;&emsp;a4: in std_logic_vector(0 downto 0);<br>";
-				b.innerHTML += "&emsp;<span class=\"comment\">-- four outputs added</span><br>";
-				b.innerHTML += "&emsp;&emsp;s1: out std_logic_vector(0 downto 0);<br>";
-				b.innerHTML += "&emsp;&emsp;s2: out std_logic_vector(0 downto 0);<br>";
-				b.innerHTML += "&emsp;&emsp;s3: out std_logic_vector(0 downto 0);<br>";
-				b.innerHTML += "&emsp;&emsp;s4: out std_logic_vector(0 downto 0)<br>";
-				b.innerHTML += "&emsp;);<br>";
-				b.innerHTML += "end buffer_4;<br>";
-				b.innerHTML += "<br>";
-				b.innerHTML += "architecture Behavioral of buffer_4 is<br>";
-				b.innerHTML += "begin<br>";
-				b.innerHTML += "&emsp;s1(0) &lt;&#61; a1(0); <span class=\"comment\">-- nothing new here.  just assigning values</span><br>";
-				b.innerHTML += "&emsp;s2(0) &lt;&#61; a2(0);<br>";
-				b.innerHTML += "&emsp;s3(0) &lt;&#61; a3(0);<br>";
-				b.innerHTML += "&emsp;s4(0) &lt;&#61; a4(0);<br>";
-				b.innerHTML += "end Behavioral;<br>";
-				b.innerHTML += "<span class=\"comment\">-- remember that \"Behavioral\" is just the name of the architecture.</span><br>";
-				b.innerHTML += "<span class=\"comment\">-- Last time I named it \"implementation\" to make it sound more like</span><br>";
-				b.innerHTML += "<span class=\"comment\">-- english.  But you can name it what ever you want.</span><br>";
-			});
-		});
-	};
-	vhdlLesson2_slideshow();
-	vhdlLesson2_questions();
 	location.hash = "#"+globalLesson.id;
 };
 
@@ -598,7 +516,7 @@ function javaScriptLesson1() {
 			codeArrAppend(tag("/html"));
 			lon([4,5]);
 			setHeader("mind over body");
-			setComment("The body is usually where a lot of the action happens.  But since we are talking about JavaScript, we won't be using html to add stuff in here.  We will use the power of javaScript to make things and make things happen");
+			setComment("The body is usually where a lot of the action happens.  But since we are talking about JavaScript, we won't be using html to add stuff in here.  We will use the power of javaScript to make things and make things happen.");
 			slideshowAppend();
 			//
 			flush();
@@ -613,7 +531,7 @@ function javaScriptLesson1() {
 			codeArrAppend(tag("/html"));
 			lon([3,4]);
 			setHeader("meta and script");
-			setComment("The meta tag is used to explicitly say that we should use utf-8 encoding.  The script tags will be the home of our javascript");
+			setComment("The meta tag is used to explicitly say that we should use utf-8 encoding.  The script tags will be the home of our javascript.");
 			slideshowAppend();
 			//
 			flush();
@@ -631,7 +549,7 @@ function javaScriptLesson1() {
 			codeArrAppend(tag("/html"));
 			lon([5,6]);
 			setHeader("main function");
-			setComment("The window.onload is a property that expects a function pointer or a function block.  When the browser is done parsing the html page, it will call window.onload as a function which will then perform the code you see to the right of the assignment operator all the way down to the right curly brace and semi-colon. <br><br> If you are familiar with C or C++ you would call this the main function because it is the first function that gets run");
+			setComment("The window.onload is a property that expects a function pointer or a function block.  When the browser is done parsing the html page, it will call window.onload as a function which will then perform the code you see to the right of the assignment operator all the way down to the right curly brace and semi-colon. <br><br> If you are familiar with C or C++ you would call this the main function because it is the first function that gets run.");
 			slideshowAppend();
 			
 			//
@@ -668,7 +586,7 @@ function javaScriptLesson1() {
 													 ]);
 			lon([7,9]);
 			setHeader("Claustrophobic");
-			setComment("If you tested the code in the previous slide, you may have noticed that the words all continued on to the right.  You might have had to scroll all the way to the right to see all of it.  Or if your browser is good it would end up wrapping.  This may or may not be what you are aiming for.  But my personal preference is to make things more readable, so we should add line breaks");
+			setComment("If you tested the code in the previous slide, you may have noticed that the words all continued on to the right.  You might have had to scroll all the way to the right to see all of it.  Or if your browser is good it would end up wrapping.  This may or may not be what you are aiming for.  But my personal preference is to make things more readable, so we should add line breaks.");
 			slideshowAppend();
 			
 			codeArrSplice(6, 4, [
@@ -711,7 +629,7 @@ function javaScriptLesson1() {
 													 ]);
 			lon([6,7,8]);
 			setHeader("Can store those values somewhere?");
-			setComment("Introducing, variables.  To make a variable you must enter the \"var\" keyword followed by a variable name.  The variable name can be anything that starts with a letter from the alphabet.  It may not start with a number, however it can end with numbers.  You can name variables beginning with non-alphabetic characters, but I personally do not like them and prefer to stick with variable names with alphabetic characters.<BR><BR> The equal sign i.e. \"=\" is called an assignment operator.  The assignment operator takes the stuff to the right of it (up to by not including the semicolon) and saves that into the variable on the left. <BR><BR> Javascript is a very weakly type language so you don't have to tell it the variable type.  That kind of information assumed.  And most of the time it is correct.");
+			setComment("Introducing, variables.  To make a variable you must enter the \"var\" keyword followed by a variable name.  The variable name can be anything that starts with a letter from the alphabet.  It may not start with a number, however it can end with numbers.  You can name variables beginning with non-alphabetic characters, but I personally do not like them and prefer to stick with variable names with alphabetic characters.<BR><BR> The equal sign i.e. \"=\" is called an assignment operator.  The assignment operator takes the stuff to the right of it (up to by not including the semicolon) and saves that into the variable on the left. <BR><BR> Javascript is a very weakly typed language so you don't have to tell it the variable type.  That kind of information assumed.  And most of the time it is correct.");
 			slideshowAppend();
 			//
 			codeArrSplice(6, 3, [
@@ -724,7 +642,7 @@ function javaScriptLesson1() {
 													 ]);
 			lon([7,8,9,11]);
 			setHeader("Adding strings?");
-			setComment("When a string is added to a string, it concatenates it into one big string.  Pretend the plus symbols are pieces of tape and we are taping the string together.  When it is all connected a copy of that will be saved into the variable.<BR><BR>But wait, you can add a string to a number! In this particular case, the string has priority so the number will get transformed into a string version of the number and then it will get taped to the string");
+			setComment("When a string is added to a string, it concatenates it into one big string.  Pretend the plus symbols are pieces of tape and we are taping the string together.  When it is all connected a copy of that will be saved into the variable.<BR><BR>But wait, you can add a string to a number! In this particular case, the string has priority so the number will get transformed into a string version of the number and then it will get taped to the string.");
 			slideshowAppend();
 			
 			//
@@ -740,7 +658,7 @@ function javaScriptLesson1() {
 													 ]);
 			lon([7,8,9,11]);
 			setHeader("Ok, Strings and Numbers are Cool.  Anything else?");
-			setComment("There is anther basic data type called an array.  An array is a set of contiguous data that can be access by offering an index.  You can think of an array as a book with sheets of paper as pages.  Each page is numbered.  If you send the array name then you're sending you the book.  But if I give you the book and the page number then you will be able to see what is on that page.  We usually call that page number the index of an array.  The first element of the array is always 0.  The second index is 1.  the third index is 2 and so on and so forth.");
+			setComment("There is anther basic data type called an array.  An array is a set of contiguous data that can be accessed by offering it an index.  You can think of an array as a book with sheets of paper as pages.  Each page is numbered.  If you send the array name then you're sending you the book.  But if I give you the book and the page number then you will be able to see what is on that particular page.  We usually call that page number the index of an array.  The first element of the array is always 0.  The second index is 1.  the third index is 2 and so on and so forth.");
 			slideshowAppend();
 		});
 	};
@@ -781,10 +699,10 @@ function javaScriptLesson1() {
 		});
 		mk("p", {class:"answer"}, globalLesson, function(b){
 			b.innerHTML = "When you want to view the first element in the array, you do something like this:";
-			b.innerHTML = "<br><br>";
-			b.innerHTML = "array[0];";
-			b.innerHTML = "<br><br>";
-			b.innerHTML = "But why?  That number is the offset from the beginning of the array.  If the offset is 0 then we are looking at the very beginning.  If the offset is 5 then we are looking 5 elements below the initial element.";
+			b.innerHTML += "<br><br>";
+			b.innerHTML += "array[0];";
+			b.innerHTML += "<br><br>";
+			b.innerHTML += "But why?  That number is the offset from the beginning of the array.  If the offset is 0 then we are looking at the very beginning.  If the offset is 5 then we are looking 5 elements below the initial element.";
 		});
 	};
 	javaScriptLesson1_slideshow();
