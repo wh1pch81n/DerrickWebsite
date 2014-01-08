@@ -138,24 +138,24 @@ function ProgrammingAssignmentModel() {
 function _divTurnInPolicy(obj){
 	return mk("div", {id:obj.kID_turnInPolicy()}, null, function(b) {
 		mk("p", null, b, function(b) {
-			b.innerHTML = "Code that is turned in, must be contained in a .html file named main.html. Files of ANY other format will not be graded (e.g. main.doc, main.txt, main.js etc).";
+			b.innerHTML = "Code that is turned in, must be contained in a \".html file\" named \"main.html\". Files of ANY other format will not be graded (e.g. main.doc, main.txt, main.js etc).";
 		});
 		mk("p", null, b, function(b) {
 			b.innerHTML = "You must turn in your work via email to dho006@ucr.edu with an appropriate subject line.";
 		});
 		mk("p", null, b, function(b) {
-			b.innerHTML = "Remember to include the following header information at the top of the HTML file";
+			b.innerHTML = "Remember to include the following header information at the top of the HTML file:";
 		});
 		mk("p", {id:obj.kID_progHeader()}, b, function(b) {
-			b.innerHTML = "&lt;!--\
-			//course: cs10<br>\
+			b.innerHTML = "&lt;!--<br>\
+			// Course: CS10<br>\
 			//<br>\
-			//Assignment #: ... (ie assignment 1,2,3, etc.)<br>\
+			// Assignment #: ... (ie assignment 1,2,3, etc.)<br>\
 			//<br>\
-			// Last Name: Enter your LAST (family) name here (eg, Doe)<br>\
-			// First Name: Enter your First (given) name here (eg, John)<br>\
+			// Last Name: Enter your LAST name here (eg, Doe)<br>\
+			// First Name: Enter your FIRST name here (eg, John)<br>\
 			//<br>\
-			// Email address: enter your email address here (eg, jdoe@gmail.com)<br>\
+			// Email address: Enter your email address here (eg, jdoe@gmail.com)<br>\
 			//\==================================================================<br>\
 			--&gt;";
 		});
@@ -169,7 +169,7 @@ function _divCollabPolicy(obj){
 	return mk("div", {id:obj.kID_collabPolicy()}, null, function(b) {
 		mk("h2", null, b, function(b) { b.innerHTML = "Collaboration Policy";});
 		mk("p", null, b, function(b) {
-			b.innerHTML = "You may use anything from the built-in JavaScript API. You may ask clarification question if there are ambiguous descriptions in the assignment. If the answer is already clearly stated in the specs, your answer will not be answered, but instead you will be reminded to re-read the specs.";
+			b.innerHTML = "You may use anything from the built-in JavaScript API. You may ask clarification questions if there are ambiguous descriptions in the assignment. If the answer is already clearly stated in the specs, your answer will not be answered. Instead, you will be reminded to re-read the specs.";
 		});
 	});
 }
