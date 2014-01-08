@@ -153,7 +153,7 @@ END ARCHITECTURE implementation;
 @header
 Explicit setting
 @comment
-We can specify the exact bits we want to send over.  This is unneccessary in this context, but I thing it is good to know.
+We can specify the exact bits we want to send over.  This is unneccessary in this context, but I think it is good to know.
 @addSlide
 @code
 LIBRARY IEEE;
