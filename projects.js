@@ -39,7 +39,7 @@ function initContent(parent) {
 	tableCaption = "Toy Projects";
 	tableData2d = [
 								 ["Name", "Brief", "Repository"],
-								 ["<a target=\"_blank\" href=\"games/MineSweeper.html\">Minesweeper</a>", "The classic game of Minesweeper", "<a target=\"_blank\" href=\"\">1</a>"]
+								 ["<a target=\"_blank\" href=\"games/MineSweeper.html\">Minesweeper</a>", "The classic game of Minesweeper", "<a target=\"_blank\" href=\"https://github.com/wh1pch81n/DerrickWebsite/blob/master/games/MineSweeper.html\">1</a>"]
 								 ];
 	parent.appendChild(makeTable(tableID, tableCaption, tableData2d));
 };
