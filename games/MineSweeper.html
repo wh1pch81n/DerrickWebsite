@@ -1,0 +1,472 @@
+<!doctype html>
+<html>
+	<head>
+		<title>MineSweeper Game</title>
+		<script>
+			window.onload = function(){
+				var body = document.getElementsByTagName("body")[0];
+				createGUI(body);
+				doNewGame();
+			};
+		//constants
+		function kID_GUI() {return "MS_GUI";};
+		function kID_header(){return "MS_header";};
+		function kID_footer(){return "MS_footer";};
+		function kID_newGameButton(){return "MS_newGameButton";};
+		function kID_validationButton(){return "MS_validationButton";};
+		function kID_cheatButton(){return "MS_cheatButton";};
+		function kID_divmineField(){return "MS_divMineField";};
+		function kID_mineField(){return "MS_mineField";};
+		function kID_mineFieldTR(){return "MS_mineFieldTR";};
+		function kID_mineFieldTD(){return "MS_mineFieldTD";};
+		
+		function kID_width(){return "MS_width";};
+		function kID_height(){return "MS_height";};
+		function kID_numBombs(){return "MS_numBombs";};
+		
+		function kID_maxWidthValue(){return 35};
+		function kID_maxHeightValue(){return 35};
+		function kID_maxNumBombsValue(){return 64;};
+		
+		function kID_minWidthValue(){return 8};
+		function kID_minHeightValue(){return 8};
+		function kID_minNumBombsValue(){return 10;};
+		
+		function kID_defaultWidthValue(){return 8};
+		function kID_defaultHeightValue(){return 8};
+		function kID_defaultNumBombsValue(){return 10;};
+		
+		//Mine states
+		function kClass_MS_mystery(){return "MS_mystery";}; //user never click
+		function kClass_MS_solved(){return "MS_solved";}; //clicked and survived
+		function kClass_MS_cheat(){return "MS_cheat";}; //cheat shows the mine
+		function kClass_MS_dead(){return "MS_dead";}; //exploded bomb
+		function kClass_MS_flag(){return "MS_flag";}; //flag
+		
+		//tools
+		function kID_tools(){return "MS_tools";};
+		function kID_clickTool(){return "MS_clickTool";};
+		function kID_flagTool(){return "MS_clickTtool";};
+		
+		//array of mines
+		var __arrMines = [];
+		var __width = currWidth();
+		var __height = currHeight();
+		var __numMines = currNumMines();
+		function getArrMines(){return __arrMines;};
+		
+		function currWidth() {
+			var num = parseInt(document.getElementById(kID_width()).value);
+			if(num < kID_minWidthValue()) num = kID_minWidthValue();
+			else if(num > kID_maxWidthValue())num = kID_maxWidthValue();
+			return num;
+		};
+		function currHeight() {
+			var num = parseInt(document.getElementById(kID_height()).value);
+			if(num < kID_minHeightValue()) num = kID_minHeightValue();
+			else if(num > kID_maxHeightValue())num = kID_maxHeightValue();
+			return num;
+		};
+		function currNumMines() {
+			var num = parseInt(document.getElementById(kID_numBombs()).value);
+			if(num < kID_minNumBombsValue()) num = kID_minNumBombsValue();
+			else if(num > kID_maxNumBombsValue())num = kID_maxNumBombsValue();
+			return num;
+		};
+		
+		/**
+		 can set mine at specified coordinates.
+		 @param x the x coordinate
+		 @param y the y coordinate
+		 @param block a block pointer with one param.  This param is a reference to the mine
+		 */
+		function setMineAtCoord(x,y,block){
+			if(x < 0 || x >= __width) return;
+			if(y < 0 || y >= __height) return;
+			block(__arrMines[x + y*__width]);
+		};
+		
+		function addMineObject(mine){
+			__arrMines.push(mine);
+		};
+		
+		/**
+		 returns true if this node is a mine.  False otherwise
+		 */
+		function checkNode(x,y){
+			if(x < 0 || x >= __width) return false;
+			if(y < 0 || y >= __height) return false;
+			var mine = getArrMines()[x + y*__width];
+			if(mine.getAttribute("isMine") === "true") return true;
+			
+			return false;
+		};
+		
+		/**
+		 The current node will be show the adjecent mines.  If it is zero it will
+		 repeate itself on the node around it.
+		 @param x coordinate
+		 @param y coordinate
+		 */
+		function numAdjMines(x,y) {
+			if(x < 0 || x >= __width) return;
+			if(y < 0 || y >= __height) return;
+			var mine = getArrMines()[x + y*__width];
+			if(mine.getAttribute("class") === kClass_MS_solved()) return;
+			var adjecentMines = 0;
+			
+			if(checkNode(x+1, y)) adjecentMines++;
+			if(checkNode(x-1, y)) adjecentMines++;
+			if(checkNode(x, y+1)) adjecentMines++;
+			if(checkNode(x, y-1)) adjecentMines++;
+			
+			if(checkNode(x+1, y+1)) adjecentMines++;
+			if(checkNode(x-1, y+1)) adjecentMines++;
+			if(checkNode(x+1, y-1)) adjecentMines++;
+			if(checkNode(x-1, y-1)) adjecentMines++;
+			
+			mine.innerHTML = adjecentMines;
+			mine.setAttribute("class", kClass_MS_solved());
+			
+			if(adjecentMines < 1){
+				numAdjMines(x+1, y); //right
+				numAdjMines(x-1, y); //left
+				numAdjMines(x, y+1); //up
+				numAdjMines(x, y-1); //down
+				
+				numAdjMines(x-1,y+1); // tl
+				numAdjMines(x+1,y+1); // tr
+				numAdjMines(x-1,y-1); // bl
+				numAdjMines(x+1,y-1); // br
+			}
+		};
+		
+		/**
+		 handle the mine at the coordinates.
+		 @param x coordinate
+		 @param y coordinate
+		 */
+		function clickedMine(x,y) {
+			var mine = getArrMines()[x + y*__width];
+			
+			var selectTool = document.getElementById(kID_tools());
+			var index = selectTool.selectedIndex;
+			var tool = selectTool[index].value;
+			
+			if(tool === kID_clickTool()) {
+				if(mine.getAttribute("isMine") === "false") {
+					numAdjMines(x,y);
+				} else if(mine.getAttribute("isMine") === "true")  {
+					doLostGame();
+				}
+			} else {
+				if(mine.getAttribute("class") !== kClass_MS_solved()) {
+					mine.setAttribute("class", kClass_MS_flag());
+					mine.innerHTML = "F";
+				}
+			}
+		};
+		</script>
+		<script>
+			function createGUI(parent){
+				createHeader(parent);
+				mk("div", {id:kID_divmineField()}, parent, null);
+				createOptions(parent);
+			};
+		
+		function createOptions(parent){
+			mk("div",{id:kID_footer()}, parent, function(b){
+				 mk("label",{for:kID_tools()},b, function(b){
+						b.innerHTML = "Mouse Tool";
+						});
+				 mk("select",{id:kID_tools(), name:kID_tools()},b, function(b){
+						mk("option", {value:kID_clickTool(), selected:"selected"}, b, function(b){
+							 b.innerHTML = "Click Tool";
+							 });
+						mk("option", {value:kID_flagTool()}, b, function(b){
+							 b.innerHTML = "Flag Tool";
+							 });
+						});
+				 mk("br", null, b,null);
+				 mk("label",{for:kID_width()},b, function(b){
+						b.innerHTML = "Width [" + kID_minWidthValue() + "," + kID_maxWidthValue() + "]" ;
+						});
+				 mk("input",{id:kID_width(),type:"number",min:kID_minWidthValue(),max:kID_maxWidthValue(),value:kID_defaultWidthValue()},b,null);
+				 mk("br", null, b,null);
+				 mk("label",{for:kID_height()},b, function(b){
+						b.innerHTML = "Height [" + kID_minHeightValue() + "," + kID_maxHeightValue() + "]";
+						});
+				 mk("input",{id:kID_height(),type:"number",min:kID_minHeightValue(),max:kID_maxHeightValue(),value:kID_defaultHeightValue()},b,null);
+				 mk("br", null, b,null);
+				 mk("label",{for:kID_numBombs()},b, function(b){
+						b.innerHTML = "Number of Bombs [" + kID_minNumBombsValue() + "," + kID_maxNumBombsValue() + "]";
+						});
+				 mk("input",{id:kID_numBombs(),type:"number",min:kID_minNumBombsValue(),max:kID_maxNumBombsValue(),value:kID_defaultNumBombsValue()},b,null);
+				 });
+		};
+		
+		function createHeader(parent){
+			mk("div",{id:kID_header()},parent,function(b){
+				 mk("span",{id:kID_newGameButton()}, b, function(b){
+						b.innerHTML = "New Game";
+						b.onclick = doNewGame;
+						});
+				 mk("span",{id:kID_validationButton()}, b, function(b){
+						b.innerHTML = "Validate";
+						b.onclick = doValidate;
+						});
+				 mk("span",{id:kID_cheatButton()}, b, function(b){
+						b.innerHTML = "Cheat";
+						b.onclick = doCheat;
+						});
+				 });
+		};
+		
+		function createMineField(parent){
+			parent.innerHTML = null;
+			mk("table",{class:kID_mineField()}, parent, function(b){
+				 mk("caption",null, b, function(b){
+						b.innerHTML = "The Mine Field";
+						});
+				 for(var y = 0; y < __height; ++y){
+				 mk("tr",{class:kID_mineFieldTR()}, b,function(b){
+						for(var x = 0; x < __width; ++x){
+						mk("td",null, b, function(b){
+							 b.setAttribute("x", x);
+							 b.setAttribute("y", y);
+							 addMineObject(b);
+							 });
+						}
+						});
+				 }
+				 });
+		};
+		</script>
+		<script>
+			function doLostGame() {
+				for(var i = 0;i < __width * __height; ++i){
+					var mine = getArrMines()[i];
+					mine.onclick = null;
+					if(mine.getAttribute("isMine") === "true"){
+						mine.setAttribute("class", kClass_MS_dead());
+						mine.innerHTML = "X";
+					}
+				}
+				window.setTimeout(function() {//give message after the delay
+													alert("You lost Game");
+													}, 500);
+			};
+		
+		function doNewGame(){
+			__width = currWidth();
+			__height = currHeight();
+			__numMines = currNumMines();
+			__arrMines = [];
+			createMineField(document.getElementById(kID_divmineField()));
+			
+			alert("New Game "+__width + "x" + __height + " with " + __numMines + " bombs" );
+				
+			//default mines
+			for(var y = 0; y < __height; ++y){
+				for(var x = 0; x < __width; ++x){
+					setMineAtCoord(x,y,function(b){
+												 b.setAttribute("isMine", "false");
+												 b.setAttribute("class", kClass_MS_mystery());
+												 b.innerHTML = "?";
+												 
+												 var mx = parseInt(b.getAttribute("x"));
+												 var my = parseInt(b.getAttribute("y"));
+												 b.onclick = function(){
+												 clickedMine(mx, my);
+												 };
+												 
+												 });
+				}
+			}
+			
+			//add mines at random places
+			for(var i = 0;i < __numMines;){
+				var index = Math.floor(Math.random() * (__width * __height));
+				var mine = getArrMines()[index];
+				if(mine.getAttribute("isMine") === "false"){
+					mine.setAttribute("isMine", "true");
+					++i;
+				}
+			}
+		};
+		
+		function doValidate(){
+			for(var i = 0;i < __width * __height; ++i){
+				var mine = getArrMines()[i];
+				if(mine.getAttribute("isMine") === "true"){
+					if(mine.getAttribute("class") === kClass_MS_dead()){
+						alert("Can't validate if your dead");
+						return;
+					}
+				}
+			}
+			for(var i = 0;i < __width * __height; ++i){
+				var mine = getArrMines()[i];
+				if(mine.getAttribute("isMine") === "false"){
+					if(mine.getAttribute("class") === kClass_MS_mystery()){
+						alert("Non-mines still exists");
+						return;
+					}
+				}
+			}
+			alert("You Won!");
+			for(var i = 0;i < __width * __height; ++i){
+				var mine = getArrMines()[i];
+				mine.onclick = null;
+			}
+		};
+		
+		function doCheat(){
+			alert("Cheat");
+			for(var i = 0;i < __width * __height; ++i){
+				var mine = getArrMines()[i];
+				if(mine.getAttribute("isMine") === "true"){
+					mine.setAttribute("class", kClass_MS_cheat());
+					mine.setAttribute("isMine","true");
+				}
+			}
+		};
+		</script>
+		<script>
+			/**
+			 creates an HTML element and allows you to add more html elements inside
+			 
+			 @param elementName name of the element to be created.  MUST have value otherwise function returns undefined.
+			 @param attrObj an object containing attribute values. set to null to add no attributes
+			 @param parent the created element will be appended as the parents child ie parent.appendChild(element). set null to prevent auto appending of child
+			 @param appendChild a block pointer used to add stuff inside the created element. Set to null to put nothing
+			 @return reference to the created object
+			 @code
+			 
+			 var content = document.getElementById("content");
+			 mkHTML("blockquote", null, content, function(block) {
+			 block.innerHTML = "third test";
+			 mkHTML("blockquote", {id:"coolBlockquote"}, block, function(block) {
+			 block.innerHTML = "third inner";
+			 });
+			 });
+			 
+			 @endcode
+			 */
+		
+		function mkHTML( elementName, attrObj, parent, appendChild) {
+			var element = document.createElement(elementName);
+			if(!element) {return undefined;}
+			if(attrObj) {
+				var prop;
+				for (prop in attrObj) {
+					element.setAttribute(prop, attrObj[prop]);
+				}
+			}
+			if(appendChild) {
+				appendChild(element);//the stuff that will go inside
+			}
+			if(parent){parent.appendChild(element);}
+			
+			return element;
+		};
+		
+		/**
+		 short hand version of mkHTML()
+		 */
+		
+		function mk( elementName, attrObj, parent, appendChild) {
+			return mkHTML( elementName, attrObj, parent, appendChild);
+		};
+		</script>
+		<style>
+			#MS_newGameButton {
+				border:thin solid black;
+				padding:10px;
+				margin:10px;
+				background-color:lightgreen;
+			}
+		
+		#MS_validationButton {
+			border:thin solid black;
+			padding:10px;
+			margin:10px;
+			background-color:yellow;
+		}
+		
+		#MS_cheatButton {
+			border:thin solid black;
+			padding:10px;
+			margin:10px;
+			background-color:red;
+		}
+		
+		#MS_newGameButton,
+		#MS_validationButton,
+		#MS_cheatButton {
+			border-radius: 10px;
+		}
+		
+		#MS_header {
+			margin-top: 10px;
+		}
+		
+		.MS_mystery{ /*user never click*/
+			background-color:lightgrey;
+		}
+		
+		.MS_solved{ /*clicked and survived*/
+			background-color:lightgreen;
+			border-bottom: medium solid white;
+			border-right: medium solid white;
+			border-left: medium solid gray;
+			border-top: medium solid gray;
+		}
+		
+		.MS_cheat{/*cheat shows the mine*/
+			background-color:lightpink;
+		}
+		
+		.MS_dead{ /*exploded bomb*/
+			background-color:red;
+		}
+		
+		.MS_flag{ /*user flagged it*/
+			background-color: white;
+		}
+		
+		label, select{
+			margin: 10px;
+		}
+		
+		table {
+			background-color:black;
+			margin-top: 20px;
+			border:thin solid black;
+			caption-side:top;
+			/*border-collapse: collapse;*/ /*to prevent overlaps*/
+		}
+		
+		td {
+			/*border: thin solid black;*/
+			border-top: medium solid white;
+			border-left: medium solid white;
+			border-right: medium solid gray;
+			border-bottom: medium solid gray;
+			
+			padding: 0px 4px;
+			font-size: 230%;
+		}
+		
+		body {
+			font-family: monospace;
+			margin:0px;
+			padding:20px 10px;
+		}
+		</style>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		
+	</body>
+</html>
