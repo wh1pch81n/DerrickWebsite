@@ -50,7 +50,7 @@ function Navigation(){
 			nav.appendChild(p);
 		}
 		if(selNum == 0) {
-			nav.firstChild.class = "selected";
+			nav.firstChild.setAttribute("class", "selected");
 		}
 		
 	}
