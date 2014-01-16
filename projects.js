@@ -17,6 +17,7 @@ function initContent(parent) {
 	var tableCaption = "Self-Driven projects";
 	var tableData2d = [
 										 ["Name","Brief","Duration","Repository"],
+										 ["Slideshow Script Generator","Implemented a Cocoa bindings aware UI App that can edit and create slideshow scripts for online tutorials.","Jan 2014","<a target=\"_blank\" href=\"https://github.com/wh1pch81n/DerrickWebsiteSSG\">1</a>"],
 										 ["<a href=\"http://derrickho.co.nf\">Personal Website</a>", "Website built from scratch out of HTML5, CSS, and JavaScript.", "Dec 2013 to present", "<a target=\"_blank\" href=\"https://github.com/wh1pch81n/DerrickWebsite\">1</a>"],
 										 ["nand2tetris","Built an elementary, but complete computer. Stacked custom built ALU, CPU, Assembler, Virtual Machine Translator, Jack Compiler, and Jack OS in order to play Tetris on top of them. Implemented hardware abstraction layer.","Dec 2012 to Mar 2013","<a target=\"_blank\" href=\"https://github.com/wh1pch81n/code_projects_portfolio/tree/master/TECS_condensed\">1</a>, <a target=\"_blank\" href=\"https://github.com/wh1pch81n/code_projects_portfolio/tree/master/TECS_uncondensed\">2</a>"],
 										 ["iOS Pong Game","Taught myself Objective-c through a step-by-step guide to iPhone game development.","Mar 2013 to Mar 2013","<a target=\"_blank\" href=\"https://github.com/wh1pch81n/AirHockeyiPhone\">1</a>"],
