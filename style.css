@@ -16,12 +16,13 @@ nav#navigation {
 	text-align: center;
 	vertical-align: top;
 	width: 20%;
-	
+	border-radius: 10px;
 }
 
 nav p { /*spaces out the links in the navigation*/
 	padding: 10px;
 	margin: 5px 0px;
+	border-radius: 5px;
 }
 
 nav a:link, nav a:visited {
@@ -41,6 +42,7 @@ section#content {
 	padding: 15px;
 	vertical-align: top;
 	width: 80%;
+	border-radius: 10px;
 }
 
 .selected {
@@ -90,6 +92,8 @@ header{
 	margin-left:10px;
 	margin-right:10px;
 	color: #efe5d0;
+	
+	border-radius: 10px;
 }
 
 footer {
@@ -99,6 +103,7 @@ footer {
 	padding:          15px;
 	margin: 0px 10px 10px 10px;
 	font-size:        90%;
+	border-radius: 10px;
 }
 
 table {
