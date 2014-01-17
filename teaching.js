@@ -142,9 +142,14 @@ function filterChar(line) {
 		'*/':"</span>"//not handled
 	};
 	
-	return line.replace(/[`<>]/g, function(match) {
+	line = line.replace(/[`<>]/g, function(match) {
 		return replace_map[match];
 	});
+	
+	line = line.replace(/\/\/[a-zA-Z0-9 ]*/g,function(match) { // handle slash slash comments
+		return "<span class=\"comment\">" + match + "</span>";
+	});
+	return line;
 }
 
 /*
