@@ -1,0 +1,673 @@
+@code
+window.onload = function() {
+~var mystique = "blue girl";
+}
+@header
+Change
+@comment
+Up to this point we have been creating variables and giving them a value on the same line.
+
+However, you don't need to do that.
+@addSlide
+@code
+window.onload = function() {
+~var mystique;
+}
+@header
+Empty variable
+@comment
+You can declare a variable without setting it.  Then what's in the variable you say? 
+
+Junk. 
+
+Technically it is given the value "undefined".
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+}
+@header
+Fill it up
+@comment
+It goes without saying that you should be able to set the variable at a later time.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+~mystique = "blue girl";
+~document.write(mystique);
+~document.write("<br>");
+}
+@header
+Blue Girl
+@comment
+I have assigned the string "blue girl" to the variable called mystique.
+
+Then I proceed to print mystique to the document.  Try it, and you will see "blue girl".
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+`mystique = "blue girl";
+`document.write(mystique);
+`document.write("<br>");
+
+~mystique = "Wolverine";
+~document.write(mystique);
+~document.write("<br>");
+}
+@header
+mystique can be anyone
+@comment
+Let's try changing mystique after we print it.
+
+I decided to change it to "Wolverine" then proceeded to print it to the document.
+
+Try it, and you should see two lines: one with "blue girl" and one with "Wolverine".
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+~mystique = "blue girl";
+~mystique = "Wolverine";
+
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Back to back changes
+@comment
+So what happens if I change mystique right after I set it?
+
+When I finally print it, what will be printed to the document?
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+`mystique = "blue girl";
+`mystique = "Wolverine";
+
+~document.write(mystique);
+`document.write("<br>");
+}
+@header
+Last one
+@comment
+The document will print "Wolverine" because it was the most recent value.  The old value  will no longer be referred to by the variable mystique.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+~mystique = window.prompt();
+
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Prompts
+@comment
+If you want user input, then you can use "window.prompt".
+
+It will cause a small pop up to appear with a textbox and two buttons.  Selecting OK will cause the "window.prompt" function to return the text in the textbox.  If you Selected CANCEL then the "window.prompt" function will return null.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+~mystique = window.prompt("Enter your name");
+
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Instructions
+@comment
+If you add a parameter to the "window.prompt" function, then you can give the user instructions.
+
+The first parameter of this function takes a string.  I used it to ask the user for his or her name.
+
+Now when I run the program the prompt will include the string I provided.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+~mystique = window.prompt("Enter your name", "John Doe");
+
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Placeholder
+@comment
+The second parameter is where you can provide a placeholder string.
+
+The default text in the textbox will have the placeholder in it.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+~mystique = window.prompt("Enter your Age");
+
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Age
+@comment
+Run the code. It will ask for your age and then it will save what ever the user entered as a string.
+
+But what if we don't want a string?
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+`mystique = window.prompt("Enter your Age");
+
+~mystique = parseInt(mystique);
+
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+parseInt
+@comment
+You can use the parseInt function to turn a string into an integer.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+`mystique = window.prompt("Enter your Age");
+
+`mystique = parseInt(mystique);
+
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Valid input?
+@comment
+Four things can happen.  
+
+1) User clicks cancel.
+2) User clicks ok but leaves the textbox blank.
+3) User clicks ok and enters a number.
+4) User clicks ok but does not enter a number.
+
+We need to handle for wrong input.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+~while(!mystique) { 
+
+~}
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Undefined 'til set
+@comment
+Remeber when I said that a variable is undefined until you set it?  I shall use the not operator (ie !) so that the while loop will run its inner code as long as mystique remains undefined.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+`while(!mystique) { 
+~`mystique = window.prompt("Enter your Age");
+`}
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Handle Cancel
+@comment
+Now when we prompt the user and the user hits cancel, we no longer have to worry.  Cancel will set mystique to null which is almost the same as undefined.
+
+The while loop conditional will see that mystique is null so it will do its inner code again (ie prompt the user again).
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+`while(!mystique) { 
+~`mystique = window.prompt("Enter your Age");
+`}
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Handle empty textbox
+@comment
+If the user leaves the textbox blank and presses OK, then the prompt will also return null.
+
+It will keep running until the user actually enters something.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+`while(!mystique) { 
+``mystique = window.prompt("Enter your Age");
+~`mystique = parseInt(mystique);
+`}
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Handle number
+@comment
+Use parseInt to handle numbers.
+
+If they enter a non-number it will set mystique to NaN.
+
+The only way to break out of the loop is to actually enter a number.
+@addSlide
+@code
+window.onload = function() {
+`var mystique;
+`while(!mystique) { 
+``mystique = window.prompt("Enter your Age");
+``mystique = parseInt(mystique);
+`}
+`document.write(mystique);
+`document.write("<br>");
+}
+@header
+Loop 'til correct
+@comment
+Try running the program.  It should continue to prompt you until you enter a number.
+@addSlide
+@code
+window.onload = function() {
+`var name = "Freddy Von Blackheart";
+`var s1 = " plays the ";
+`var hobby = "piano";
+`var s2 = " therefore he is ";
+`var sexiness = 95;
+`var s3 = "percent sexy";
+
+~var profile = name + s1+ hobby 
+~```+ s2 + sexiness + s3;
+`document.write(profile);
+`document.write("<br>");
+}
+@header
+Tape strings together
+@comment
+We already went over this, but let's review it anyways.  You can tape strings together using the + operator.
+@addSlide
+@code
+window.onload = function() {
+`var name = "Freddy Von Blackheart";
+`var s1 = " plays the ";
+`var hobby = "piano";
+`var s2 = " therefore he is ";
+`var sexiness = 95;
+`var s3 = "percent sexy";
+
+`var profile = name + s1+ hobby 
+````+ s2 + sexiness + s3;
+`document.write(profile);
+`document.write("<br>");
+}
+@header
+How long?
+@comment
+The profile variable contains a really long string.  How long is it?  
+
+Each string has a property called "length" which will return the number of characters in a string.
+@addSlide
+@code
+window.onload = function() {
+`var name = "Freddy Von Blackheart";
+`var s1 = " plays the ";
+`var hobby = "piano";
+`var s2 = " therefore he is ";
+`var sexiness = 95;
+`var s3 = "percent sexy";
+
+`var profile = name + s1+ hobby 
+````+ s2 + sexiness + s3;
+
+~for(var i = 0; i < profile.length; ++i) {
+~`document.write(profile.charAt(i));
+~}
+`document.write("<br>");
+}
+@header
+charAt
+@comment
+If you wanted to access each character of the string you can use charAt.
+
+The first parameter is the index number.  If index is 0 it will get the very first character.  If index is 3 it will get the fourth character.
+
+Look at the example to see how we can print "profile" character by character.
+@addSlide
+@code
+window.onload = function() {
+`var name = "Freddy Von Blackheart";
+`var s1 = " plays the ";
+`var hobby = "piano";
+`var s2 = " therefore he is ";
+`var sexiness = 95;
+`var s3 = "percent sexy";
+
+`var profile = name + s1+ hobby 
+````+ s2 + sexiness + s3;
+
+`for(var i = 0; i < profile.length; ++i) {
+~`document.write(profile[i]);
+`}
+`document.write("<br>");
+}
+@header
+charAt alternative
+@comment
+Alternatively, you can access each character the same way you access each element of an array.
+@addSlide
+@code
+window.onload = function() {
+~var grocery_list = [
+~``				  "eggs",
+~``				  "milk",
+~``				  "butter",
+~``				  "cereal"
+~``				  ];
+
+}
+@header
+Speaking of arrays...
+@comment
+How do we print an array?
+@addSlide
+@code
+window.onload = function() {
+`var grocery_list = [
+```"eggs",
+```"milk",
+```"butter",
+```"cereal"
+```];
+
+~for(var i = 0; i < grocery_list.length; ++i) {
+~`document.write(grocery_list[i]);
+``document.write(", ");
+~}
+`document.write("<br>");
+}
+@header
+Speaking of arrays...
+@comment
+How do we print an array?
+
+Arrays also have the "length" property. There fore you can use a loop at access each.
+@addSlide
+@code
+window.onload = function() {
+`var grocery_list = [
+```"eggs",
+```"milk",
+```"butter",
+```"cereal"
+```];
+
+~grocery_list.push("skittles");
+~grocery_list.push("bubblegum");
+
+`//To print array.
+`for(var i = 0; i < grocery_list.length; ++i) {
+``document.write(grocery_list[i]);
+``document.write(", ");
+`}
+`document.write("<br>");
+}
+@header
+Append
+@comment
+You can add more to the list by using the push function.
+@addSlide
+@code
+window.onload = function() {
+`var grocery_list = [
+```"eggs",
+```"milk",
+```"butter",
+```"cereal"
+```];
+
+~grocery_list.splice(0, 0, "skittles");
+
+`//To print array.
+`for(var i = 0; i < grocery_list.length; ++i) {
+``document.write(grocery_list[i]);
+``document.write(", ");
+`}
+`document.write("<br>");
+}
+@header
+Can prepend?
+@comment
+Use the splice function.
+
+The first parameter is the insertion point.  The second parameter is how much to delete.  The third parameter is what will be added.
+
+The example shows how we can insert "skittles" into the first index.
+@addSlide
+@code
+window.onload = function() {
+`var grocery_list = [
+```"eggs",
+```"milk",
+```"butter",
+```"cereal"
+```];
+
+~grocery_list.splice(2, 0, "M&M's");
+
+`//To print array.
+`for(var i = 0; i < grocery_list.length; ++i) {
+``document.write(grocery_list[i]);
+``document.write(", ");
+`}
+`document.write("<br>");
+}
+@header
+Insert elsewhere
+@comment
+Use can use the splice function to insert an object anywhere in the array.  The example shows how you can add "M&M's" into the 3rd index of the array.
+@addSlide
+@code
+window.onload = function() {
+`var grocery_list = [
+```"eggs",
+```"milk",
+```"butter",
+```"cereal"
+```];
+
+~grocery_list.splice(2, 1);
+
+`//To print array.
+`for(var i = 0; i < grocery_list.length; ++i) {
+``document.write(grocery_list[i]);
+``document.write(", ");
+`}
+`document.write("<br>");
+}
+@header
+Splice it out
+@comment
+The second argument of splice allows you to remove objects at the specified index.
+
+The example shows you show you can remove one object starting from the 3rd index (ie "butter").
+
+**Notice the third argument is missing**
+@addSlide
+@code
+window.onload = function() {
+`var grocery_list = [
+```"eggs",
+```"milk",
+```"butter",
+```"cereal"
+```];
+
+~grocery_list.splice(2, 2);
+
+`//To print array.
+`for(var i = 0; i < grocery_list.length; ++i) {
+``document.write(grocery_list[i]);
+``document.write(", ");
+`}
+`document.write("<br>");
+}
+@header
+Remove more
+@comment
+This will remove "butter" and "cereal" from the array.
+@addSlide
+@code
+window.onload = function() {
+`var grocery_list = [
+```"eggs",
+```"milk",
+```"butter",
+```"cereal"
+```];
+
+~grocery_list.splice(2, 1, "pancakes");
+
+`//To print array.
+`for(var i = 0; i < grocery_list.length; ++i) {
+``document.write(grocery_list[i]);
+``document.write(", ");
+`}
+`document.write("<br>");
+}
+@header
+Replace
+@comment
+An example of how splice can replace "butter" with "pancakes".
+@addSlide
+@code
+window.onload = function() {
+~var array_2d = [
+~```[0, 1, 2],
+~```[3, 4, 5],
+~```[6, 7, 8],
+~```];
+}
+@header
+2d arrays
+@comment
+Arrays can contain any object, even if that object is another array.  An array of arrays can be called a 2d array.
+
+The example shows how to make a 2d array of numbers.
+@addSlide
+@code
+window.onload = function() {
+`var array_2d = [
+````[0, 1, 2],
+````[3, 4, 5],
+````[6, 7, 8],
+````];
+}
+@header
+Quiz time
+@comment
+How do you print array_2d such that the output looks like:
+
+0 1 2
+3 4 5
+6 7 8
+@addSlide
+@code
+window.onload = function() {
+`var array_2d = [
+````[0, 1, 2],
+````[3, 4, 5],
+````[6, 7, 8],
+````];
+
+~for(var y=0; y < array_2d.length; ++y) {
+~`var array_1d = array_2d[y];
+~`for(var x=0; x < array_1d.length; ++x) {
+~``var num = array_1d[x];
+~``document.write(num);
+~``document.write(" ");
+~`}
+~`document.write("<br>");
+~}
+}
+@header
+Quiz solution
+@comment
+Using nested for loops.  The outer loop isolates a single array.  The inner for loop isolates the number inside that single array.
+@addSlide
+@code
+window.onload = function() {
+`var array_2d = [
+````[0, 1, 2],
+````[3, 4, 5],
+````[6, 7, 8],
+````];
+
+`for(var y=0; y < array_2d.length; ++y) {
+~`for(var x=0; x < array_2d[y].length; ++x) {
+~``document.write(array_2d[y][x]);
+```document.write(" ");
+``}
+``document.write("<br>");
+`}
+}
+@header
+Quiz solution
+@comment
+Alternative Solution.
+@addSlide
+@question
+What is user input?
+@answer
+It is when the computer tries to get a response from the user.  For example, you want to log on to your email account.  The website will ask you for your username and password.  The username and password is an example of a user input that will later be used by the computer.  There are many examples of user input beyond usernames and passwords.
+@question
+What is an Integer?
+@answer
+An integer is a whole number.  1, 2, 3, 4, and 5 are whole numbers.  While 3.14 is not.
+@question
+What can I use besides parseInt?
+@answer
+You can use parseFloat.  It will try to make a floating point number from the string that you provide it.
+
+e.g.
+parseInt("15"); // Will return 15
+parseFloat("15"); // Will return 15.0
+
+parseInt("3.14"); // Will return 3
+parseFloat("3.14"); // Will return 3.14
+@question
+What is the difference between null and undefined?
+@answer
+Null and undefined are different.  Undefined is the value a variable has when it hasn't been given one.  Null is an object that you can set a variable to.  Null is an object that means "no value".
+
+So when a conditional branch encounters Null or Undefined, it will result in false.  They represent two different situations, but they affect a conditional branch the same way.
+@question
+What is NaN?
+@answer
+NaN stands for "Not a Number".
+@question
+Can I make an array of arrays of arrays?
+@answer
+Of course.
+But what you are describing is a 3-d array.  Javascript is capable of creating an n-d array where n represents the number of dimentions.
+
+For example if you have a 3d array (AKA array of arrays of arrays):
+
+var array3d = [
+[[1,2,3],[4,5,6],[7,8,9]],
+[[10,11,12],[13,14,15],[16,17,18]],
+[[19,20,21],[22,23,24],[25,26,27]],
+]
+
+You can access the second array of arrays using array3d[1].
+You can access the second array of that with array3d[1][1].
+You can access the second object of that array with array3d[1][1][1].
+
+If I wanted to get the number 20 stored in the array I could use array3d[2][0][1].
+@end
