@@ -147,7 +147,7 @@ function filterChar(line) {
 		return replace_map[match];
 	});
 	
-	line = line.replace(/\/\/[a-zA-Z0-9 ]*/g,function(match) { // handle slash slash comments
+	line = line.replace(/\/\/[^\n]*/g,function(match) { // handle slash slash comments
 		return "<span class=\"comment\">" + match + "</span>";
 	});
 	return line;
