@@ -16,7 +16,7 @@ window.onload = function() {
 @header
 Empty variable
 @comment
-You can declare a variable without setting it.  Then what's in the variable you say? 
+You can declare a variable without setting it.  Then what value is stored in the variable? 
 
 Junk. 
 
@@ -30,6 +30,8 @@ window.onload = function() {
 Fill it up
 @comment
 It goes without saying that you should be able to set the variable at a later time.
+
+I repeat, you should always give your variables some sort of value sometime after you declare them.
 @addSlide
 @code
 window.onload = function() {
@@ -108,7 +110,9 @@ Prompts
 @comment
 If you want user input, then you can use "window.prompt".
 
-It will cause a small pop up to appear with a textbox and two buttons.  Selecting OK will cause the "window.prompt" function to return the text in the textbox.  If you Selected CANCEL then the "window.prompt" function will return null.
+It will cause a small pop up to appear with a textbox and two buttons.  
+
+Selecting OK will cause the "window.prompt" function to return the text in the textbox.  If you Selected CANCEL then the "window.prompt" function will return null.
 @addSlide
 @code
 window.onload = function() {
@@ -153,7 +157,7 @@ window.onload = function() {
 @header
 Age
 @comment
-Run the code. It will ask for your age and then it will save what ever the user entered as a string.
+Run the code. It will ask for your age and then it will save whatever the user entered as a string.
 
 But what if we don't want a string?
 @addSlide
@@ -187,12 +191,12 @@ Valid input?
 @comment
 Four things can happen.  
 
-1) User clicks cancel.
-2) User clicks ok but leaves the textbox blank.
-3) User clicks ok and enters a number.
-4) User clicks ok but does not enter a number.
+1) User clicks CANCEL.
+2) User clicks OK but leaves the textbox blank.
+3) User clicks OK and enters a number.
+4) User clicks OK but does not enter a number.
 
-We need to handle for wrong input.
+The 3rd item in the list shall be considered valid input.  However we need to handle the wrong inputs in a graceful manner.
 @addSlide
 @code
 window.onload = function() {
@@ -206,7 +210,9 @@ window.onload = function() {
 @header
 Undefined 'til set
 @comment
-Remeber when I said that a variable is undefined until you set it?  I shall use the not operator (ie !) so that the while loop will run its inner code as long as mystique remains undefined.
+Remeber when I said that a variable is undefined until you set it?  I shall use the NOT operator (ie !) so that the while loop will run its inner code as long as mystique remains undefined.
+
+Don't run the code yet.  This will create an infinite loop.
 @addSlide
 @code
 window.onload = function() {
@@ -220,7 +226,7 @@ window.onload = function() {
 @header
 Handle Cancel
 @comment
-Now when we prompt the user and the user hits cancel, we no longer have to worry.  Cancel will set mystique to null which is almost the same as undefined.
+Now when we prompt the user and the user hits cancel, we no longer have to worry.  Cancel will set mystique to null which is treated almost the same as undefined.
 
 The while loop conditional will see that mystique is null so it will do its inner code again (ie prompt the user again).
 @addSlide
@@ -283,7 +289,7 @@ window.onload = function() {
 `var sexiness = 95;
 `var s3 = "percent sexy";
 
-~var profile = name + s1+ hobby 
+~var profile = name + s1 + hobby 
 ~```+ s2 + sexiness + s3;
 `document.write(profile);
 `document.write("<br>");
@@ -302,7 +308,7 @@ window.onload = function() {
 `var sexiness = 95;
 `var s3 = "percent sexy";
 
-`var profile = name + s1+ hobby 
+`var profile = name + s1 + hobby 
 ````+ s2 + sexiness + s3;
 `document.write(profile);
 `document.write("<br>");
@@ -323,7 +329,7 @@ window.onload = function() {
 `var sexiness = 95;
 `var s3 = "percent sexy";
 
-`var profile = name + s1+ hobby 
+`var profile = name + s1 + hobby 
 ````+ s2 + sexiness + s3;
 
 ~for(var i = 0; i < profile.length; ++i) {
@@ -365,11 +371,11 @@ Alternatively, you can access each character the same way you access each elemen
 @code
 window.onload = function() {
 ~var grocery_list = [
-~``				  "eggs",
-~``				  "milk",
-~``				  "butter",
-~``				  "cereal"
-~``				  ];
+~``"eggs",
+~``"milk",
+~``"butter",
+~``"cereal"
+~``];
 
 }
 @header
@@ -397,7 +403,7 @@ Speaking of arrays...
 @comment
 How do we print an array?
 
-Arrays also have the "length" property. There fore you can use a loop at access each.
+Arrays also have the "length" property. Therefore you can use a loop at access each element.
 @addSlide
 @code
 window.onload = function() {
@@ -442,11 +448,11 @@ window.onload = function() {
 `document.write("<br>");
 }
 @header
-Can prepend?
+Can I prepend?
 @comment
 Use the splice function.
 
-The first parameter is the insertion point.  The second parameter is how much to delete.  The third parameter is what will be added.
+The first parameter is the insertion point.  The second parameter is how much to delete.  The third parameter is what will be added at the insertion point.
 
 The example shows how we can insert "skittles" into the first index.
 @addSlide
@@ -496,9 +502,9 @@ Splice it out
 @comment
 The second argument of splice allows you to remove objects at the specified index.
 
-The example shows you show you can remove one object starting from the 3rd index (ie "butter").
+The example shows you how you can remove one object starting from the 3rd index (ie "butter").
 
-**Notice the third argument is missing**
+**Notice the third argument is missing.  This is because we do not want to add anything at the insertion point.**
 @addSlide
 @code
 window.onload = function() {
@@ -577,6 +583,8 @@ How do you print array_2d such that the output looks like:
 0 1 2
 3 4 5
 6 7 8
+
+**Solution on next slide**
 @addSlide
 @code
 window.onload = function() {
@@ -625,11 +633,15 @@ Alternative Solution.
 @question
 What is user input?
 @answer
-It is when the computer tries to get a response from the user.  For example, you want to log on to your email account.  The website will ask you for your username and password.  The username and password is an example of a user input that will later be used by the computer.  There are many examples of user input beyond usernames and passwords.
+It is when the computer tries to get a response from the user.  For example, you want to log on to your email account.  The website will ask you for your username and password.  The computer can do useful things with the user input.  There are many examples of user input beyond usernames and passwords.
 @question
-What is an Integer?
+What is an integer?
 @answer
-An integer is a whole number.  1, 2, 3, 4, and 5 are whole numbers.  While 3.14 is not.
+An integer is a whole number.  1, 2, 3, 4, and 5 are examples of whole numbers.  While 3.14 is not.
+@question
+Then what is 3.14?
+@answer
+That is a floating point number.  Anything with decimal places is a floating point number in the computer world.  The number 3.14 is also an approximation of ¹.
 @question
 What can I use besides parseInt?
 @answer
@@ -644,20 +656,48 @@ parseFloat("3.14"); // Will return 3.14
 @question
 What is the difference between null and undefined?
 @answer
-Null and undefined are different.  Undefined is the value a variable has when it hasn't been given one.  Null is an object that you can set a variable to.  Null is an object that means "no value".
+Null and undefined are different.  Undefined is the value a variable has when it hasn't been given one.  Null is an object that means "no value".
 
-So when a conditional branch encounters Null or Undefined, it will result in false.  They represent two different situations, but they affect a conditional branch the same way.
+So when a conditional branch encounters null or undefined, it will result in false.  They represent two different situations, but they have the same truth value (most of the time).
+@question
+What do you mean most of the time?
+@answer
+There are two equality operators in JavaScript: "==" and "===".  The former is lenient and the latter is strict.  If we use the lenient one, undefined and null are considered equal.  The strict one will say they are not equal.
+
+More Examples:
+
+"" == 0 // true
+"123" == 123 // true
+
+"" === 0 // false
+"123" === 123 // false
+
+x === y // true if and only if x and y point to the same object
 @question
 What is NaN?
 @answer
 NaN stands for "Not a Number".
 @question
+You mentioned that if I use parseInt and user enters a non-number, then it will return NaN.  However, when I use the loop to ask the user for a number and the user enters 0, it won't break out of the loop.
+@answer
+Observe this example:
+
+var num;
+while(!(num = parseInt(window.prompt("Write a number"))));
+
+In this example, the loop will repeat as long as num evaluates to a truth value of false.  NaN evaluates to false.  Zero also evaluates to false.  Any number greater than zero will be evaluated to true.  So when you use parseInt to set the value of num, entering zero will not break you out of the loop.  
+
+However there is a function called isNaN.  If it is given a number it will return true otherwise it will return false.  Observe the rectified solution.
+
+var num;
+while(isNaN(num = parseInt(window.prompt("Write a number"))));
+@question
 Can I make an array of arrays of arrays?
 @answer
 Of course.
-But what you are describing is a 3-d array.  Javascript is capable of creating an n-d array where n represents the number of dimentions.
+But what you are describing is a 3-d array.  Javascript is capable of creating an n-d array where n represents the number of dimensions.
 
-For example if you have a 3d array (AKA array of arrays of arrays):
+For example if you have a 3-d array (AKA array of arrays of arrays):
 
 var array3d = [
 [[1,2,3],[4,5,6],[7,8,9]],
@@ -669,5 +709,5 @@ You can access the second array of arrays using array3d[1].
 You can access the second array of that with array3d[1][1].
 You can access the second object of that array with array3d[1][1][1].
 
-If I wanted to get the number 20 stored in the array I could use array3d[2][0][1].
+If I wanted to get the number 20 stored in array3d I could use array3d[2][0][1].
 @end
