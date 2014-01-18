@@ -9,7 +9,7 @@ var globalLesson = null;
 var globalTutorialArr =
 [{
 tutorial:"VHDL",
- syntaxHighlighting:{"ENTITY":"comment"},
+ syntaxHighlighting:{"ENTITY":"comment", "ARCHITECTURE":"newCode"},//replace with better CSS colors classes
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
 				 {value:vhdlLesson1, text:"1 - First Program"},
@@ -84,9 +84,9 @@ function generateSlideShowFromFile(path, slideShowTitle, syntaxHighlighting) {
 													 textFromScript = filterChar(textFromScript);
 													 
 													 for(var key in syntaxHighlighting) {
-													 alert(key);
+													 //alert(key);
 													 textFromScript = textFromScript.replace(new RegExp(key, "g"), function(match){
-																																	 alert(syntaxHighlighting[match]);
+																																	 //alert(syntaxHighlighting[match]);
 																																	 return "<span class=\"" + syntaxHighlighting[match] + "\">" + match + "</span>"});
 													 }
 			var fileArr = textFromScript.split('\n');
