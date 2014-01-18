@@ -641,7 +641,7 @@ An integer is a whole number.  1, 2, 3, 4, and 5 are examples of whole numbers. 
 @question
 Then what is 3.14?
 @answer
-That is a floating point number.  Anything with decimal places is a floating point number in the computer world.  The number 3.14 is also an approximation of ¹.
+That is a floating point number.  Anything with decimal places is a floating point number in the computer world.  The number 3.14 is also an approximation of &pi;.
 @question
 What can I use besides parseInt?
 @answer
