@@ -11,20 +11,21 @@ var globalTutorialArr =
 tutorial:"VHDL",
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
-	{value:vhdlLesson1, text:"1 - First Program"},
-	{file:"vhdlL2.txt", text:"2 - Multiple Ports"}
+				 {value:vhdlLesson1, text:"1 - First Program"},
+				 {file:"vhdlL2.txt", text:"2 - Multiple Ports"}
 				 ]
 },{
 tutorial:"JavaScript",
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
-	{value:javaScriptLesson0, text:"0 - Get Set Up"},
-	{value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
-	{file:"javaScriptL2.txt", text:"2 - ifs & loops"},
-	{href:"javaScriptPA1.html", text:"Programming Assignment 1"}
-				 //{file:"javaScriptL3.txt", text:"JavaScript Lesson 3"}
+				 {value:javaScriptLesson0, text:"0 - Get Set Up"},
+				 {value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
+				 {file:"javaScriptL2.txt", text:"2 - ifs & loops"},
+				 {file:"javaScriptL3.txt", text:"3 - Object Properties & Methods"},
+				 {href:"javaScriptPA1.html", text:"Programming Assignment 1"}
 				 ]
 }];
+
 /**
  initializes the content of the page.
  
