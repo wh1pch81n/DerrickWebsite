@@ -9,6 +9,7 @@ var globalLesson = null;
 var globalTutorialArr =
 [{
 tutorial:"VHDL",
+ syntaxHighlighting:{"ENTITY":"comment"},
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
 				 {value:vhdlLesson1, text:"1 - First Program"},
@@ -50,9 +51,10 @@ function initContent(parent) {
 						button.onclick = lesson_j.value;
 					} else if(lesson_j.hasOwnProperty("file")) {
 						button.file = tutorialFolder+lesson_j.file;
+				 button.syntaxHighlighting = tutorial.syntaxHighlighting;
 						button.onclick = function(){
 							location.hash = "#header";
-							generateSlideShowFromFile(this.file, "Lesson " + this.value);
+							generateSlideShowFromFile(this.file, "Lesson " + this.value, this.syntaxHighlighting);
 							location.hash = "#"+globalLesson.id;
 						};
 					} else if(lesson_j.hasOwnProperty("href")) {
@@ -74,12 +76,20 @@ function initContent(parent) {
  @param path "the text at this URL will be used to generate the slideShowObject
  @param slideShowTitle "Title of the slide show"
  */
-function generateSlideShowFromFile(path, slideShowTitle) {
+function generateSlideShowFromFile(path, slideShowTitle, syntaxHighlighting) {
 	globalLesson.innerHTML = null;
 	httpGet(path, function(textFromScript) {
 		makeSlideShowWithBlock(globalLesson, slideShowTitle, function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
 			//parse script line by line
-			var fileArr = filterChar(textFromScript).split('\n');
+													 textFromScript = filterChar(textFromScript);
+													 
+													 for(var key in syntaxHighlighting) {
+													 alert(key);
+													 textFromScript = textFromScript.replace(new RegExp(key, "g"), function(match){
+																																	 alert(syntaxHighlighting[match]);
+																																	 return "<span class=\"" + syntaxHighlighting[match] + "\">" + match + "</span>"});
+													 }
+			var fileArr = textFromScript.split('\n');
 			var action = null;
 			for (var i = 0; i < fileArr.length;++i) {
 				if(fileArr[i].indexOf("@code") >= 0) {
