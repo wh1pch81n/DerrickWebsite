@@ -225,7 +225,8 @@ h1#lessonSpace {
 }
 
 .newCode {
-	border-left: thick solid salmon;
+	box-shadow: -8px 0 0 0 salmon;
+	box
 }
 
 .comment {
