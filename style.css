@@ -245,6 +245,10 @@ h1#lessonSpace {
 /*Syntax Colors*/
 #codeSection .syntaxRed {color: red;}
 #codeSection .syntaxGreen {color: green;}
+#codeSection .syntaxDarkGreen {color: darkgreen;}
+#codeSection .syntaxTurquoise {color: rgb(46,89,93);}
+#codeSection .syntaxDarkOrange {color: darkorange;}
+#codeSection .syntaxOrange {color: orange;}
 #codeSection .syntaxBlue {color: blue;}
 #codeSection .syntaxMagenta {color: magenta;}
 #codeSection .syntaxPurple {color: purple;}

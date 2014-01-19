@@ -3,6 +3,10 @@ var globalLesson = null;
 
 function kClass_syntaxRed(){return "syntaxRed";};
 function kClass_syntaxGreen(){return "syntaxGreen";};
+function kClass_syntaxDarkGreen(){return "syntaxDarkGreen";};
+function kClass_syntaxTurquoise(){return "syntaxTurquoise";};
+function kClass_syntaxDarkOrange(){return "syntaxDarkOrange";};
+function kClass_syntaxOrange(){return "syntaxOrange";};
 function kClass_syntaxBlue(){return "syntaxBlue";};
 function kClass_syntaxMagenta(){return "syntaxMagenta";};
 function kClass_syntaxPurple(){return "syntaxPurple";};
@@ -97,7 +101,7 @@ function generateSlideShowFromFile(path, slideShowTitle, syntaxColoring) {
 			
 			//parse script line by line
 			var fileArr = filterChar(textFromScript, syntaxColoring).split('\n');
-
+			
 			var action = null;
 			for (var i = 0; i < fileArr.length;++i) {
 				if(fileArr[i].indexOf("@code") >= 0) {
@@ -897,33 +901,36 @@ function getJavaScriptSyntaxColoring() {
 		{
 		//Blue stuff
 		"function":kClass_syntaxBlue(),
-		"var":kClass_syntaxBlue()
-//		case
-//		return
-//		void
-//		debugger
-//		do
-//		for
-//		with
-//		//Magenta stuff
-//		instanceof
-//		typeof
-//		this
-//		default
-//		//Violet stuff
-//		new
-//		delete
-//		catch
-//		try
-//		throw
-//		finally
-//		//Purple stuff
-//		break
-//		while
-//		if
-//		else
-//		switch
-//		continue
+		"var":kClass_syntaxBlue(),
+		"case":kClass_syntaxBlue(),
+		"return":kClass_syntaxBlue(),
+		"void":kClass_syntaxBlue(),
+		"debugger":kClass_syntaxBlue(),
+		"with":kClass_syntaxBlue(),
+		//Magenta stuff
+		"instanceof":kClass_syntaxMagenta(),
+		"typeof":kClass_syntaxMagenta(),
+		"this":kClass_syntaxMagenta(),
+		"default":kClass_syntaxMagenta(),
+		//Violet stuff
+		"new":kClass_syntaxViolet(),
+		"delete":kClass_syntaxViolet(),
+		"catch":kClass_syntaxViolet(),
+		"try":kClass_syntaxViolet(),
+		"throw":kClass_syntaxViolet(),
+		"finally":kClass_syntaxViolet(),
+		//Purple stuff
+		"break":kClass_syntaxPurple(),
+		"while":kClass_syntaxPurple(),
+		"if":kClass_syntaxPurple(),
+		"else":kClass_syntaxPurple(),
+		"switch":kClass_syntaxPurple(),
+		"continue":kClass_syntaxPurple(),
+		"do":kClass_syntaxPurple(),
+		"for":kClass_syntaxPurple(),
+		//Dark orange
+		"window":kClass_syntaxTurquoise(),
+		"document":kClass_syntaxTurquoise()
 		},//add more
 	comment:
 		{
