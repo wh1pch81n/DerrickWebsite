@@ -145,10 +145,10 @@ END ENTITY buffer4v;
 
 ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
-~s0_o(0 downto 0) <= a0_i(0 downto 0);
-~s1_o(0 downto 0) <= a1_i(0 downto 0);
-~s2_o(0 downto 0) <= a2_i(0 downto 0);
-~s3_o(0 downto 0) <= a3_i(0 downto 0);
+~s0_o(0 DOWNTO 0) <= a0_i(0 DOWNTO 0);
+~s1_o(0 DOWNTO 0) <= a1_i(0 DOWNTO 0);
+~s2_o(0 DOWNTO 0) <= a2_i(0 DOWNTO 0);
+~s3_o(0 DOWNTO 0) <= a3_i(0 DOWNTO 0);
 END ARCHITECTURE implementation;
 @header
 Explicit setting
