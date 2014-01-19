@@ -169,7 +169,7 @@ function filterChar(line, syntaxColoring) {
 	
 	/**  Handle Keywords*/
 	for(var key in syntaxColoring.keyword) {
-		line = line.replace(new RegExp(key+"\\b", "g"), function(match){
+		line = line.replace(new RegExp("\\b"+key+"\\b", "g"), function(match){
 			return makeSpanWithClass(syntaxColoring.keyword[match], match);
 		});
 	}
@@ -871,6 +871,7 @@ function getVHDLSyntaxColoring() {
 		"ARRAY":kClass_syntaxBlue(),
 		"RANGE":kClass_syntaxBlue(),
 		"CASE":kClass_syntaxBlue(),
+		"FUNCTION":kClass_syntaxBlue(),
 		//MAGENTA STUFF
 		"STD_LOGIC_VECTOR":kClass_syntaxMagenta(),
 		"STD_LOGIC":kClass_syntaxMagenta(),
@@ -881,7 +882,7 @@ function getVHDLSyntaxColoring() {
 		"STD_LOGIC_SIGNED":kClass_syntaxMagenta(),
 		//RED STUFF
 		"WORK":kClass_syntaxRed()
-		},//add more
+		},
 	comment:
 		{
 		regularExpression:(new RegExp("--[^\n]*", "g")),
