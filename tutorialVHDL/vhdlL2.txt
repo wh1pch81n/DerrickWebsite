@@ -8,7 +8,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 
 END ARCHITECTURE implementation;
@@ -31,7 +31,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 `s0_o <= a0_i;
 END ARCHITECTURE implementation;
@@ -57,7 +57,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 `s0_o <= a0_i;
 END ARCHITECTURE implementation;
@@ -84,7 +84,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 `s0_o <= a0_i;
 END ARCHITECTURE implementation;
@@ -111,7 +111,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 ~s0_o <= a0_i;
 ~s1_o <= a1_i;
@@ -143,7 +143,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 ~s0_o(0 downto 0) <= a0_i(0 downto 0);
 ~s1_o(0 downto 0) <= a1_i(0 downto 0);
@@ -173,7 +173,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 ~s0_o <= a0_i;
 ~s1_o <= a1_i;
@@ -203,7 +203,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 `s0_o <= a0_i;
 `s1_o <= a1_i;
@@ -237,7 +237,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 `s0_o <= a0_i;
 `s1_o <= a1_i;
@@ -265,7 +265,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 `s0_o <= a0_i;
 `s1_o <= a1_i;
@@ -293,7 +293,7 @@ ENTITY buffer4v IS
 `);
 END ENTITY buffer4v;
 
-ARCHITECTURE implementation  OF buffer4v is
+ARCHITECTURE implementation  OF buffer4v IS
 BEGIN
 `s0_o <= a0_i;
 `s1_o <= a1_i;

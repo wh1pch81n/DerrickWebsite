@@ -207,7 +207,7 @@ a:visited.image img{
 
 #commentSection {
 	display: table-cell;
-	background-color: grey;
+	background-color: lightgrey;
 	max-width: 300px;
 	padding: 10px;
 }
@@ -225,11 +225,12 @@ h1#lessonSpace {
 }
 
 .newCode {
-	color: salmon;
+	box-shadow: -8px 0 0 0 salmon;
+	box
 }
 
 .comment {
-	color: green;
+	color: darkgreen;
 	font-weight: normal;
 	
 }
@@ -240,3 +241,15 @@ h1#lessonSpace {
 .answer {
 	margin-left: 30px;
 }
+
+/*Syntax Colors*/
+#codeSection .syntaxRed {color: red;}
+#codeSection .syntaxGreen {color: green;}
+#codeSection .syntaxDarkGreen {color: darkgreen;}
+#codeSection .syntaxTurquoise {color: rgb(46,89,93);}
+#codeSection .syntaxDarkOrange {color: darkorange;}
+#codeSection .syntaxOrange {color: orange;}
+#codeSection .syntaxBlue {color: blue;}
+#codeSection .syntaxMagenta {color: magenta;}
+#codeSection .syntaxPurple {color: purple;}
+#codeSection .syntaxViolet {color: violet;}

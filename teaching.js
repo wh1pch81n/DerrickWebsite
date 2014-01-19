@@ -1,5 +1,18 @@
 var globalParent = null;
 var globalLesson = null;
+
+function kClass_syntaxRed(){return "syntaxRed";};
+function kClass_syntaxGreen(){return "syntaxGreen";};
+function kClass_syntaxDarkGreen(){return "syntaxDarkGreen";};
+function kClass_syntaxTurquoise(){return "syntaxTurquoise";};
+function kClass_syntaxDarkOrange(){return "syntaxDarkOrange";};
+function kClass_syntaxOrange(){return "syntaxOrange";};
+function kClass_syntaxBlue(){return "syntaxBlue";};
+function kClass_syntaxMagenta(){return "syntaxMagenta";};
+function kClass_syntaxPurple(){return "syntaxPurple";};
+function kClass_syntaxViolet(){return "syntaxViolet";};
+function kClass_syntaxComment(){return "comment";};
+
 /*
  And array of tutorial objects that hold references to
  the lessons
@@ -9,6 +22,7 @@ var globalLesson = null;
 var globalTutorialArr =
 [{
 tutorial:"VHDL",
+syntaxColoring:getVHDLSyntaxColoring(),
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
 				 {value:vhdlLesson1, text:"1 - First Program"},
@@ -16,6 +30,7 @@ lessons:[
 				 ]
 },{
 tutorial:"JavaScript",
+syntaxColoring:getJavaScriptSyntaxColoring(),
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
 				 {value:javaScriptLesson0, text:"0 - Get Set Up"},
@@ -50,9 +65,10 @@ function initContent(parent) {
 						button.onclick = lesson_j.value;
 					} else if(lesson_j.hasOwnProperty("file")) {
 						button.file = tutorialFolder+lesson_j.file;
+						button.syntaxColoring = tutorial.syntaxColoring;
 						button.onclick = function(){
 							location.hash = "#header";
-							generateSlideShowFromFile(this.file, "Lesson " + this.value);
+							generateSlideShowFromFile(this.file, "Lesson " + this.value, this.syntaxColoring);
 							location.hash = "#"+globalLesson.id;
 						};
 					} else if(lesson_j.hasOwnProperty("href")) {
@@ -73,13 +89,19 @@ function initContent(parent) {
  
  @param path "the text at this URL will be used to generate the slideShowObject
  @param slideShowTitle "Title of the slide show"
+ @param syntaxColoring "An Object containing Color info"
+ 
+ syntaxColoring.keyword "a dictionary of keywords with color name"
+ syntaxColoring.comment "contains RegEx for single line comments and Comment colors"
  */
-function generateSlideShowFromFile(path, slideShowTitle) {
+function generateSlideShowFromFile(path, slideShowTitle, syntaxColoring) {
 	globalLesson.innerHTML = null;
 	httpGet(path, function(textFromScript) {
 		makeSlideShowWithBlock(globalLesson, slideShowTitle, function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
+			
 			//parse script line by line
-			var fileArr = filterChar(textFromScript).split('\n');
+			var fileArr = filterChar(textFromScript, syntaxColoring).split('\n');
+			
 			var action = null;
 			for (var i = 0; i < fileArr.length;++i) {
 				if(fileArr[i].indexOf("@code") >= 0) {
@@ -126,31 +148,45 @@ function generateSlideShowFromFile(path, slideShowTitle) {
 			}
 		});
 	});
-	
 }
 
 /**
  replaces certain characters with ones more appropriate for slideShow
  
  @param line "the string that will get flitered of certain chars"
+ @param syntaxColoring "An Object containing Color info"
+ 
+ syntaxColoring.keyword "a dictionary of keywords with color name"
+ syntaxColoring.comment "contains RegEx for single line comments and Comment colors"
  */
-function filterChar(line) {
+function filterChar(line, syntaxColoring) {
+	/**  Character swapping */
 	var replace_map = {
 		'`':"&emsp; ",
 		'<':"&lt;",
-		'>':"&gt;",
-		'/*':"<span class=\"comment\">", //not handled
-		'*/':"</span>"//not handled
+		'>':"&gt;"
 	};
 	
-	line = line.replace(/[`<>]/g, function(match) {
+	line = line.replace(new RegExp("[`<>]", "g"), function(match) {
 		return replace_map[match];
 	});
 	
-	line = line.replace(/\/\/[^\n]*/g,function(match) { // handle slash slash comments
-		return "<span class=\"comment\">" + match + "</span>";
+	/**  Handle Keywords*/
+	for(var key in syntaxColoring.keyword) {
+		line = line.replace(new RegExp("\\b"+key+"\\b", "g"), function(match){
+			return makeSpanWithClass(syntaxColoring.keyword[match], match);
+		});
+	}
+	
+	/**  Handle single line Comments*/
+	line = line.replace(syntaxColoring.comment.regularExpression ,function(match) {
+		return makeSpanWithClass(syntaxColoring.comment.color, match);
 	});
 	return line;
+}
+
+function makeSpanWithClass(className, innerHTML) {
+	return "<span class=\"" + className + "\">" + innerHTML + "</span>"
 }
 
 /*
@@ -795,3 +831,111 @@ function makeSlideShowWithBlock(parent, slideTitle, block) {
 	slideshow.goToSlide(0);
 };
 
+function getVHDLSyntaxColoring() {
+	return {
+	keyword:
+		{
+		//BLUE STUFF
+		"LIBRARY":kClass_syntaxBlue(),
+		"USE":kClass_syntaxBlue(),
+		"ALL":kClass_syntaxBlue(),
+		"ENTITY":kClass_syntaxBlue(),
+		"ARCHITECTURE":kClass_syntaxBlue(),
+		"PACKAGE":kClass_syntaxBlue(),
+		"IS":kClass_syntaxBlue(),
+		"COMPONENT":kClass_syntaxBlue(),
+		"GENERIC":kClass_syntaxBlue(),
+		"NATURAL":kClass_syntaxBlue(),
+		"PORT":kClass_syntaxBlue(),
+		"IN":kClass_syntaxBlue(),
+		"OUT":kClass_syntaxBlue(),
+		"INOUT":kClass_syntaxBlue(),
+		"TO":kClass_syntaxBlue(),
+		"DOWNTO":kClass_syntaxBlue(),
+		"END":kClass_syntaxBlue(),
+		"OF":kClass_syntaxBlue(),
+		"SIGNAL":kClass_syntaxBlue(),
+		"OTHERS":kClass_syntaxBlue(),
+		"TYPE":kClass_syntaxBlue(),
+		"CONSTANT":kClass_syntaxBlue(),
+		"BEGIN":kClass_syntaxBlue(),
+		"WHEN":kClass_syntaxBlue(),
+		"ELSE":kClass_syntaxBlue(),
+		"IF":kClass_syntaxBlue(),
+		"ELSIF":kClass_syntaxBlue(),
+		"THEN":kClass_syntaxBlue(),
+		"NOT":kClass_syntaxBlue(),
+		"AND":kClass_syntaxBlue(),
+		"OR":kClass_syntaxBlue(),
+		"NAND":kClass_syntaxBlue(),
+		"NOR":kClass_syntaxBlue(),
+		"XOR":kClass_syntaxBlue(),
+		"XNOR":kClass_syntaxBlue(),
+		"PROCESS":kClass_syntaxBlue(),
+		"ARRAY":kClass_syntaxBlue(),
+		"RANGE":kClass_syntaxBlue(),
+		"CASE":kClass_syntaxBlue(),
+		"FUNCTION":kClass_syntaxBlue(),
+		//MAGENTA STUFF
+		"STD_LOGIC_VECTOR":kClass_syntaxMagenta(),
+		"STD_LOGIC":kClass_syntaxMagenta(),
+		"IEEE":kClass_syntaxMagenta(),
+		"STD_LOGIC_1164":kClass_syntaxMagenta(),
+		"STD_LOGIC_ARITH":kClass_syntaxMagenta(),
+		"STD_LOGIC_UNSIGNED":kClass_syntaxMagenta(),
+		"STD_LOGIC_SIGNED":kClass_syntaxMagenta(),
+		//RED STUFF
+		"WORK":kClass_syntaxRed()
+		},
+	comment:
+		{
+		regularExpression:(new RegExp("--[^\n]*", "g")),
+		color: kClass_syntaxComment()
+		}
+	};
+}
+
+function getJavaScriptSyntaxColoring() {
+	return {
+	keyword:
+		{
+		//Blue stuff
+		"function":kClass_syntaxBlue(),
+		"var":kClass_syntaxBlue(),
+		"case":kClass_syntaxBlue(),
+		"return":kClass_syntaxBlue(),
+		"void":kClass_syntaxBlue(),
+		"debugger":kClass_syntaxBlue(),
+		"with":kClass_syntaxBlue(),
+		//Magenta stuff
+		"instanceof":kClass_syntaxMagenta(),
+		"typeof":kClass_syntaxMagenta(),
+		"this":kClass_syntaxMagenta(),
+		"default":kClass_syntaxMagenta(),
+		//Violet stuff
+		"new":kClass_syntaxViolet(),
+		"delete":kClass_syntaxViolet(),
+		"catch":kClass_syntaxViolet(),
+		"try":kClass_syntaxViolet(),
+		"throw":kClass_syntaxViolet(),
+		"finally":kClass_syntaxViolet(),
+		//Purple stuff
+		"break":kClass_syntaxPurple(),
+		"while":kClass_syntaxPurple(),
+		"if":kClass_syntaxPurple(),
+		"else":kClass_syntaxPurple(),
+		"switch":kClass_syntaxPurple(),
+		"continue":kClass_syntaxPurple(),
+		"do":kClass_syntaxPurple(),
+		"for":kClass_syntaxPurple(),
+		//Dark orange
+		"window":kClass_syntaxTurquoise(),
+		"document":kClass_syntaxTurquoise()
+		},//add more
+	comment:
+		{
+		regularExpression:(new RegExp("//[^\n]*", "g")),
+		color: kClass_syntaxComment()
+		}
+	};
+}
