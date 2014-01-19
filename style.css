@@ -242,9 +242,9 @@ h1#lessonSpace {
 }
 
 /*Syntax Colors*/
-.syntaxRed {color: red;}
-.syntaxGreen {color: green;}
-.syntaxBlue {color: blue;}
-.syntaxMagenta {color: magenta;}
-.syntaxPurple {color: purple;}
-.syntaxViolet {color: violet;}
+#codeSection .syntaxRed {color: red;}
+#codeSection .syntaxGreen {color: green;}
+#codeSection .syntaxBlue {color: blue;}
+#codeSection .syntaxMagenta {color: magenta;}
+#codeSection .syntaxPurple {color: purple;}
+#codeSection .syntaxViolet {color: violet;}

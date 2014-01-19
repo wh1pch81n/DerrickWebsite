@@ -895,8 +895,37 @@ function getJavaScriptSyntaxColoring() {
 	return {
 	keyword:
 		{
-		"function":kClass_syntaxMagenta(),
-		"var":kClass_syntaxViolet()},//add more
+		//Blue stuff
+//		"function":kClass_syntaxMagenta(),
+//		"var":kClass_syntaxViolet()
+//		case
+//		return
+//		void
+//		debugger
+//		for
+//		
+//		
+//		//Magenta stuff
+//		instanceof
+//		typeof
+//		this
+//		default
+//		//Violet stuff
+//		new
+//		delete
+//		catch
+//		try
+//		throw
+//		finally
+//		//Purple stuff
+//		break
+//		while
+//		if
+//		else
+//		switch
+//		continue
+		
+		},//add more
 	comment:
 		{
 		regularExpression:(new RegExp("//[^\n]*", "g")),
