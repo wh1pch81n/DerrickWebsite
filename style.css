@@ -225,7 +225,7 @@ h1#lessonSpace {
 }
 
 .newCode {
-	color: grey;
+	border-left: thick solid salmon;
 }
 
 .comment {
@@ -246,3 +246,5 @@ h1#lessonSpace {
 .syntaxGreen {color: green;}
 .syntaxBlue {color: blue;}
 .syntaxMagenta {color: magenta;}
+.syntaxPurple {color: purple;}
+.syntaxViolet {color: violet;}

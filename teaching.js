@@ -5,6 +5,8 @@ function kClass_syntaxRed(){return "syntaxRed";};
 function kClass_syntaxGreen(){return "syntaxGreen";};
 function kClass_syntaxBlue(){return "syntaxBlue";};
 function kClass_syntaxMagenta(){return "syntaxMagenta";};
+function kClass_syntaxPurple(){return "syntaxPurple";};
+function kClass_syntaxViolet(){return "syntaxViolet";};
 function kClass_syntaxComment(){return "comment";};
 
 /*
@@ -30,7 +32,7 @@ lessons:[
 tutorial:"JavaScript",
 syntaxColoring:
 	{
-	keyword:{"function":kClass_syntaxMagenta()},//add more
+	keyword:{"function":kClass_syntaxMagenta(), "var":kClass_syntaxViolet()},//add more
 	comment:{regularExpression:(new RegExp("//[^\n]*", "g")), color: kClass_syntaxComment()}
 	},
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
@@ -91,6 +93,10 @@ function initContent(parent) {
  
  @param path "the text at this URL will be used to generate the slideShowObject
  @param slideShowTitle "Title of the slide show"
+ @param syntaxColoring "An Object containing Color info"
+ 
+ syntaxColoring.keyword "a dictionary of keywords with color name"
+ syntaxColoring.comment "contains RegEx for single line comments and Comment colors"
  */
 function generateSlideShowFromFile(path, slideShowTitle, syntaxColoring) {
 	globalLesson.innerHTML = null;
@@ -146,22 +152,23 @@ function generateSlideShowFromFile(path, slideShowTitle, syntaxColoring) {
 			}
 		});
 	});
-	
 }
 
 /**
  replaces certain characters with ones more appropriate for slideShow
  
  @param line "the string that will get flitered of certain chars"
+ @param syntaxColoring "An Object containing Color info"
+ 
+ syntaxColoring.keyword "a dictionary of keywords with color name"
+ syntaxColoring.comment "contains RegEx for single line comments and Comment colors"
  */
 function filterChar(line, syntaxColoring) {
 	/**  Character swapping */
 	var replace_map = {
 		'`':"&emsp; ",
 		'<':"&lt;",
-		'>':"&gt;",
-		'/*':"<span class=\"comment\">", //not handled
-		'*/':"</span>"//not handled
+		'>':"&gt;"
 	};
 	
 	line = line.replace(new RegExp("[`<>]", "g"), function(match) {
@@ -170,10 +177,7 @@ function filterChar(line, syntaxColoring) {
 	
 	/**  Handle Keywords*/
 	for(var key in syntaxColoring.keyword) {
-		//alert(key);
-		line = line.replace(new RegExp(key, "g"), function(match){
-			//alert(syntaxHighlighting[match]);
-			//return "<span class=\"" + syntaxColoring.keyword[match] + "\">" + match + "</span>"
+		line = line.replace(new RegExp(key+"\\b", "g"), function(match){
 			return makeSpanWithClass(syntaxColoring.keyword[match], match);
 		});
 	}
@@ -181,7 +185,6 @@ function filterChar(line, syntaxColoring) {
 	/**  Handle single line Comments*/
 	line = line.replace(syntaxColoring.comment.regularExpression ,function(match) {
 		return makeSpanWithClass(syntaxColoring.comment.color, match);
-		//return "<span class=\"comment\">" + match + "</span>";
 	});
 	return line;
 }
