@@ -896,15 +896,15 @@ function getJavaScriptSyntaxColoring() {
 	keyword:
 		{
 		//Blue stuff
-//		"function":kClass_syntaxMagenta(),
-//		"var":kClass_syntaxViolet()
+		"function":kClass_syntaxBlue(),
+		"var":kClass_syntaxBlue()
 //		case
 //		return
 //		void
 //		debugger
+//		do
 //		for
-//		
-//		
+//		with
 //		//Magenta stuff
 //		instanceof
 //		typeof
@@ -924,7 +924,6 @@ function getJavaScriptSyntaxColoring() {
 //		else
 //		switch
 //		continue
-		
 		},//add more
 	comment:
 		{
