@@ -1,5 +1,12 @@
 var globalParent = null;
 var globalLesson = null;
+
+function kClass_syntaxRed(){return "syntaxRed";};
+function kClass_syntaxGreen(){return "syntaxGreen";};
+function kClass_syntaxBlue(){return "syntaxBlue";};
+function kClass_syntaxMagenta(){return "syntaxMagenta";};
+function kClass_syntaxComment(){return "comment";};
+
 /*
  And array of tutorial objects that hold references to
  the lessons
@@ -9,7 +16,11 @@ var globalLesson = null;
 var globalTutorialArr =
 [{
 tutorial:"VHDL",
- syntaxHighlighting:{"ENTITY":"comment", "ARCHITECTURE":"newCode"},//replace with better CSS colors classes
+syntaxColoring:
+	{
+	keyword:{"ENTITY":kClass_syntaxBlue(), "ARCHITECTURE":kClass_syntaxBlue()},//add more
+	comment:{regularExpression:(new RegExp("--[^\n]*", "g")), color: kClass_syntaxComment()}
+	},
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
 				 {value:vhdlLesson1, text:"1 - First Program"},
@@ -17,6 +28,11 @@ lessons:[
 				 ]
 },{
 tutorial:"JavaScript",
+syntaxColoring:
+	{
+	keyword:{"function":kClass_syntaxMagenta()},//add more
+	comment:{regularExpression:(new RegExp("//[^\n]*", "g")), color: kClass_syntaxComment()}
+	},
 tutorialFolder:"http://derrickho.co.nf/tutorialJavaScript/",
 lessons:[
 				 {value:javaScriptLesson0, text:"0 - Get Set Up"},
@@ -51,10 +67,10 @@ function initContent(parent) {
 						button.onclick = lesson_j.value;
 					} else if(lesson_j.hasOwnProperty("file")) {
 						button.file = tutorialFolder+lesson_j.file;
-				 button.syntaxHighlighting = tutorial.syntaxHighlighting;
+						button.syntaxColoring = tutorial.syntaxColoring;
 						button.onclick = function(){
 							location.hash = "#header";
-							generateSlideShowFromFile(this.file, "Lesson " + this.value, this.syntaxHighlighting);
+							generateSlideShowFromFile(this.file, "Lesson " + this.value, this.syntaxColoring);
 							location.hash = "#"+globalLesson.id;
 						};
 					} else if(lesson_j.hasOwnProperty("href")) {
@@ -76,20 +92,14 @@ function initContent(parent) {
  @param path "the text at this URL will be used to generate the slideShowObject
  @param slideShowTitle "Title of the slide show"
  */
-function generateSlideShowFromFile(path, slideShowTitle, syntaxHighlighting) {
+function generateSlideShowFromFile(path, slideShowTitle, syntaxColoring) {
 	globalLesson.innerHTML = null;
 	httpGet(path, function(textFromScript) {
 		makeSlideShowWithBlock(globalLesson, slideShowTitle, function (codeArr,flush, codeArrSplice, setHeader, setComment, tag, codeArrAppend, mkdhsh, slideshowAppend, loff, lon, sp, codeComment) {
+			
 			//parse script line by line
-													 textFromScript = filterChar(textFromScript);
-													 
-													 for(var key in syntaxHighlighting) {
-													 //alert(key);
-													 textFromScript = textFromScript.replace(new RegExp(key, "g"), function(match){
-																																	 //alert(syntaxHighlighting[match]);
-																																	 return "<span class=\"" + syntaxHighlighting[match] + "\">" + match + "</span>"});
-													 }
-			var fileArr = textFromScript.split('\n');
+			var fileArr = filterChar(textFromScript, syntaxColoring).split('\n');
+
 			var action = null;
 			for (var i = 0; i < fileArr.length;++i) {
 				if(fileArr[i].indexOf("@code") >= 0) {
@@ -144,7 +154,8 @@ function generateSlideShowFromFile(path, slideShowTitle, syntaxHighlighting) {
  
  @param line "the string that will get flitered of certain chars"
  */
-function filterChar(line) {
+function filterChar(line, syntaxColoring) {
+	/**  Character swapping */
 	var replace_map = {
 		'`':"&emsp; ",
 		'<':"&lt;",
@@ -153,14 +164,30 @@ function filterChar(line) {
 		'*/':"</span>"//not handled
 	};
 	
-	line = line.replace(/[`<>]/g, function(match) {
+	line = line.replace(new RegExp("[`<>]", "g"), function(match) {
 		return replace_map[match];
 	});
 	
-	line = line.replace(/\/\/[^\n]*/g,function(match) { // handle slash slash comments
-		return "<span class=\"comment\">" + match + "</span>";
+	/**  Handle Keywords*/
+	for(var key in syntaxColoring.keyword) {
+		//alert(key);
+		line = line.replace(new RegExp(key, "g"), function(match){
+			//alert(syntaxHighlighting[match]);
+			//return "<span class=\"" + syntaxColoring.keyword[match] + "\">" + match + "</span>"
+			return makeSpanWithClass(syntaxColoring.keyword[match], match);
+		});
+	}
+	
+	/**  Handle single line Comments*/
+	line = line.replace(syntaxColoring.comment.regularExpression ,function(match) {
+		return makeSpanWithClass(syntaxColoring.comment.color, match);
+		//return "<span class=\"comment\">" + match + "</span>";
 	});
 	return line;
+}
+
+function makeSpanWithClass(className, innerHTML) {
+	return "<span class=\"" + className + "\">" + innerHTML + "</span>"
 }
 
 /*
