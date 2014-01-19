@@ -18,18 +18,7 @@ function kClass_syntaxComment(){return "comment";};
 var globalTutorialArr =
 [{
 tutorial:"VHDL",
-syntaxColoring:
-	{
-	keyword:{
-		//BLUE STUFF
-		"LIBRARY":kClass_syntaxBlue(),"USE":kClass_syntaxBlue(),"ALL":kClass_syntaxBlue(),"ENTITY":kClass_syntaxBlue(), "ARCHITECTURE":kClass_syntaxBlue(),"PACKAGE":kClass_syntaxBlue(),"IS":kClass_syntaxBlue(),"COMPONENT":kClass_syntaxBlue(),"GENERIC":kClass_syntaxBlue(),"NATURAL":kClass_syntaxBlue(),"PORT":kClass_syntaxBlue(),"IN":kClass_syntaxBlue(),"OUT":kClass_syntaxBlue(),"INOUT":kClass_syntaxBlue(),"TO":kClass_syntaxBlue(),"DOWNTO":kClass_syntaxBlue(),"END":kClass_syntaxBlue(),"OF":kClass_syntaxBlue(),"SIGNAL":kClass_syntaxBlue(),"OTHERS":kClass_syntaxBlue(),"TYPE":kClass_syntaxBlue(),"CONSTANT":kClass_syntaxBlue(),"BEGIN":kClass_syntaxBlue(),"WHEN":kClass_syntaxBlue(),"ELSE":kClass_syntaxBlue(),"IF":kClass_syntaxBlue(),"ELSIF":kClass_syntaxBlue(),"THEN":kClass_syntaxBlue(),"NOT":kClass_syntaxBlue(),"AND":kClass_syntaxBlue(),"OR":kClass_syntaxBlue(),"NAND":kClass_syntaxBlue(),"NOR":kClass_syntaxBlue(),"XOR":kClass_syntaxBlue(),"XNOR":kClass_syntaxBlue(),"PROCESS":kClass_syntaxBlue(),"ARRAY":kClass_syntaxBlue(),"RANGE":kClass_syntaxBlue(),"CASE":kClass_syntaxBlue(),
-		//MAGENTA STUFF
-		"STD_LOGIC_VECTOR":kClass_syntaxMagenta(),"STD_LOGIC":kClass_syntaxMagenta(),"IEEE":kClass_syntaxMagenta(),"STD_LOGIC_1164":kClass_syntaxMagenta(),"STD_LOGIC_ARITH":kClass_syntaxMagenta(),"STD_LOGIC_UNSIGNED":kClass_syntaxMagenta(),"STD_LOGIC_SIGNED":kClass_syntaxMagenta(),
-		//RED STUFF
-		"WORK":kClass_syntaxRed(),
-	},//add more
-	comment:{regularExpression:(new RegExp("--[^\n]*", "g")), color: kClass_syntaxComment()}
-	},
+syntaxColoring:getVHDLSyntaxColoring(),
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
 				 {value:vhdlLesson1, text:"1 - First Program"},
@@ -842,3 +831,16 @@ function makeSlideShowWithBlock(parent, slideTitle, block) {
 	slideshow.goToSlide(0);
 };
 
+function getVHDLSyntaxColoring() {
+	return {
+	keyword:{
+		//BLUE STUFF
+		"LIBRARY":kClass_syntaxBlue(),"USE":kClass_syntaxBlue(),"ALL":kClass_syntaxBlue(),"ENTITY":kClass_syntaxBlue(), "ARCHITECTURE":kClass_syntaxBlue(),"PACKAGE":kClass_syntaxBlue(),"IS":kClass_syntaxBlue(),"COMPONENT":kClass_syntaxBlue(),"GENERIC":kClass_syntaxBlue(),"NATURAL":kClass_syntaxBlue(),"PORT":kClass_syntaxBlue(),"IN":kClass_syntaxBlue(),"OUT":kClass_syntaxBlue(),"INOUT":kClass_syntaxBlue(),"TO":kClass_syntaxBlue(),"DOWNTO":kClass_syntaxBlue(),"END":kClass_syntaxBlue(),"OF":kClass_syntaxBlue(),"SIGNAL":kClass_syntaxBlue(),"OTHERS":kClass_syntaxBlue(),"TYPE":kClass_syntaxBlue(),"CONSTANT":kClass_syntaxBlue(),"BEGIN":kClass_syntaxBlue(),"WHEN":kClass_syntaxBlue(),"ELSE":kClass_syntaxBlue(),"IF":kClass_syntaxBlue(),"ELSIF":kClass_syntaxBlue(),"THEN":kClass_syntaxBlue(),"NOT":kClass_syntaxBlue(),"AND":kClass_syntaxBlue(),"OR":kClass_syntaxBlue(),"NAND":kClass_syntaxBlue(),"NOR":kClass_syntaxBlue(),"XOR":kClass_syntaxBlue(),"XNOR":kClass_syntaxBlue(),"PROCESS":kClass_syntaxBlue(),"ARRAY":kClass_syntaxBlue(),"RANGE":kClass_syntaxBlue(),"CASE":kClass_syntaxBlue(),
+		//MAGENTA STUFF
+		"STD_LOGIC_VECTOR":kClass_syntaxMagenta(),"STD_LOGIC":kClass_syntaxMagenta(),"IEEE":kClass_syntaxMagenta(),"STD_LOGIC_1164":kClass_syntaxMagenta(),"STD_LOGIC_ARITH":kClass_syntaxMagenta(),"STD_LOGIC_UNSIGNED":kClass_syntaxMagenta(),"STD_LOGIC_SIGNED":kClass_syntaxMagenta(),
+		//RED STUFF
+		"WORK":kClass_syntaxRed()
+	},//add more
+	comment:{regularExpression:(new RegExp("--[^\n]*", "g")), color: kClass_syntaxComment()}
+	};
+}
