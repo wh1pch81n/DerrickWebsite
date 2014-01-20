@@ -1,0 +1,1031 @@
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE implementation OF myAnd_1b IS
+`BEGIN
+
+`END ARCHITECTURE implementation;
+@header
+Let's Make An AND Gate
+@comment
+To make the AND Gate, first we start off with skeleton code.  The entity is given the name "myAnd_1b" to help distinguish it and to help indicate that it is only good for comparing two different bits.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+~``a0_i,
+~``a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+~``s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE implementation OF myAnd_1b IS
+`BEGIN
+~`s_o <= a0_i AND a1_i;
+`END ARCHITECTURE implementation;
+@header
+Fleshing It Out
+@comment
+The inputs are two STD_LOGIC_VECTORs with a length of one.  The output has the same size.
+
+The implementation simply uses the the built in AND operator.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE implementation OF myAnd_1b IS
+`BEGIN
+``s_o <= a0_i AND a1_i;
+`END ARCHITECTURE implementation;
+@header
+What Happens?
+@comment
+The AND gate requires that both inputs must be "1" in order to recieve an output of "1".  Any other combination will output "0".
+
+In otherwords:
+
+"1" AND "1" returns "1"
+"0" AND "1" returns "0"
+"1" AND "0" returns "0"
+"0" AND "0" returns "0"
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+~``a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+```-- output
+~``s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE implementation OF myAnd_1b IS
+`BEGIN
+``s_o <= a0_i AND a1_i;
+`END ARCHITECTURE implementation;
+@header
+Need A Bigger Boat
+@comment
+How shall we turn it from a 1 bit AND machine to an 8 bit AND machine?
+
+Change it from "0 DOWNTO 0" to "7 DOWNTO 0".
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+~ENTITY myAnd_8b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+~END ENTITY myAnd_8b;
+
+~ARCHITECTURE implementation OF myAnd_8b IS
+`BEGIN
+``s_o <= a0_i AND a1_i;
+`END ARCHITECTURE implementation;
+@header
+Rename It
+@comment
+To keep things congruent, I should also change the name of the entity so that it matches.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_8b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_8b;
+
+`ARCHITECTURE implementation OF myAnd_8b IS
+`BEGIN
+``s_o <= a0_i AND a1_i;
+`END ARCHITECTURE implementation;
+@header
+That Easy?
+@comment
+Yes.
+
+But I suppose that is because the AND operator is already built in.
+
+How do we make our own?
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+`BEGIN
+
+`END ARCHITECTURE lut;
+@header
+Back To One
+@comment
+Lets put our focus back to the 1 bit AND gate.
+
+Notice how I have renamed the ARCHITECTURE from "implementation" to "lut".
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+~`TYPE col IS ARRAY (0 TO 1) OF 
+~`````STD_LOGIC_VECTOR(0 DOWNTO 0);
+`BEGIN
+
+`END ARCHITECTURE lut;
+@header
+An Array By Any Other Name...
+@comment
+This is how we create an array.  It is an array of STD_LOGIC_VECTORs.  The size of the array is 2 and the size of the STD_LOGIC_VECTOR is 1.
+
+However, this is one dimensional and it would be in our best interest to make a two dimensional array.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+~`TYPE row IS ARRAY (0 TO 1) OF
+~`````col;
+`BEGIN
+
+`END ARCHITECTURE lut;
+@header
+An Array Of Array
+@comment
+A "row" is an ARRAY of "col".  We now have a two dimensional array, but rules of VHDL say we need something to interface it.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+~`SIGNAL lut: row;
+`BEGIN
+
+`END ARCHITECTURE lut;
+@header
+Array Interface
+@comment
+A SIGNAL is an internal wire.  In this case we name it "lut" and have it interface with "row".
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+~`SIGNAL lut: row:= 
+~```(
+~````("0", "0"),
+~````("0", "1")
+~```);
+`BEGIN
+
+`END ARCHITECTURE lut;
+@header
+Defaults
+@comment
+To make our AND gate useful, let's give it some default values.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+~`CONSTANT lut: row:= 
+````(
+`````("0", "0"),
+`````("0", "1")
+````);
+`BEGIN
+
+`END ARCHITECTURE lut;
+@header
+Don't Change
+@comment
+While we are at it, let's explicitly say that our signal is a constant value.  We want the results of our AND gate to be consistent.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(
+`````("0", "0"),
+`````("0", "1")
+````);
+`BEGIN
+~`s_o <= lut(a0_i)(a1_i);
+`END ARCHITECTURE lut;
+@header
+Use It
+@comment
+Accessing the contents of the array is similar to accessing arrays other other languages like C.  The C language would use square brackets (ie lut[1][2]), but in VHDL we use parenthesis.
+
+a0_i will take us to the correct row. 
+a1_i will take us to the correct col.
+ 
+But there is a problem...
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(
+`````("0", "0"),
+`````("0", "1")
+````);
+`BEGIN
+``s_o <= lut(a0_i)(a1_i);
+`END ARCHITECTURE lut;
+@header
+Wrong Types
+@comment
+The array interface (ie lut) only excepts a signal of type INTEGER.  But we are giving it STD_LOGIC_VECTORs for arguments.  
+
+We need to convert a0_i and a1_i into INTEGERs.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+~USE IEEE.STD_LOGIC_ARITH.ALL;
+~USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(
+`````("0", "0"),
+`````("0", "1")
+````);
+`BEGIN
+``s_o <= lut(a0_i)(a1_i);
+`END ARCHITECTURE lut;
+@header
+Library
+@comment
+We can use these librarys to give us a special function called CONV_INTEGER.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE IEEE.STD_LOGIC_ARITH.ALL;
+`USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```-- inputs
+```a0_i,
+```a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+
+```-- output
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(
+`````("0", "0"),
+`````("0", "1")
+````);
+`BEGIN
+~`s_o <=
+````lut(CONV_INTEGER(a0_i))(CONV_INTEGER(a1_i));
+`END ARCHITECTURE lut;
+@header
+CONV_INTEGER
+@comment
+Using the function to convert an STD_LOGIC_VECTOR into an INTEGER.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE IEEE.STD_LOGIC_ARITH.ALL;
+`USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(("0", "0"),
+`````("0", "1"));
+`BEGIN
+``s_o <=
+````lut(CONV_INTEGER(a0_i))(CONV_INTEGER(a1_i));
+`END ARCHITECTURE lut;
+@header
+How do me make it bigger?
+@comment
+You might guess that it would be as easy as making the STD_LOGIC_VECTOR bigger followed by making "col", "row", and "lut" larger.
+
+You wouldn't be wrong, but it may be harder on the eyes (especially if you have to make a lot of variable length AND gates.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE IEEE.STD_LOGIC_ARITH.ALL;
+`USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(("0", "0"),
+`````("0", "1"));
+`BEGIN
+``s_o <=
+````lut(CONV_INTEGER(a0_i))(CONV_INTEGER(a1_i));
+`END ARCHITECTURE lut;
+@header
+The Plan
+@comment
+Here is the plan.  We shall make a header file (ie interface) for this ENTITY.  This will allow other ENTITYs to use myAnd_1b.
+
+To create myAnd_8b, We will need to create 8 instances of myAnd_1b and then connect them all together using SIGNALs (ie wires).
+@addSlide
+@code
+--================================
+--Interface
+----------------------------------
+~LIBRARY IEEE;
+~USE IEEE.STD_LOGIC_1164.ALL;
+
+--================================
+--Implementation
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE IEEE.STD_LOGIC_ARITH.ALL;
+`USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(("0", "0"),
+`````("0", "1"));
+`BEGIN
+``s_o <=
+````lut(CONV_INTEGER(a0_i))(CONV_INTEGER(a1_i));
+`END ARCHITECTURE lut;
+@header
+Let's Make The Interface
+@comment
+Separating the interface from the implementation.
+
+Adding libraries.
+@addSlide
+@code
+--================================
+--Interface
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+~PACKAGE myAnd_1b_interface IS
+
+
+
+
+
+
+~END PACKAGE myAnd_1b_interface;
+
+--================================
+--Implementation
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE IEEE.STD_LOGIC_ARITH.ALL;
+`USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(("0", "0"),
+`````("0", "1"));
+`BEGIN
+``s_o <=
+````lut(CONV_INTEGER(a0_i))(CONV_INTEGER(a1_i));
+`END ARCHITECTURE lut;
+@header
+Let's Make The Interface
+@comment
+Let's add a PACKAGE.
+@addSlide
+@code
+--================================
+--Interface
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`PACKAGE myAnd_1b_interface IS
+~`COMPONENT myAnd_1b IS
+
+
+
+
+~`END COMPONENT myAnd_1b;
+`END PACKAGE myAnd_1b_interface;
+
+--================================
+--Implementation
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE IEEE.STD_LOGIC_ARITH.ALL;
+`USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(("0", "0"),
+`````("0", "1"));
+`BEGIN
+``s_o <=
+````lut(CONV_INTEGER(a0_i))(CONV_INTEGER(a1_i));
+`END ARCHITECTURE lut;
+@header
+Let's Make The Interface
+@comment
+Make the COMPONENT.
+@addSlide
+@code
+--================================
+--Interface
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`PACKAGE myAnd_1b_interface IS
+``COMPONENT myAnd_1b IS
+~``PORT(
+~```a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+~```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+~``);
+``END COMPONENT myAnd_1b;
+`END PACKAGE myAnd_1b_interface;
+
+--================================
+--Implementation
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE IEEE.STD_LOGIC_ARITH.ALL;
+`USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(("0", "0"),
+`````("0", "1"));
+`BEGIN
+``s_o <=
+````lut(CONV_INTEGER(a0_i))(CONV_INTEGER(a1_i));
+`END ARCHITECTURE lut;
+@header
+Let's Make The Interface
+@comment
+Add the PORTs.
+@addSlide
+@code
+--================================
+--Interface
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`PACKAGE myAnd_1b_interface IS
+``COMPONENT myAnd_1b IS
+```PORT(
+````a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+````s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+```);
+``END COMPONENT myAnd_1b;
+`END PACKAGE myAnd_1b_interface;
+
+--================================
+--Implementation
+----------------------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE IEEE.STD_LOGIC_ARITH.ALL;
+`USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+`ENTITY myAnd_1b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+``);
+`END ENTITY myAnd_1b;
+
+`ARCHITECTURE lut OF myAnd_1b IS
+``TYPE col IS ARRAY (0 TO 1) OF 
+``````STD_LOGIC_VECTOR(0 DOWNTO 0);
+``TYPE row IS ARRAY (0 TO 1) OF
+``````col;
+``CONSTANT lut: row:= 
+````(("0", "0"),
+`````("0", "1"));
+`BEGIN
+``s_o <=
+````lut(CONV_INTEGER(a0_i))(CONV_INTEGER(a1_i));
+`END ARCHITECTURE lut;
+@header
+Now What?
+@comment
+Creating this PACKAGE allows other ENTITYs to use it.  PACKAGEs do more than this, but that power is beyond the scope of this tutorial.
+
+We shall now segue to the creation of myAnd_8b.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY myAnd_8b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_8b;
+
+`ARCHITECTURE beh OF myAnd_8b IS
+`BEGIN
+
+`END ARCHITECTURE beh;
+@header
+Skeleton Code
+@comment
+The skeleton code for myAnd_8b.  The name of the entity is conguent with the STD_LOGIC_VECTOR size.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+~USE WORK.myAnd_1b_interface.ALL;
+
+`ENTITY myAnd_8b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_8b;
+
+`ARCHITECTURE beh OF myAnd_8b IS
+`BEGIN
+
+`END ARCHITECTURE beh;
+@header
+Sharp Include
+@comment
+Adding the PACKAGE I created earlier.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+~USE WORK.myAnd_1b_interface.ALL;
+
+`ENTITY myAnd_8b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_8b;
+
+`ARCHITECTURE beh OF myAnd_8b IS
+`BEGIN
+~`and0:myAnd_1b 
+~``PORT MAP();
+~`and1:myAnd_1b 
+~``PORT MAP();
+~`and2:myAnd_1b 
+~``PORT MAP();
+~`and3:myAnd_1b 
+~``PORT MAP();
+~`and4:myAnd_1b 
+~``PORT MAP();
+~`and5:myAnd_1b 
+~``PORT MAP();
+~`and6:myAnd_1b 
+~``PORT MAP();
+~`and7:myAnd_1b 
+~``PORT MAP();
+`END ARCHITECTURE beh;
+@header
+Create 8 Instances
+@comment
+An 8 bit AND gate can be implemented with eight 1 bit AND gates.
+
+Therefore I create 8 instances of a single bit AND gate.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+~USE WORK.myAnd_1b_interface.ALL;
+
+`ENTITY myAnd_8b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_8b;
+
+`ARCHITECTURE beh OF myAnd_8b IS
+`BEGIN
+``and0:myAnd_1b 
+~``PORT MAP(a0_i(0),a1_i(0),s_o(0));
+``and1:myAnd_1b 
+~``PORT MAP(a0_i(1),a1_i(1),s_o(1));
+``and2:myAnd_1b 
+~``PORT MAP(a0_i(2),a1_i(2),s_o(2));
+``and3:myAnd_1b 
+~``PORT MAP(a0_i(3),a1_i(3),s_o(3));
+``and4:myAnd_1b 
+~``PORT MAP(a0_i(4),a1_i(4),s_o(4));
+``and5:myAnd_1b 
+~``PORT MAP(a0_i(5),a1_i(5),s_o(5));
+``and6:myAnd_1b 
+~``PORT MAP(a0_i(6),a1_i(6),s_o(6));
+``and7:myAnd_1b 
+~``PORT MAP(a0_i(7),a1_i(7),s_o(7));
+`END ARCHITECTURE beh;
+@header
+Connect
+@comment
+The PORT MAP is the interface to the PORTs of the myAnd_1b entity. The first two arguments are the inputs and the third argument is the output.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+~USE WORK.myAnd_1b_interface.ALL;
+
+`ENTITY myAnd_8b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_8b;
+
+`ARCHITECTURE beh OF myAnd_8b IS
+`BEGIN
+``and0:myAnd_1b PORT MAP(
+~``a0_i(0) => a0_i(0),
+~``a1_i(0) => a1_i(0),
+~``s_o(0) => s_o(0)
+``);
+``and1:myAnd_1b PORT MAP(
+~``a0_i(0) => a0_i(1),
+~``a1_i(0) => a1_i(1),
+~``s_o(0) => s_o(1)
+``);
+``and2:myAnd_1b PORT MAP(
+~``a0_i(0) => a0_i(2),
+~``a1_i(0) => a1_i(2),
+~``s_o(0) => s_o(2)
+``);
+``and3:myAnd_1b PORT MAP(
+~``a0_i(0) => a0_i(3),
+~``a1_i(0) => a1_i(3),
+~``s_o(0) => s_o(3)
+``);
+``and4:myAnd_1b PORT MAP(
+~``a0_i(0) => a0_i(4),
+~``a1_i(0) => a1_i(4),
+~``s_o(0) => s_o(4)
+``);
+``and5:myAnd_1b PORT MAP(
+~``a0_i(0) => a0_i(5),
+~``a1_i(0) => a1_i(5),
+~``s_o(0) => s_o(5)
+``);
+``and6:myAnd_1b PORT MAP(
+~``a0_i(0) => a0_i(6),
+~``a1_i(0) => a1_i(6),
+~``s_o(0) => s_o(6)
+``);
+``and7:myAnd_1b PORT MAP(
+~``a0_i(0) => a0_i(7),
+~``a1_i(0) => a1_i(7),
+~``s_o(0) => s_o(7)
+``);
+`END ARCHITECTURE beh;
+@header
+One last thing
+@comment
+I need to be specific about which PORT of myAnd_1b I am using.
+
+When I grab a bit from myAnd_8b's input a0_i (ie a0_i(3)) it will give me a STD_LOGIC.  This would make it incompatible with the a0_i of myAnd_1b which uses STD_LOGIC_VECTOR.  Therefore I use this trick to set the STD_LOGIC inside:
+
+a0_i(0) =>
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+~USE WORK.myAnd_1b_interface.ALL;
+
+`ENTITY myAnd_8b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_8b;
+
+`ARCHITECTURE beh OF myAnd_8b IS
+`BEGIN
+~`genInstance:
+~``FOR I IN 0 TO 7 GENERATE
+~``BEGIN
+~```andn:myAnd_1b PORT MAP(
+~```a0_i(0) => a0_i(I),
+~```a1_i(0) => a1_i(I),
+~```s_o(0) => s_o(I)
+~```);
+~``END GENERATE genInstance;
+`END ARCHITECTURE beh;
+@header
+Please tell me I can loop it
+@comment
+You can't.  But you can generate 8 instances with the GENERATE statement.
+@addSlide
+@code
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+~USE WORK.myAnd_1b_interface.ALL;
+
+`ENTITY myAnd_8b IS
+``PORT(
+```a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+``);
+`END ENTITY myAnd_8b;
+
+`ARCHITECTURE beh OF myAnd_8b IS
+`BEGIN
+~`genInstance:
+~``FOR I IN 0 TO 7 GENERATE
+~``BEGIN
+~```andn:myAnd_1b PORT MAP(
+~```a0_i(0) => a0_i(I),
+~```a1_i(0) => a1_i(I),
+~```s_o(0) => s_o(I)
+~```);
+~``END GENERATE genInstance;
+`END ARCHITECTURE beh;
+@header
+Make A PACKAGE
+@comment
+(TODO: implement it in the code section)
+(TODO: finish this comment)
+@addSlide
+@question
+What is an STD_LOGIC_VECTOR?
+@answer
+STD_LOGIC_VECTORs are arrays of STD_LOGIC.
+@question
+What is an STD_LOGIC?
+@answer
+An STD_LOGIC is similar to a BIT, except that STD_LOGIC covers more states than "1" and "0".
+@question
+STD_LOGIC covers more than "1" and "0"?  What are those other states?
+@question
+Are those other states important?
+@question
+Why did you rename the ARCHITECTURE from "implementation" to "lut"?
+@answer
+You can have multiple ARCHITECTUREs if you wanted to.  A good name can help descript what kind of implementation it is.  Since we ended up using a lut (ie Loop Up Table) I decided to name it "lut".
+@question
+Why is it called WORK?
+@answer
+We use the library "IEEE" and it contains many wonderful PACKAGES.  WORK is the default name of our local library.  Inside our local library is the PACKAGE we created in this lesson.
+@question
+Excuse me, What? "and0: myAnd_1b port map();"
+@end
