@@ -1,0 +1,17 @@
+@code
+<!doctype html>
+<html>
+`<head>
+``<meta charset="utf-8">
+``<script></script>
+``<style></style>
+`</head>
+`<body>
+`</body>
+</html>
+@header
+Revisit the 'ole html
+@comment
+In this lesson we shall learn about canvas, function creation, method creation, and Object creation.
+@addSlide
+@end
