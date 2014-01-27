@@ -1,17 +1,63 @@
 @code
-<!doctype html>
-<html>
-`<head>
-``<meta charset="utf-8">
-``<script></script>
-``<style></style>
-`</head>
-`<body>
-`</body>
-</html>
+`<!doctype html>
+`<html>
+``<head>
+```<meta charset="utf-8">
+```<script></script>
+```<style></style>
+``</head>
+``<body>
+``</body>
+`</html>
 @header
 Revisit the 'ole html
 @comment
 In this lesson we shall learn about canvas, function creation, method creation, and Object creation.
+@addSlide
+@code
+`<!doctype html>
+`<html>
+``<head>
+```<meta charset="utf-8">
+```<script></script>
+```<style></style>
+``</head>
+``<body>
+~``<canvas id="drawingBoard" width=640 height=480>
+
+~``</canvas>
+``</body>
+`</html>
+@header
+Canvas
+@comment
+Add the following code to create a "canvas" element.  The "canvas" is an element that gives us the ability to draw basic lines and shapes.
+
+Go ahead and run the code.
+@addSlide
+@code
+`<!doctype html>
+`<html>
+``<head>
+```<meta charset="utf-8">
+```<script></script>
+```<style>
+~```canvas {
+~````border: thin solid black;
+~```}
+```</style>
+``</head>
+``<body>
+```<canvas id="drawingBoard" width=640 height=480>
+
+```</canvas>
+``</body>
+`</html>
+@header
+It's Blank...
+@comment
+Don't worry, nothing is broken.  The canvas is just the same color as the default background.  
+
+Add a border around the canvas to help it stand out.
 @addSlide
 @end
