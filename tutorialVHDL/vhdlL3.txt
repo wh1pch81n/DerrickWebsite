@@ -41,7 +41,7 @@ Fleshing It Out
 @comment
 The inputs are two STD_LOGIC_VECTORs with a length of one.  The output has the same size.
 
-The implementation simply uses the the built in AND operator.
+The implementation simply uses the the built-in AND operator.
 @addSlide
 @code
 `LIBRARY IEEE;
@@ -148,7 +148,7 @@ That Easy?
 @comment
 Yes.
 
-But I suppose that is because the AND operator is already built in.
+But I suppose that is because the AND operator is already built-in.
 
 How do we make our own?
 @addSlide
@@ -764,6 +764,8 @@ Add the PORTs.
 @header
 Now What?
 @comment
+Notice that the COMPONENT looks pretty much the same as an ENTITY.  
+
 Creating this PACKAGE allows other ENTITYs to use it.  PACKAGEs do more than this, but that power is beyond the scope of this tutorial.
 
 We shall now segue to the creation of myAnd_8b.
@@ -980,16 +982,16 @@ You can't.  But you can generate 8 instances with the GENERATE statement.
 --====================
 --Interface
 ----------------------
-`LIBRARY IEEE;
-`USE IEEE.STD_LOGIC_1164.ALL;
-`PACKAGE myAnd_8b_interface IS
-``COMPONENT myAnd_8b IS
-```PORT(
-````a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-````s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
-```);
-``END COMPONENT myAnd_8b;
-`END PACKAGE myAnd_8b_interface;
+~LIBRARY IEEE;
+~USE IEEE.STD_LOGIC_1164.ALL;
+~PACKAGE myAnd_8b_interface IS
+~`COMPONENT myAnd_8b IS
+~``PORT(
+~```a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+~```s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+~``);
+~`END COMPONENT myAnd_8b;
+~END PACKAGE myAnd_8b_interface;
 
 --====================
 --Implementation
@@ -1033,21 +1035,52 @@ An STD_LOGIC is similar to a BIT, except that STD_LOGIC covers more states than 
 @question
 STD_LOGIC covers more than "1" and "0"?  What are those other states?
 @answer
+(Answer reproduced from source: http://vhdlguru.blogspot.com/2010/03/what-is-difference-between-stdlogic-and.html)
 
+BIT has 2 values: '0' and '1'.
+
+STD_LOGIC is defined in the library std_logic_1164. This is a nine valued logic system.
+It has 9 values: 'U', 'X', '0', '1', 'Z', 'W', 'L' ,'H' and '-'.
+The meaning of each of these characters are:
+U = uninitialized
+X = unknown - a multisource line is driven '0' and '1' simultaneously (*)
+0 = logic 0 
+1 = logic 1 
+Z = high impedance (tri state)
+W = weak unknown
+L = weak "0"
+H = weak "1"
+-  = dont care
+
+Type std_logic is an unresolved type because of 'U','Z' etc.  It is illegal to have a multi-source signal in VHDL.  So use 'bit' logic only when the signals in the design doesn't have multi sources.  If you are unsure about this then declare the signals as std_logic or std_logic_vector, because then you will be able to get errors in the compilation stage itself.
+But many of the operators such as shift operators cannot be used on 'std_logic_vector' type.  So you may need to convert them to bit_vector before using shift operations.  One example is given below:
+--example of how to shift a std_logic signal : right shifting logically by 2 bits.
+--count is std_logic_vector.
+output <= To_StdLogicVector(to_bitvector(count) srl 2);
+--to_bitvector converts Std_Logic_Vector to bit_vector.
+--To_StdLogicVector converts bit_vector to Std_Logic_Vector.
+
+Note :- Remember that use "BIT" logic type only when you are sure that the signals are NOT multi sourced.
+ BIT_VECTOR is an array of BIT's.  Similarly STD_LOGIC_VECTOR is an array of std_logic type.
 @question
 Are those other states important?
 @answer
-
+In simulation, they can give additional feedback.  However, in synthesis, "1" and "0" are the only detectable states.
 @question
 Why did you rename the ARCHITECTURE from "implementation" to "lut"?
 @answer
-You can have multiple ARCHITECTUREs if you wanted to.  A good name can help descript what kind of implementation it is.  Since we ended up using a lut (ie Loop Up Table) I decided to name it "lut".
+You can have multiple ARCHITECTUREs if you wanted to.  But in the name of simplicity we shall stick to just one for now.  A good name can help describe what kind of implementation it is.  Since we ended up using a lut (ie Loop Up Table) I decided to name it "lut".
 @question
 Why is it called WORK?
 @answer
 We use the library "IEEE" and it contains many wonderful PACKAGES.  WORK is the default name of our local library.  Inside our local library is the PACKAGE we created in this lesson.
 @question
-Excuse me, What? "and0: myAnd_1b port map();"
+Excuse me, What? "and0: myAnd_1b port map(...);"
 @answer
+This line of code allows you to create a new instance of myAnd_1b and use it.
+Let's break it down into 3 parts.
 
+1) and0 is the instance name.
+2) myAnd_1b is the name of the entity. It is analogous to a data type in software languages.
+3) port map(...) is the place where you put the arguments.
 @end
