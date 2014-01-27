@@ -26,7 +26,8 @@ syntaxColoring:getVHDLSyntaxColoring(),
 tutorialFolder:"http://derrickho.co.nf/tutorialVHDL/",
 lessons:[
 				 {value:vhdlLesson1, text:"1 - First Program"},
-				 {file:"vhdlL2.txt", text:"2 - Multiple Ports"}
+				 {file:"vhdlL2.txt", text:"2 - Multiple Ports"},
+				 {file:"vhdlL3.txt", text:"3 - Arrays, Packages, & Generate"},
 				 ]
 },{
 tutorial:"JavaScript",
@@ -884,6 +885,7 @@ function getVHDLSyntaxColoring() {
 		"STD_LOGIC_ARITH":kClass_syntaxMagenta(),
 		"STD_LOGIC_UNSIGNED":kClass_syntaxMagenta(),
 		"STD_LOGIC_SIGNED":kClass_syntaxMagenta(),
+		"CONV_INTEGER":kClass_syntaxMagenta(),
 		//RED STUFF
 		"WORK":kClass_syntaxRed()
 		},
