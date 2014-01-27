@@ -977,9 +977,26 @@ Please tell me I can loop it
 You can't.  But you can generate 8 instances with the GENERATE statement.
 @addSlide
 @code
+--====================
+--Interface
+----------------------
 `LIBRARY IEEE;
 `USE IEEE.STD_LOGIC_1164.ALL;
-~USE WORK.myAnd_1b_interface.ALL;
+`PACKAGE myAnd_8b_interface IS
+``COMPONENT myAnd_8b IS
+```PORT(
+````a0_i, a1_i: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+````s_o: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+```);
+``END COMPONENT myAnd_8b;
+`END PACKAGE myAnd_8b_interface;
+
+--====================
+--Implementation
+----------------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`USE WORK.myAnd_1b_interface.ALL;
 
 `ENTITY myAnd_8b IS
 ``PORT(
@@ -990,21 +1007,20 @@ You can't.  But you can generate 8 instances with the GENERATE statement.
 
 `ARCHITECTURE beh OF myAnd_8b IS
 `BEGIN
-~`genInstance:
-~``FOR I IN 0 TO 7 GENERATE
-~``BEGIN
-~```andn:myAnd_1b PORT MAP(
-~```a0_i(0) => a0_i(I),
-~```a1_i(0) => a1_i(I),
-~```s_o(0) => s_o(I)
-~```);
-~``END GENERATE genInstance;
+``genInstance:
+```FOR I IN 0 TO 7 GENERATE
+```BEGIN
+````andn:myAnd_1b PORT MAP(
+````a0_i(0) => a0_i(I),
+```a1_i(0) => a1_i(I),
+````s_o(0) => s_o(I)
+````);
+```END GENERATE genInstance;
 `END ARCHITECTURE beh;
 @header
 Make A PACKAGE
 @comment
-(TODO: implement it in the code section)
-(TODO: finish this comment)
+You have seen this before.  I have added a PACKAGE called myAnd_8b_interface so that other entities may use my 8-bit AND gate.
 @addSlide
 @question
 What is an STD_LOGIC_VECTOR?
@@ -1016,8 +1032,12 @@ What is an STD_LOGIC?
 An STD_LOGIC is similar to a BIT, except that STD_LOGIC covers more states than "1" and "0".
 @question
 STD_LOGIC covers more than "1" and "0"?  What are those other states?
+@answer
+
 @question
 Are those other states important?
+@answer
+
 @question
 Why did you rename the ARCHITECTURE from "implementation" to "lut"?
 @answer
@@ -1028,4 +1048,6 @@ Why is it called WORK?
 We use the library "IEEE" and it contains many wonderful PACKAGES.  WORK is the default name of our local library.  Inside our local library is the PACKAGE we created in this lesson.
 @question
 Excuse me, What? "and0: myAnd_1b port map();"
+@answer
+
 @end
