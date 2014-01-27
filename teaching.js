@@ -38,7 +38,8 @@ lessons:[
 				 {value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
 				 {file:"javaScriptL2.txt", text:"2 - ifs & loops"},
 				 {file:"javaScriptL3.txt", text:"3 - Object Properties & Methods"},
-				 {href:"javaScriptPA1.html", text:"Programming Assignment 1"}
+				 {href:"javaScriptPA1.html", text:"Programming Assignment 1"},
+				 {file:"javaScriptL4.txt", text:"4 - Canvas, Methods, & Classes"},
 				 ]
 }];
 
