@@ -1,0 +1,35 @@
+@code
+--===============
+--Interface
+-----------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+`PACKAGE name_interface IS
+``COMPONENT name IS
+```PORT(
+```);
+``END COMPONENT name;
+`END PACKAGE name_interface;
+
+--===============
+--Implementation
+-----------------
+`LIBRARY IEEE;
+`USE IEEE.STD_LOGIC_1164.ALL;
+
+`ENTITY name IS
+``PORT(
+``);
+`END ENTITY name;
+`ARCHITECTURE beh OF name IS
+`BEGIN
+
+`END beh;
+@header
+Logic Gates
+@comment
+In this lesson we will cover three logic gates: NOT, OR, & NAND.
+
+We already went over the AND gate in the previous section.  These gates follow a similar design.  The only difference would be in the truth table.
+@addSlide
+@end
