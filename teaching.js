@@ -37,7 +37,7 @@ lessons:[
 				 {value:javaScriptLesson0, text:"0 - Get Set Up"},
 				 {value:javaScriptLesson1, text:"1 - Strings, Arrays & Math"},
 				 {file:"javaScriptL2.txt", text:"2 - ifs & loops"},
-				 {file:"javaScriptL3.txt", text:"3 - Object Properties & Methods"},
+				 {file:"javaScriptL3.txt", text:"3 - Object Properties And Methods"},
 				 {href:"javaScriptPA1.html", text:"Programming Assignment 1"},
 				 {file:"javaScriptL4.txt", text:"4 - Canvas, Methods, & Classes"},
 				 ]
@@ -932,8 +932,8 @@ function getJavaScriptSyntaxColoring() {
 		"do":kClass_syntaxPurple(),
 		"for":kClass_syntaxPurple(),
 		//Dark orange
-		"window":kClass_syntaxTurquoise(),
-		"document":kClass_syntaxTurquoise()
+		"window":kClass_syntaxGreen(),
+		"document":kClass_syntaxGreen()
 		},//add more
 	comment:
 		{
