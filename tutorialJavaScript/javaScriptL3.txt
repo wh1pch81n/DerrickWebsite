@@ -210,7 +210,7 @@ window.onload = function() {
 @header
 Undefined 'til set
 @comment
-Remeber when I said that a variable is undefined until you set it?  I shall use the NOT operator (ie !) so that the while loop will run its inner code as long as mystique remains undefined.
+Remember when I said that a variable is undefined until you set it?  I shall use the NOT operator (ie !) so that the while loop will run its inner code as long as mystique remains undefined.
 
 Don't run the code yet.  This will create an infinite loop.
 @addSlide
