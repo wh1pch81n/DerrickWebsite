@@ -24,13 +24,13 @@ function Navigation(){
 		footer.innerHTML = "Copyright &copy; 2013-present. All rights reserved";
 	}
 	this.initGUI = function() {
-		var navLinker = function(isExternal) {
+		var navLinkCurry = function(isExternal) {
 			return function(linkName, url) {
 				return new NavLink(linkName, url, isExternal);
 			};
 		};
-		var navInternal = navLinker(0);
-		var navExternal = navLinker(1);
+		var navInternal = navLinkCurry(0);
+		var navExternal = navLinkCurry(1);
 		var arrLinks = [
 			navInternal("About Me", "index.html"),
 			navExternal("Blog", "http://embsi.blogspot.com"),
@@ -58,10 +58,13 @@ function Navigation(){
 				currentLink.push(nav.childNodes[i]);
 			}
 		}
-		if (currentLink.length) {
-			var p = currentLink[0];
-			p.setAttribute("class", "selected");
-		}
+
+		var setAttributeCurry = function(attributeName, attributeValue) {
+			return function(node) {
+				node.setAttribute(attributeName, attributeValue)
+			};
+		};
+		setAttributeCurry("class", "selected")(currentLink.length == 0 ? nav.childNodes[0] : currentLink[0])
 	}
 };
 
