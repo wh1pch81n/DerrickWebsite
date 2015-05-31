@@ -1,46 +1,37 @@
 function initContent(parent) {
-	var jobTitle = "iOS Intern";
-	var jobCompany = "EVRST Inc";
-	var jobDuration = "May 2013 - August 2013";
-	var arrOfSummary =  [
-	"Implemented the client side image filtering and selection feature that includes network operations, parsing data, storing data and displaying the content in a UICollectionView. Created an interface that changes to accommodate the selected Core Image Filter. Observed, identified and implemented a fix for truncating large pasted text into a character-limited text box.",
-	"Performed pixel shifting and extinguished weird mutant shaped bugs"
-	];
-	var arrOfAdditionalNotes =  [
-	" Command line git for Source Control management for commiting, merging, branching and bisecting",
-															 
-	" GitHub for code reviews",
-															 
-	" Developed iOS app in Xcode",
-															 
-	" Utilized NSOperationQueues by writing custom NSOperation subclasses to perform networking operations to fetch content from servers",
-															 
-	" Utilized CoreImage framework to implement image filters for the end user",
-															 
-	" Implemented UI using Interface Builder to display results of the CoreImage and NSOperation work listed above using UICollectionView",
-															 
-	" Fetched, Modified, and Saved client side data using Apple's Core Data",
-															 
-	" Filed, tracked and managed new features and bug tickets using Atlassian's Jira",
-															 
-	" Used Graylog's log management tool for verifying network activity for the test devices and individual users",
-															 
-	" Used Charles Web Debugging Proxy to test and verify network activity from the client side",
-															 
-	" Contributed daily to the scrum meeting",
-															 
-	" Used Gurock's Test Rail for Full Regression Testing",
-															 
-	" Used TestFlight for beta testing"
-															 
-	];
-	
-	var job = new JobDetail(
-		jobTitle,
-		jobCompany,
-		jobDuration,
-		arrOfSummary,
-		arrOfAdditionalNotes
+	var job;
+
+	generateHTML(new JobDetail(
+			"Mobile Software Developer, Contractor",
+			null,
+			"March 2014 - Present",
+			["Software Developer, Contractor @ Kong Studios (March 2014 - May 2014)"],
+			null
+		), parent);
+
+	job = new JobDetail(
+		"iOS Intern",
+		"EVRST Inc",
+		"May 2013 - August 2013",
+		[
+			"Implemented the client side image filtering and selection feature that includes network operations, parsing data, storing data and displaying the content in a UICollectionView. Created an interface that changes to accommodate the selected Core Image Filter. Observed, identified and implemented a fix for truncating large pasted text into a character-limited text box.",
+			"Performed pixel shifting and extinguished weird mutant shaped bugs"
+		],
+		[
+			" Command line git for Source Control management for commiting, merging, branching and bisecting",
+			" GitHub for code reviews",
+			" Developed iOS app in Xcode",							 
+			" Utilized NSOperationQueues by writing custom NSOperation subclasses to perform networking operations to fetch content from servers",
+			" Utilized CoreImage framework to implement image filters for the end user",
+			" Implemented UI using Interface Builder to display results of the CoreImage and NSOperation work listed above using UICollectionView",
+			" Fetched, Modified, and Saved client side data using Apple's Core Data",
+			" Filed, tracked and managed new features and bug tickets using Atlassian's Jira",
+			" Used Graylog's log management tool for verifying network activity for the test devices and individual users",
+			" Used Charles Web Debugging Proxy to test and verify network activity from the client side",
+			" Contributed daily to the scrum meeting",				 
+			" Used Gurock's Test Rail for Full Regression Testing", 
+			" Used TestFlight for beta testing"													 
+		]
 	);
 	generateHTML(job, parent);
 };
@@ -82,10 +73,13 @@ function generateHTML(job, parent) {
 		});
 		mk("dl", null, currElement, function(currElement) {
 			mk("dt", null, currElement, function(currElement) {
-				mk("span", {class:job.jobCompanyID}, currElement, function(currElement) {
-					currElement.innerHTML = job.jobCompany;
-				});
-				mk("br", null,currElement,null);
+				if(job.jobCompany != null) {
+					mk("span", {class:job.jobCompanyID}, currElement, function(currElement) {
+						currElement.innerHTML = job.jobCompany;
+					});
+					mk("br", null,currElement,null);
+				}
+				
 				mk("span", {class:job.jobDurationID}, currElement, function(currElement) {
 					currElement.innerHTML = job.jobDuration;
 				});
@@ -97,16 +91,18 @@ function generateHTML(job, parent) {
 					});
 				}
 					 
-				mk("ul", {class:job.additionalNotesID}, currElement, function(currElement) {
-					mk("h4", null, currElement, function(currElement) {
-						currElement.innerHTML = "[ Additional Notes ]";
-					});
-					for(var i = 0; i < job.arrOfAdditionalNotes.length; ++i) {
-						mk("li", null, currElement, function(currElement) {
-							currElement.innerHTML = job.arrOfAdditionalNotes[i];
+				if (job.arrOfAdditionalNotes != null) {
+					mk("ul", {class:job.additionalNotesID}, currElement, function(currElement) {
+						mk("h4", null, currElement, function(currElement) {
+							currElement.innerHTML = "[ Additional Notes ]";
 						});
-					}
-				});		 
+						for(var i = 0; i < job.arrOfAdditionalNotes.length; ++i) {
+							mk("li", null, currElement, function(currElement) {
+								currElement.innerHTML = job.arrOfAdditionalNotes[i];
+							});
+						}
+					});
+				}		 
 			});
 		});
 	});	

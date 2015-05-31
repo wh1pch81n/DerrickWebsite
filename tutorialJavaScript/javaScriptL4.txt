@@ -195,7 +195,7 @@ The fourth argument specifies the height of the rectangle.
 @header
 A point about the y-axis
 @comment
-In math, the tradition is having the postive y-axis grow upwards and the negative grown down.
+In math, the tradition is having the postive y-axis grow upwards and the negative grow down.
 
 In graphics, the tradition is the opposite.  The positive y-axis grows down.  In other words:
 
@@ -343,7 +343,7 @@ Use "canvas.setAttribute" to set the attributes of the canvas.  Namely the id, w
 ``</body>
 `</html>
 @header
-Where
+Where?
 @comment
 We created the canvas element via JavaScript, but we haven't placed it anywhere.  We want to place it inside the HTML body element.
 
@@ -358,7 +358,7 @@ We can do that, but there is an alternative we can use ...
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-~```var body = document.getElementByTagName("body")[0];
+~```var body = document.getElementsByTagName("body")[0];
 
 ````var canvas = document.createElement("canvas");
 
@@ -389,7 +389,7 @@ We can do that, but there is an alternative we can use ...
 @header
 getElementsByTagName
 @comment
-Use the "document.getElementByTagName" method to get an array of Elements that have the tag name.  We told it to find all the HTML body elements.
+Use the "document.getElementsByTagName" method to get an array of Elements that have the tag name.  We told it to find all the HTML body elements.
 
 We only have one, ergo we access the very first array element then save that in the body variable.
 @addSlide
@@ -400,7 +400,7 @@ We only have one, ergo we access the very first array element then save that in 
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 
 ````var canvas = document.createElement("canvas");
 
@@ -443,7 +443,7 @@ Lastly, we need to put the canvas inside the body.  Observe the example.
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 
 ````var canvas = document.createElement("canvas");
 
@@ -486,7 +486,7 @@ If you run the program, it should show a black rectangle.  Black is the default 
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 
 ````var canvas = document.createElement("canvas");
 
@@ -534,7 +534,7 @@ Play around with the color of the rectangle.
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -579,7 +579,7 @@ Use "context.stroke" to connect the points.
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -620,7 +620,7 @@ We must use strokeStyle to specify the color of the lines we draw.
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -662,7 +662,7 @@ If you append more points before calling the stroke() method, you can create a z
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -696,7 +696,7 @@ If you append more points before calling the stroke() method, you can create a z
 @header
 Triangle with Fill
 @comment
-Observe example of how to create a triangle with a purple outline and a green fill. 
+The example shows how to create a triangle with a purple outline and a green fill. 
 
 You can only fill in a closed path, thus we use closePath() to do just that.  Thereafter we use fill() to fill it up.
 @addSlide
@@ -707,7 +707,7 @@ You can only fill in a closed path, thus we use closePath() to do just that.  Th
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -752,7 +752,7 @@ The example is self-explanatory.  However, you may have noticed that I intention
 ```<meta charset="utf-8">
 ```<script>
 ```window.onload = function() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -787,7 +787,7 @@ The example is self-explanatory.  However, you may have noticed that I intention
 @header
 Make an arc
 @comment
-An arc is simply a partially drawn circle.  Therefore, I change the angle values.
+An arc is simply a partially drawn circle.  Therefore, I change the angle values to create an arc.
 
 Use "context.lineWidth" to change the thickness of the strokes.
 @addSlide
@@ -830,7 +830,7 @@ Each function begins with the keyword "function", followed by the name of the fu
 
 ```};
 ```function generateContext() {
-~```var body = document.getElementByTagName("body")[0];
+~```var body = document.getElementsByTagName("body")[0];
 ~```var canvas = document.createElement("canvas");
 ~```body.appendChild(canvas);
 ~```canvas.setAttribute("id", "drawingBoard");
@@ -863,7 +863,7 @@ This is the exact code from earlier that we used to create a canvas element, add
 
 ```};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -897,7 +897,7 @@ Lastly, we need to have our function return something.  Since we want the contex
 ~```var context = generateContext();
 ```};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -939,7 +939,7 @@ lets go back to the main function, and call the function we just made.  We can s
 ~```context.fillRect(x, y, 1, 1);
 ~``};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -981,7 +981,7 @@ Let's use this knowledge to build a function that draws points.
 ````context.fillRect(x, y, 1, 1);
 ```};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -1025,7 +1025,7 @@ It can be helpful to create objects.  Objects that we can pass around before dec
 ~```this.color = color;
 ```};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -1074,7 +1074,7 @@ The "new" keyword indicates that we are creating a new instance of the Point cla
 ~```};
 ```};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -1100,7 +1100,7 @@ Give the Point class a variable called "draw".  We will set its default value to
 
 When we set it up like this, we are NOT calling a function.  Instead, we are creating an alias called "draw"
 
-Calling draw() will we like calling the closure.
+Calling draw() will be like calling the closure.
 @addSlide
 @code
 `<!doctype html>
@@ -1126,7 +1126,7 @@ Calling draw() will we like calling the closure.
 ````};
 ```};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -1148,7 +1148,7 @@ Calling draw() will we like calling the closure.
 @header
 Closure guts
 @comment
-Use the "this" keyword to tell the function to use the current instance's data.
+Use the "this" keyword to tell the function to use the current Point's instance data.
 @addSlide
 @code
 `<!doctype html>
@@ -1177,7 +1177,7 @@ Use the "this" keyword to tell the function to use the current instance's data.
 ````};
 ```};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -1246,7 +1246,7 @@ This is how you call the draw function of the Point class.  When a function belo
 ~````this.context.closePath();
 ~````this.context.stroke();
 ~```};
-~``this.draw = function() {
+~```this.draw = function() {
 ~````this.fillSquare();
 ~````this.strokeSquare();
 ~```};
@@ -1262,7 +1262,7 @@ This is how you call the draw function of the Point class.  When a function belo
 ````};
 ```};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -1302,7 +1302,7 @@ An implementation of a Square class.
 ~```//Implementation here
 ~``};
 ```function generateContext() {
-````var body = document.getElementByTagName("body")[0];
+````var body = document.getElementsByTagName("body")[0];
 ````var canvas = document.createElement("canvas");
 ````body.appendChild(canvas);
 ````canvas.setAttribute("id", "drawingBoard");
@@ -1326,10 +1326,75 @@ Quiz
 @comment
 How would you implement a Circle class?
 @addSlide
+@code
+`<!doctype html>
+`<html>
+``<head>
+```<meta charset="utf-8">
+```<script>
+```window.onload = function() {
+````var context = generateContext();
+````var color = "#FF772B";
+~```var c1 = new Circle(context, 56, 77, 10, color);
+````c1.draw();
+```};
+~``function Circle(context, x, y, radius, color) {
+~```this.context = context;
+~```this.x = x;
+~```this.y = y;
+~```this.radius = radius;
+~```this.fillColor = color;
+
+~```this.fillCircle = function() {
+~````var context = this.context;
+~````context.fillStyle = this.fillColor;
+~````context.beginPath();
+~````context.arc(this.x, this.y, this.radius, 0, Math.PI, true);
+~````context.closePath();
+~````context.fill();
+~```};
+~```this.strokeCircle = function() {
+~````var context = this.context;
+~````context.strokeStyle = this.fillColor;
+~````context.beginPath();
+~````context.arc(this.x, this.y, this.radius, 0, Math.PI, true);
+~````context.closePath();
+~````context.stroke();
+~```};
+~```this.draw = function() {
+~````this.fillCircle();
+~````this.strokeCircle();
+~```};
+~``};
+```function generateContext() {
+````var body = document.getElementsByTagName("body")[0];
+````var canvas = document.createElement("canvas");
+````body.appendChild(canvas);
+````canvas.setAttribute("id", "drawingBoard");
+````canvas.setAttribute("width", "640");
+````canvas.setAttribute("height", "480"); 
+````var context = canvas.getContext("2d");
+````return context;
+```};
+```</script>
+```<style>
+````canvas {
+`````border: thin solid black;
+````}
+```</style>
+``</head>
+``<body>
+``</body>
+`</html>
+@header
+Quiz Solution
+@comment
+Circle Class implementation.
+@addSlide
 @question
 Do you have a good circle angle reference?
 @answer
-See this reference for circles and their angles (http://math.rice.edu/~pcmi/sphere/degrad.gif).
+See this reference for circles and their angles (math.rice.edu/~pcmi/sphere/degrad.gif).
 @question
 What's a closure?
 @answer
