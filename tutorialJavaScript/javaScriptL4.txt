@@ -1394,7 +1394,7 @@ Circle Class implementation.
 @question
 Do you have a good circle angle reference?
 @answer
-See this reference for circles and their angles (http://math.rice.edu/~pcmi/sphere/degrad.gif).
+See this reference for circles and their angles (math.rice.edu/~pcmi/sphere/degrad.gif).
 @question
 What's a closure?
 @answer
