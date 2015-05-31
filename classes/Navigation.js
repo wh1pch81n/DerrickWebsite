@@ -34,12 +34,8 @@ function Navigation(){
 		var arrLinks = [
 			navInternal("About Me", "index.html"),
 			navExternal("Blog", "http://embsi.blogspot.com"),
-			navInternal("Classes", "courses.html"),
 			navInternal("Projects", "projects.html"),
-			navInternal("Skills", "skills.html"),
-			navInternal("Work History", "work_history.html"),
-			navInternal("Teaching", "teaching.html"),
-			navExternal("Project Euler", "https://github.com/wh1pch81n/ProjectEulerNew"),
+			navExternal("GitHub", "https://github.com/wh1pch81n/"),
 			navExternal("CodeEval", "https://www.codeeval.com/public/8204d6d519fd06ef4ef36415ec9001466e87fc35/"),
 			navExternal("<img src=\"http://s.c.lnkd.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png\" width=\"20\" height=\"15\" alt=\"View Derrick Ho's LinkedIn profile\">", "http://www.linkedin.com/in/derrickho88")
 		];
